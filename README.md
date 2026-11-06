@@ -120,7 +120,7 @@ After `INTAKE_BREAKER_THRESHOLD` consecutive documents fail with an unreachable-
 - `deliverables/queue.json`: the review queue, one entry per record, linked by `document_id`, with counts by owner and next action.
 - `state/`: history of every attempt, current records, run logs and claims. Not committed (`.gitignore`); keep it with the deliverables it produced. Never edit it by hand.
 - `state/accuracy/`: a separate scratch state used by `intake accuracy`, so accuracy checks never change the review queue.
-- `deliverables/extractions.jsonl` and `deliverables/queue.json` are not committed yet. Produce them with `uv run intake run materials/requests` and commit them; regenerate and recommit after any change that affects records (settings, prompt or policy version).
+- The committed `deliverables/extractions.jsonl` and `deliverables/queue.json` come from `uv run intake run materials/requests` with the mock (`response_source` is `mock`; policy `northstar-intake-policy/2026-10-22.4`). Regenerate and recommit them after any change that affects records (settings, prompt or policy version).
 
 ## Configuration
 
