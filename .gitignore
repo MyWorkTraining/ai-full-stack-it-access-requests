@@ -1,0 +1,17 @@
+# Runtime state (current records, history, run manifests, lock); deliverables/ is committed.
+state/
+
+# Local settings may name a real model; keep the example only.
+config/settings.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+build/
+dist/
+
+# Never commit credentials
+.env

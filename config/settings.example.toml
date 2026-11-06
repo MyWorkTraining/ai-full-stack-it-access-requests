@@ -1,0 +1,23 @@
+# Example intake settings. Copy to config/settings.toml and pass it with --config.
+# Every value can also be set by environment variable (shown on the right), which wins over
+# this file. The provider credential is never stored here: set API_KEY in the environment.
+
+[intake]
+provider = "mock"                 # INTAKE_PROVIDER: "mock" (fixtures), "databricks" (serving endpoint), "provider" (placeholder)
+model_id = "mock-extractor-v1"    # INTAKE_MODEL_ID; for databricks the endpoint name, e.g. "databricks-claude-sonnet-4-5"
+temperature = 0.0                 # INTAKE_TEMPERATURE; "none" sends no temperature (e.g. databricks-gpt-5-mini)
+structured_output = "json_schema" # INTAKE_STRUCTURED_OUTPUT: json_schema (strict schema), json_object, none
+databricks_host = ""              # INTAKE_DATABRICKS_HOST: workspace URL; empty uses DATABRICKS_HOST
+max_output_tokens = 2000          # INTAKE_MAX_OUTPUT_TOKENS
+timeout_s = 60                    # INTAKE_TIMEOUT_S: per model call
+max_retries = 3                   # INTAKE_MAX_RETRIES: for timeout, rate limit, unavailable
+concurrency = 4                   # INTAKE_CONCURRENCY: parallel model calls (shared rate limit)
+backoff_base_s = 1.0              # INTAKE_BACKOFF_BASE_S: first retry wait, doubled per retry, with jitter
+backoff_max_s = 30.0              # INTAKE_BACKOFF_MAX_S: cap on one wait (a provider Retry-After wins)
+breaker_threshold = 5             # INTAKE_BREAKER_THRESHOLD: consecutive unavailable documents before halting
+claim_ttl_s = 900                 # INTAKE_CLAIM_TTL_S: a document claim older than this is abandoned
+state_dir = "state"               # INTAKE_STATE_DIR: current records, history, run manifests
+output_dir = "deliverables"       # INTAKE_OUTPUT_DIR: extractions.jsonl and queue.json
+schema_path = "snapshot.schema.json"                   # INTAKE_SCHEMA_PATH
+mock_responses = "tests/fixtures/mock_responses.json"  # INTAKE_MOCK_RESPONSES
+mock_faults = ""                  # MOCK_FAULTS, e.g. "IT-002:unavailable,IT-003:timeout*1"
