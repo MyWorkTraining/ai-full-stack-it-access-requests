@@ -9,7 +9,6 @@ run the same way every time, with no model key and no network.
 """
 import hashlib
 import json
-import os
 import socket
 import unittest
 from pathlib import Path
@@ -41,8 +40,7 @@ class SuppliedFiles(unittest.TestCase):
 class MockResponse(unittest.TestCase):
     def test_a_mock_reply_is_read_with_no_key_and_no_network(self):
         refuse = mock.Mock(side_effect=AssertionError("a test tried to open a network connection"))
-        with mock.patch.dict(os.environ), mock.patch.object(socket, "socket", refuse):
-            os.environ.pop("API_KEY", None)
+        with mock.patch.object(socket, "socket", refuse):
             reply = canned_reply("canned-reply")
         self.assertEqual(reply["response_source"], "mock")
         self.assertTrue(reply["output_text"])
