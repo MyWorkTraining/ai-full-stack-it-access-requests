@@ -27,6 +27,14 @@ class MockTransport:
                 raise ProviderError('unscripted transport call')
             name = self.responses.popleft()
         response = json.loads((self.root / name).read_text(encoding='utf-8'))
+        if response.get('event') == 'file-block':
+            gates = request.get('config', {}).get('mock_gates')
+            if not gates:
+                raise ProviderError('file-block fixture requires --mock-gates')
+            FileEvent(Path(gates) / response['entered']).set()
+            if not FileEvent(Path(gates) / response['barrier']).wait(request.get('config', {}).get('timeout', 30)):
+                raise ProviderError('provider response timeout', True)
+            response = json.loads((self.root / response['response']).read_text())
         if response.get('event') == 'block':
             if response.get('entered') in self.barriers:
                 self.barriers[response['entered']].set()
@@ -57,3 +65,22 @@ class MockProvider:
         if name not in self.scripts:
             raise ProviderError(f'unscripted document: {name}')
         return self.scripts[name]({'message': document.get('message', ''), 'config': config or {}})
+
+
+class FileEvent:
+    """Development-only cross-process barrier used by saved mock scenarios."""
+    def __init__(self, path):
+        self.path = Path(path)
+
+    def set(self):
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.path.touch()
+
+    def wait(self, timeout):
+        import time
+        deadline = time.monotonic() + timeout
+        while not self.path.exists():
+            if time.monotonic() >= deadline:
+                return False
+            time.sleep(min(0.01, max(0, deadline - time.monotonic())))
+        return True
