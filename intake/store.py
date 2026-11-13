@@ -105,3 +105,22 @@ class Store:
     def pending(self):
         with self.connection() as db:
             return [self.decode(row) for row in db.execute("SELECT a.* FROM documents d JOIN attempts a ON a.id=d.current_attempt WHERE a.state IN ('pending','running') ORDER BY a.id")]
+
+
+    def claim(self, attempt, now=None, lease=60):
+        import uuid
+        now = time.time() if now is None else now
+        token = uuid.uuid4().hex
+        with self.connection() as db:
+            db.execute('BEGIN IMMEDIATE')
+            row = db.execute('SELECT * FROM attempts WHERE id=?', (attempt,)).fetchone()
+            if row is None or row['state'] in ('done', 'error') or row['not_before'] > now:
+                return None
+            if row['state'] == 'running' and row['expires'] > now:
+                return None
+            db.execute("UPDATE attempts SET state='running',token=?,expires=?,tries=tries+1 WHERE id=?", (token, now + lease, attempt))
+            return token
+
+    def defer(self, attempt, token, not_before):
+        with self.connection() as db:
+            return db.execute("UPDATE attempts SET state='pending',not_before=?,token=NULL,expires=NULL WHERE id=? AND token=? AND state='running'", (not_before, attempt, token)).rowcount == 1

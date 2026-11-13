@@ -28,7 +28,11 @@ class MockTransport:
             name = self.responses.popleft()
         response = json.loads((self.root / name).read_text(encoding='utf-8'))
         if response.get('event') == 'block':
-            self.barriers[response['barrier']].wait()
+            if response.get('entered') in self.barriers:
+                self.barriers[response['entered']].set()
+            timeout = request.get('timeout', request.get('config', {}).get('timeout', 30))
+            if not self.barriers[response['barrier']].wait(timeout):
+                raise ProviderError('provider response timeout', True)
             response = json.loads((self.root / response['response']).read_text())
         if response.get('event') == 'error':
             raise ProviderError(response['error'], response.get('retryable', False))
