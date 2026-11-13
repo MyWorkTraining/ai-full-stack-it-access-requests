@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "output": [
+    {
+      "type": "message",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"requester\": \"Isla Morgan\", \"team\": \"Support\", \"system\": \"Beacon\", \"kind\": \"new\", \"environment\": \"staging\", \"permission\": \"read\", \"start_date\": \"2026-10-26\", \"end_date\": \"2026-10-29\", \"manager\": null, \"request_id\": \"IT-009\", \"request_date\": \"2026-10-22\", \"business_purpose\": \"to go through example support cases before updating our troubleshooting guide\", \"supporting_quotes\": [\"Can you please grant me new staging read access for Beacon? Isla Morgan, Support. IT-009, submitted 2026-10-22. I need access to it from 2026-10-26 - 2026-10-29 to go through example support cases before updating our troubleshooting guide (we're missing a few steps new starters have been asking about). I've captured the questions in a document. I'd like to cross check with sample support cases first before I try writing the changes.\"], \"issues\": [\"manager: absent or unresolved in the message\"]}"
+        }
+      ]
+    }
+  ]
+}

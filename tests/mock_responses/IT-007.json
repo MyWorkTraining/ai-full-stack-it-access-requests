@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "output": [
+    {
+      "type": "message",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"requester\": \"Grace Tan\", \"team\": \"Developer Experience\", \"system\": \"Forge\", \"kind\": \"change\", \"environment\": \"staging\", \"permission\": \"write\", \"start_date\": \"2026-10-24\", \"end_date\": \"2026-10-28\", \"manager\": \"Nia Patel\", \"request_id\": \"IT-007\", \"request_date\": \"2026-10-22\", \"business_purpose\": \"We're updating starter project templates, so i want to save our changes for the templates.\", \"supporting_quotes\": [\"IT-007 2026-10-22 - Grace Tan / Developer Experience\\n\\nI have current (read only) access to Forge (staging) and would like to transition to (write) from 2026-10-24 to 2026-10-28. My manager is Nia Patel.\\n\\nWe're updating starter project templates, so i want to save our changes for the templates. Also confirming example pipelines are still working.\\n\\nThe changes involve fixing the sample configuration + testing on a new project. I'll provide a summary of what templates were modified for the team. (so they can reference this during next onboarding session)\"], \"issues\": []}"
+        }
+      ]
+    }
+  ]
+}

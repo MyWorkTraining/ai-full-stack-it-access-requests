@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "output": [
+    {
+      "type": "message",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"requester\": \"Emma Wilson\", \"team\": \"Compliance\", \"system\": \"Beacon\", \"kind\": \"new\", \"environment\": \"production\", \"permission\": \"read\", \"start_date\": \"2026-10-28\", \"end_date\": \"2026-10-30\", \"manager\": \"Elena Park\", \"request_id\": \"IT-013\", \"request_date\": \"2026-10-22\", \"business_purpose\": \"to review account activity records to help with internal audit we have scheduled.\", \"supporting_quotes\": [\"Hey, can you assist with IT-013 (dated 2026-10-22). This is Emma Wilson from Compliance. I need to get new access to Beacon for reading in production. Need it from 2026-10-28 to 2026-10-30 to review account activity records to help with internal audit we have scheduled. My manager is Elena Park. Audit coordinator already has the accounts to look at lined up. It's my job to check out the dates on the activity records and provide a summary of any gaps that we need to have for our review meeting.\"], \"issues\": []}"
+        }
+      ]
+    }
+  ]
+}

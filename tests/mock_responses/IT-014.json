@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "output": [
+    {
+      "type": "message",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"requester\": \"Lucas Brown\", \"team\": \"Sales Operations\", \"system\": \"Atlas\", \"kind\": \"new\", \"environment\": \"staging\", \"permission\": \"read\", \"start_date\": \"2026-11-05\", \"end_date\": \"2026-11-02\", \"manager\": \"Priya Shah\", \"request_id\": \"IT-014\", \"request_date\": \"2026-10-22\", \"business_purpose\": \"I'm giving a demo of the new territory report for sales leads.\", \"supporting_quotes\": [\"IT-014. 2026-10-22 request. Lucas Brown in Sales Operations. New read access for Atlas in staging. Start date 2026-11-05. End date 2026-11-02. Manager is Priya Shah. I'm giving a demo of the new territory report for sales leads. Trying to match up the sample territories with the handover notes. Also want to make sure I understand the columns for the demo. I just copied above dates from my planning sheet. This email should be the request record.\"], \"issues\": [\"date-order: start_date after end_date\"]}"
+        }
+      ]
+    }
+  ]
+}

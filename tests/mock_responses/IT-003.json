@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "output": [
+    {
+      "type": "message",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"requester\": \"Lina Gomez\", \"team\": \"Customer Success\", \"system\": \"Beacon\", \"kind\": \"new\", \"environment\": null, \"permission\": null, \"start_date\": null, \"end_date\": null, \"manager\": \"Priya Shah\", \"request_id\": \"IT-003\", \"request_date\": \"2026-10-22\", \"business_purpose\": \"We are working on the customer renewal review next week.\", \"supporting_quotes\": [\"Hi, this is Lina Gomez from Customer Success. I'm opening up IT-003 on 2026-10-22. I need new access to Beacon. The same access Sam has. We are working on the customer renewal review next week. I'm trying to get the account notes together before we meet as a team. My manager is Priya Shah. Sam did show me the screens during the hand-off but I didn't note what environment he was on or what the permission is named. Can someone help me figure out what the request should be? I'll follow up when I have the details.\"], \"issues\": [\"environment: absent or unresolved in the message\", \"permission: absent or unresolved in the message\", \"start_date: absent or unresolved in the message\", \"end_date: absent or unresolved in the message\"]}"
+        }
+      ]
+    }
+  ]
+}

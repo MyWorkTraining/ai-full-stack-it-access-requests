@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "output": [
+    {
+      "type": "message",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"requester\": \"Ethan Clark\", \"team\": \"Product\", \"system\": \"Atlas\", \"kind\": \"new\", \"environment\": \"staging\", \"permission\": \"read\", \"start_date\": \"2026-10-29\", \"end_date\": \"2026-11-02\", \"manager\": null, \"request_id\": \"IT-020\", \"request_date\": \"2026-10-22\", \"business_purpose\": \"I want to look at some sample usage records before I draft the summary on feature adoption.\", \"supporting_quotes\": [\"IT-020. Dated 2026-10-22. I'm Ethan Clark with Product. I need new Atlas read access to staging from 2026-10-29 to 2026-11-02. I want to look at some sample usage records before I draft the summary on feature adoption. My manager is Priya Shah. The manager for this request is Elena Park. Those are the names I wrote down from notes during the team handover. I copied them exactly as I saw them. The summary will compare the sample records with the feature list and point out where labels make the activity difficult to interpret. I would like this request logged in with the details above so we can follow up prior to the writing session.\", \"My manager is Priya Shah.\", \"The manager for this request is Elena Park.\"], \"issues\": [\"manager: absent or unresolved in the message\", \"manager: conflicting alternatives without correction\"]}"
+        }
+      ]
+    }
+  ]
+}

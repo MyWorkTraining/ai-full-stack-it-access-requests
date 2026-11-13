@@ -127,3 +127,109 @@ class Step02(Contract):
             changed=Path(directory)/path.name
             changed.write_bytes(path.read_bytes()+b'\n')
             self.assertNotEqual(source.load(changed)['source_sha256'],original['source_sha256'])
+
+
+class Step03(Contract):
+    def extract_fixture(self, number=1):
+        validation=self.module('intake.validation')
+        return validation.extract_response(self.document(number),self.reply(f'IT-{number:03d}.json'))
+
+    def test_r06_contract(self):
+        validation=self.module('intake.validation')
+        data=self.extract_fixture()
+        for key in list(data):
+            bad=dict(data);del bad[key]
+            with self.subTest(missing=key),self.assertRaises(ValueError):validation.validate(self.document(),bad)
+        bad=dict(data,unexpected=True)
+        with self.assertRaises(ValueError):validation.validate(self.document(),bad)
+        with self.assertRaises(ValueError):validation.validate(self.document(),[])
+
+    def field_contract(self,field):
+        data=self.extract_fixture()
+        self.assertEqual(data[field],self.expected()['fields'].get(field, data[field]))
+        bad=dict(data);bad[field]=123
+        with self.assertRaises(ValueError):self.module('intake.validation').validate(self.document(),bad)
+
+    def test_r21_contract(self):
+        data=self.extract_fixture();data['start_date']='10/23/2026'
+        with self.assertRaises(ValueError):self.module('intake.validation').validate(self.document(),data)
+
+    def test_r22_contract(self):
+        data=self.extract_fixture(3)
+        for field in ['environment','permission','start_date','end_date']:
+            self.assertIsNone(data[field]);self.assertTrue(any(field in x for x in data['issues']))
+        data['issues']=[]
+        with self.assertRaises(ValueError):self.module('intake.validation').validate(self.document(3),data)
+
+    def test_r23_contract(self):
+        for n,field,alternatives in [(4,'environment',['staging','production']),(20,'manager',['Priya Shah','Elena Park'])]:
+            data=self.extract_fixture(n)
+            self.assertIsNone(data[field])
+            for value in alternatives:self.assertTrue(any(value in q for q in data['supporting_quotes']))
+
+    def test_r24_contract(self):
+        self.assertEqual(self.extract_fixture(8)['environment'],'staging')
+        self.assertEqual(self.extract_fixture(15)['start_date'],'2026-10-29')
+        self.assertEqual(self.extract_fixture(15)['end_date'],'2026-10-31')
+
+    def test_r25_contract(self):
+        data=self.extract_fixture(11)
+        self.assertIsNone(data['start_date']);self.assertIsNone(data['end_date'])
+
+    def test_r27_contract(self):
+        data=self.extract_fixture(16)
+        self.assertEqual(data['request_id'],'IT-061')
+        self.assertTrue(any('mismatch' in x for x in data['issues']))
+
+    def test_r29_contract(self):
+        data=self.extract_fixture(2)
+        for quote in data['supporting_quotes']:self.assertIn(quote,self.document(2)['message'])
+        data['supporting_quotes'].append('fabricated evidence')
+        with self.assertRaises(ValueError):self.module('intake.validation').validate(self.document(2),data)
+
+    def test_r30_contract(self):
+        validation=self.module('intake.validation')
+        for name in ['provider-refusal.json','provider-interrupted.json','malformed.json']:
+            with self.subTest(name=name),self.assertRaises(ValueError):validation.extract_response(self.document(),self.reply(name))
+
+    def test_r07_contract(self):
+        self.field_contract('request_id')
+
+    def test_r08_contract(self):
+        self.field_contract('request_date')
+
+    def test_r09_contract(self):
+        self.field_contract('kind')
+
+    def test_r10_contract(self):
+        self.field_contract('requester')
+
+    def test_r11_contract(self):
+        self.field_contract('team')
+
+    def test_r12_contract(self):
+        self.field_contract('system')
+
+    def test_r13_contract(self):
+        self.field_contract('environment')
+
+    def test_r14_contract(self):
+        self.field_contract('permission')
+
+    def test_r15_contract(self):
+        self.field_contract('business_purpose')
+
+    def test_r16_contract(self):
+        self.field_contract('start_date')
+
+    def test_r17_contract(self):
+        self.field_contract('end_date')
+
+    def test_r18_contract(self):
+        self.field_contract('manager')
+
+    def test_r19_contract(self):
+        self.field_contract('supporting_quotes')
+
+    def test_r20_contract(self):
+        self.field_contract('issues')

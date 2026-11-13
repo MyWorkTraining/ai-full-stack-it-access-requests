@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "output": [
+    {
+      "type": "message",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"requester\": \"Ava Brooks\", \"team\": \"Design\", \"system\": null, \"kind\": \"withdrawal\", \"environment\": null, \"permission\": null, \"start_date\": null, \"end_date\": null, \"manager\": \"Elena Park\", \"request_id\": \"IT-005\", \"request_date\": \"2026-10-22\", \"business_purpose\": \"The project that triggered my request has been cancelled so now there is no work for me to do.\", \"supporting_quotes\": [\"Could you please withdraw IT-005? Date: 2026-10-22\\n\\nMy name is Ava Brooks. Design.\\n\\nThe project that triggered my request has been cancelled so now there is no work for me to do.\\n\\nMy boss is Elena Park.\\n\\nI had a handover call pencilled in with the project team but that has been deleted in the calendar as well.\\n\\nPlease record the request as withdrawn so everyone on the project can see it the same way.\"], \"issues\": [\"system: absent or unresolved in the message\", \"environment: absent or unresolved in the message\", \"permission: absent or unresolved in the message\", \"start_date: absent or unresolved in the message\", \"end_date: absent or unresolved in the message\"]}"
+        }
+      ]
+    }
+  ]
+}
