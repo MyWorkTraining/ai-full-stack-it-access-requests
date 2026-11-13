@@ -1,0 +1,3 @@
+read challenge.md, requirements.md, office-policy.md, snapshot.schema.json, and the 20 messages on meterials/requests. Create a spec document which will be saved in planning/spec.md Each requirement should be on a separate line, numbered R-01, R-02, etc. Each should be a testable sentence.
+For each statement, the file and section it comes from, with the exact words quoted for tracability. For each, define how it will be checked, including which tests, which files to inspect, and what commands to run to validate it. 
+Do not invent any requirements or specs not clearly defined in these files.
