@@ -1,0 +1,69 @@
+{
+  "cli_version": "0.13.4",
+  "checkpoint_id": "01M7B0T0W21398REQVN99040R9",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "tests/mock_responses/IT-001.json",
+    "tests/mock_responses/IT-002.json",
+    "tests/mock_responses/IT-003.json",
+    "tests/mock_responses/IT-004.json",
+    "tests/mock_responses/IT-005.json",
+    "tests/mock_responses/IT-006.json",
+    "tests/mock_responses/IT-007.json",
+    "tests/mock_responses/IT-008.json",
+    "tests/mock_responses/IT-009.json",
+    "tests/mock_responses/IT-010.json",
+    "tests/mock_responses/IT-011.json",
+    "tests/mock_responses/IT-012.json",
+    "tests/mock_responses/IT-013.json",
+    "tests/mock_responses/IT-014.json",
+    "tests/mock_responses/IT-015.json",
+    "tests/mock_responses/IT-016.json",
+    "tests/mock_responses/IT-017.json",
+    "tests/mock_responses/IT-018.json",
+    "tests/mock_responses/IT-019.json",
+    "tests/mock_responses/IT-020.json",
+    "tests/mock_responses/malformed.json",
+    "tests/mock_responses/manifest.json",
+    "tests/mock_responses/paraphrase.json",
+    "tests/test_spec_contract.py"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0/metadata.json",
+      "transcript": "/0/full.jsonl",
+      "compact_transcript": "/0/transcript.jsonl",
+      "content_hash": "/0/content_hash.txt",
+      "prompt": ""
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 830,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 261632,
+    "output_tokens": 3186,
+    "api_call_count": 2
+  },
+  "redaction": {
+    "replacements": 0,
+    "layers": {
+      "betterleaks": 0,
+      "connection_string": 0,
+      "credential_key": 0,
+      "credential_value": 0,
+      "credentialed_uri": 0,
+      "entropy": 0,
+      "key_context": 0,
+      "pii": 0,
+      "provider_token": 0,
+      "shell_stdin": 0
+    },
+    "pii": {
+      "EMAIL": 0,
+      "IP": 0,
+      "PHONE": 0
+    }
+  }
+}
