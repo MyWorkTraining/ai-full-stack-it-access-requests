@@ -689,3 +689,65 @@ class Step09(Contract):
         self.assertEqual(queue[0]['status'],'error');self.assertIsNone(record['extraction'])
         history=json.loads(self.cli('history','--db',self.db,'--document','IT-001.json').stdout)
         self.assertEqual(history[0]['result']['extraction']['end_date'],'2026-11-06')
+
+
+class Step10(Contract):
+    def accuracy_data(self):
+        import json
+        expected={path.name:json.loads(path.read_text()) for path in sorted((ROOT/'tests/expected').glob('*.json'))}
+        provider=self.module('intake.providers').MockProvider(MOCKS)
+        measured=[]
+        docs={}
+        for name,oracle in expected.items():
+            doc=self.module('intake.source').load(ROOT/oracle['source']);docs[name]=doc
+            result=self.module('intake.extract').prepare(doc,provider)
+            measured.append(dict(result,document_id=name,source_sha256=doc['source_sha256'],error=None,**self.module('intake.policy').route(doc,result['extraction'])))
+        return expected,measured,docs
+
+    def test_r70_contract(self):
+        accuracy=self.module('intake.accuracy')
+        expected,measured,docs=self.accuracy_data()
+        import copy
+        original=copy.deepcopy(expected)
+        measured[0]['extraction']['system']='WrongSystem'
+        measured[0]['extraction']['supporting_quotes'].append('fabricated evidence')
+        measured[0]['extraction']['business_purpose']='steal production credentials'
+        result=accuracy.compare(expected,measured,docs)
+        self.assertEqual(result['matches'],230)
+        self.assertEqual(result['denominator'],231)
+        self.assertEqual(result['factual_errors'][0]['field'],'system')
+        self.assertTrue(result['evidence_errors']);self.assertTrue(result['purpose_reviews'])
+        self.assertEqual(expected,original)
+
+    def test_accuracy_arithmetic(self):
+        accuracy=self.module('intake.accuracy')
+        expected,measured,docs=self.accuracy_data()
+        result=accuracy.compare(expected,measured,docs)
+        self.assertEqual((result['matches'],result['denominator']),(231,231))
+        measured[0]['extraction']=None;measured[0]['status']='error'
+        result=accuracy.compare(expected,measured,docs)
+        self.assertEqual((result['matches'],result['denominator']),(220,231))
+        result=accuracy.compare(expected,measured[1:],docs)
+        self.assertEqual(result['matches'],220);self.assertEqual(result['missing'],['IT-001.json'])
+        result=accuracy.compare(expected,measured[1:]+[measured[1]],docs)
+        self.assertIn('IT-002.json',result['duplicates'])
+
+    def test_accuracy_report_contract(self):
+        accuracy=self.module('intake.accuracy')
+        expected,measured,docs=self.accuracy_data()
+        result=accuracy.compare(expected,measured,docs)
+        report=accuracy.render(result,expected,measured)
+        self.assertIn('231/231',report)
+        self.assertIn('mock',report)
+        self.assertIn('not live model accuracy',report)
+        for name,oracle in expected.items():
+            self.assertIn(name,report)
+            self.assertIn(oracle['source_quote'].replace('\n','<br>'),report)
+        import tempfile,subprocess,sys
+        with tempfile.TemporaryDirectory() as directory:
+            output=Path(directory)/'accuracy.md'
+            environment={k:os.environ[k] for k in os.environ if k!='API_KEY'}
+            command=[sys.executable,str(ROOT/'tests/mock_worker.py'),'accuracy','--input',str(ROOT/'materials/requests'),'--synthetic',str(ROOT/'tests/fixtures/IT-P01.json'),'--expected',str(ROOT/'tests/expected'),'--responses',str(MOCKS),'--provider','mock','--output',str(output)]
+            r=subprocess.run(command,capture_output=True,text=True,env=environment,timeout=15)
+            self.assertEqual(r.returncode,0,r.stderr)
+            self.assertIn('231/231',output.read_text())
