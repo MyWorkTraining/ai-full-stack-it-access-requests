@@ -1,0 +1,202 @@
+[
+  {
+    "attempt_id": 1,
+    "document_id": "IT-001.json",
+    "error": null,
+    "next_action": "review-request",
+    "owner": "System Owner",
+    "source_revision": 1,
+    "source_sha256": "102a69f8fbc3779ec19fb6c761ad34b0c9a001f845b8df3c808f5a79441fbb10",
+    "status": "review"
+  },
+  {
+    "attempt_id": 2,
+    "document_id": "IT-002.json",
+    "error": null,
+    "next_action": "review-risk-then-owner",
+    "owner": "Security Review",
+    "source_revision": 2,
+    "source_sha256": "007e47d1bd662d246e6d3656b6226b1c512ca4d38d71fc5844b9690ee29c14f6",
+    "status": "review"
+  },
+  {
+    "attempt_id": 3,
+    "document_id": "IT-003.json",
+    "error": null,
+    "next_action": "clarify",
+    "owner": "IT Service Desk",
+    "source_revision": 3,
+    "source_sha256": "80b64509cf82b29006492e97a2c53a165b9df7d22c78da10976a04594f829052",
+    "status": "needs-information"
+  },
+  {
+    "attempt_id": 4,
+    "document_id": "IT-004.json",
+    "error": null,
+    "next_action": "clarify",
+    "owner": "IT Service Desk",
+    "source_revision": 4,
+    "source_sha256": "d5de0f00c5c118e499ed27c6f779139b1b4c483158adf5fd2d86f513b1f9654e",
+    "status": "needs-information"
+  },
+  {
+    "attempt_id": 5,
+    "document_id": "IT-005.json",
+    "error": null,
+    "next_action": "confirm-withdrawal",
+    "owner": "IT Service Desk",
+    "source_revision": 5,
+    "source_sha256": "fb0f1d6451346e0d411204cb82375ae6f3be26e2791996d6adb5550d969c20f1",
+    "status": "review"
+  },
+  {
+    "attempt_id": 6,
+    "document_id": "IT-006.json",
+    "error": null,
+    "next_action": "inspect-message",
+    "owner": "IT Service Desk",
+    "source_revision": 6,
+    "source_sha256": "d342c355bcf72b2d2c50e5fdf2696403bc245f5e7483722095e92b382a1991b2",
+    "status": "review"
+  },
+  {
+    "attempt_id": 7,
+    "document_id": "IT-007.json",
+    "error": null,
+    "next_action": "review-risk-then-owner",
+    "owner": "Security Review",
+    "source_revision": 7,
+    "source_sha256": "dd4857323b83b418755981031c2798cd95c83703d09aa5457e3c8105afba646e",
+    "status": "review"
+  },
+  {
+    "attempt_id": 8,
+    "document_id": "IT-008.json",
+    "error": null,
+    "next_action": "review-request",
+    "owner": "System Owner",
+    "source_revision": 8,
+    "source_sha256": "b1e1de4bd67831115149cad2f1caba73f76d0c016bfcd75bdcdefdff8705a66f",
+    "status": "review"
+  },
+  {
+    "attempt_id": 9,
+    "document_id": "IT-009.json",
+    "error": null,
+    "next_action": "clarify",
+    "owner": "IT Service Desk",
+    "source_revision": 9,
+    "source_sha256": "8aa13b91d4d163827ed609b04c4cf40db2e66e4bbe33cd2211e22c1fa35378ad",
+    "status": "needs-information"
+  },
+  {
+    "attempt_id": 10,
+    "document_id": "IT-010.json",
+    "error": null,
+    "next_action": "clarify",
+    "owner": "IT Service Desk",
+    "source_revision": 10,
+    "source_sha256": "8d40a28442575c92e012ea57356a5d39b5a5724dd8e85de65118bffbf269ea2d",
+    "status": "needs-information"
+  },
+  {
+    "attempt_id": 11,
+    "document_id": "IT-011.json",
+    "error": null,
+    "next_action": "clarify",
+    "owner": "IT Service Desk",
+    "source_revision": 11,
+    "source_sha256": "0776059292b21c7e12a3c5ecf3e81b3afa9743a4bd5e67e897da9bdd15bab345",
+    "status": "needs-information"
+  },
+  {
+    "attempt_id": 12,
+    "document_id": "IT-012.json",
+    "error": null,
+    "next_action": "review-risk-then-owner",
+    "owner": "Security Review",
+    "source_revision": 12,
+    "source_sha256": "192b72da5e74647b660d0e1226bb6a0f056fca4ec5ec53b278d7863fd397a791",
+    "status": "review"
+  },
+  {
+    "attempt_id": 13,
+    "document_id": "IT-013.json",
+    "error": null,
+    "next_action": "review-risk-then-owner",
+    "owner": "Security Review",
+    "source_revision": 13,
+    "source_sha256": "e477b1b1ecabb5f445dd80703e532a7ac11247220861a09f550f374dcdea240f",
+    "status": "review"
+  },
+  {
+    "attempt_id": 14,
+    "document_id": "IT-014.json",
+    "error": null,
+    "next_action": "clarify",
+    "owner": "IT Service Desk",
+    "source_revision": 14,
+    "source_sha256": "8f2ce7407f230ea93d334947f9fd577ef7656f5deb25c5d28b62e5930ce592a1",
+    "status": "needs-information"
+  },
+  {
+    "attempt_id": 15,
+    "document_id": "IT-015.json",
+    "error": null,
+    "next_action": "review-request",
+    "owner": "System Owner",
+    "source_revision": 15,
+    "source_sha256": "a8beef34c01e19d3192a97d81b7a9b1a076703733d842b2eb50b002c6723cd2d",
+    "status": "review"
+  },
+  {
+    "attempt_id": 16,
+    "document_id": "IT-016.json",
+    "error": null,
+    "next_action": "clarify",
+    "owner": "IT Service Desk",
+    "source_revision": 16,
+    "source_sha256": "4c470e6fc498eba6b02efd4fcb9e4550b5e6229c608b20d7ceb2e529cd6282c2",
+    "status": "needs-information"
+  },
+  {
+    "attempt_id": 17,
+    "document_id": "IT-017.json",
+    "error": null,
+    "next_action": "clarify",
+    "owner": "IT Service Desk",
+    "source_revision": 17,
+    "source_sha256": "48c112b2079b488d1c8c52585526957f072df1d7985cf8a2d1a71624c7f08a15",
+    "status": "needs-information"
+  },
+  {
+    "attempt_id": 18,
+    "document_id": "IT-018.json",
+    "error": null,
+    "next_action": "review-request",
+    "owner": "System Owner",
+    "source_revision": 18,
+    "source_sha256": "0f4735183084c428b92ba37fc4247b8792222daff9395ab3feb94b866a8de1bd",
+    "status": "review"
+  },
+  {
+    "attempt_id": 19,
+    "document_id": "IT-019.json",
+    "error": null,
+    "next_action": "review-risk-then-owner",
+    "owner": "Security Review",
+    "source_revision": 19,
+    "source_sha256": "a2818ebed37c50392ff66143f0f4ecea0509b40a6d42edff4168770041d8e87d",
+    "status": "review"
+  },
+  {
+    "attempt_id": 20,
+    "document_id": "IT-020.json",
+    "error": null,
+    "next_action": "clarify",
+    "owner": "IT Service Desk",
+    "source_revision": 20,
+    "source_sha256": "05c79e5aeea9a964492143fe9e0731e7926ae987bd935482940ffde658a273ab",
+    "status": "needs-information"
+  }
+]

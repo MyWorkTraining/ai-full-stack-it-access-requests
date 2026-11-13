@@ -74,8 +74,20 @@ class Runner:
             self.store.finish(attempt, result, token=token, now=self.clock())
             return
 
-    def resume(self):
-        self._execute([row['id'] for row in self.store.pending()])
+    def resume(self, attempts=None):
+        rows = self.store.pending()
+        if attempts is not None:
+            rows = [row for row in rows if row['id'] in attempts]
+        work = []
+        for row in rows:
+            changed = any(key in row['settings'] and row['settings'][key] != value for key, value in self.config.items())
+            if changed:
+                fresh = self.store.begin(row['document'], self.config, force=True)
+                self.store.supersede(row['id'])
+                work.append(fresh)
+            else:
+                work.append(row['id'])
+        self._execute(work)
         return self.store.current()
 
     def retry(self, document_id):

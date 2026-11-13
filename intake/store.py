@@ -133,3 +133,8 @@ class Store:
     def defer(self, attempt, token, not_before):
         with self.connection() as db:
             return db.execute("UPDATE attempts SET state='pending',not_before=?,token=NULL,expires=NULL WHERE id=? AND token=? AND state='running'", (not_before, attempt, token)).rowcount == 1
+
+
+    def supersede(self, attempt):
+        with self.connection() as db:
+            db.execute("UPDATE attempts SET state='superseded',token=NULL,expires=NULL WHERE id=? AND state IN ('pending','running')", (attempt,))

@@ -1,0 +1,164 @@
+{
+  "matches": 231,
+  "denominator": 231,
+  "factual_errors": [],
+  "missing": [],
+  "duplicates": [],
+  "unexpected": [],
+  "evidence_errors": [],
+  "purpose_reviews": [],
+  "routing_errors": [],
+  "by_field": {
+    "request_id": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "request_date": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "kind": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "requester": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "team": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "system": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "environment": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "permission": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "start_date": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "end_date": {
+      "matches": 21,
+      "denominator": 21
+    },
+    "manager": {
+      "matches": 21,
+      "denominator": 21
+    }
+  },
+  "by_case": [
+    {
+      "document_id": "IT-001.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-002.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-003.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-004.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-005.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-006.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-007.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-008.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-009.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-010.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-011.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-012.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-013.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-014.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-015.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-016.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-017.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-018.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-019.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-020.json",
+      "matches": 11,
+      "denominator": 11
+    },
+    {
+      "document_id": "IT-P01.json",
+      "matches": 11,
+      "denominator": 11
+    }
+  ]
+}

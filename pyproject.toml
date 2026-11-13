@@ -1,0 +1,9 @@
+[project]
+name = "northstar-access-intake"
+version = "0.1.0"
+description = "Source-grounded IT access extraction and human review queue"
+requires-python = ">=3.11"
+dependencies = ["jsonschema==4.23.0"]
+
+[tool.uv]
+package = false

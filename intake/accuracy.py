@@ -17,11 +17,14 @@ def compare(expected, measured, documents):
               'missing': sorted(set(expected) - set(counts)),
               'duplicates': sorted(name for name, count in counts.items() if count != 1),
               'unexpected': sorted(set(counts) - set(expected)), 'evidence_errors': [], 'purpose_reviews': [],
-              'by_field': {key: {'matches': 0, 'denominator': len(expected)} for key in FIELDS}, 'by_case': []}
+              'routing_errors': [], 'by_field': {key: {'matches': 0, 'denominator': len(expected)} for key in FIELDS}, 'by_case': []}
     for name, oracle in sorted(expected.items()):
         row = indexed.get(name)
         actual = row.get('extraction') if row and counts[name] == 1 else None
         actual = actual if isinstance(actual, dict) and not row.get('error') else None
+        for field in ['owner', 'status', 'next_action']:
+            if row is None or row.get(field) != oracle[field]:
+                result['routing_errors'].append({'document_id': name, 'field': field, 'expected': oracle[field], 'actual': row.get(field) if row else None})
         matched = 0
         for field in FIELDS:
             wanted = oracle['fields'][field]

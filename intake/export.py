@@ -22,7 +22,7 @@ def sync_directory(path):
         os.close(descriptor)
 
 
-def publish(store, output, hook=None):
+def _publish(store, output, hook=None):
     hook = hook or (lambda stage: None)
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -55,3 +55,17 @@ def publish(store, output, hook=None):
     sync_directory(output)
     hook('after-publish')
     return generation
+
+
+def publish(store, output, hook=None):
+    import fcntl
+    output = Path(output)
+    output.mkdir(parents=True, exist_ok=True)
+    # Hold the local-host advisory lock from snapshot acquisition through pointer
+    # replacement, preventing a slow old publisher from overwriting a newer one.
+    with (output / '.publish.lock').open('a') as lock:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
+        try:
+            return _publish(store, output, hook)
+        finally:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_UN)

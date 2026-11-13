@@ -51,7 +51,7 @@ def parser():
     return result
 
 
-def make_runner(args, store):
+def make_runner(args, store, prior_override=None):
     prior = {}
     if args.command == 'retry':
         history = store.history(args.document)
@@ -59,6 +59,8 @@ def make_runner(args, store):
             prior = history[-1]['settings']
     elif args.command == 'resume' and store.pending():
         prior = store.pending()[0]['settings']
+    if prior_override is not None:
+        prior = prior_override
     provider_name = args.provider or ('openai' if prior.get('provider', '').startswith('openai/') else 'mock')
     timeout = args.timeout if args.timeout is not None else prior.get('timeout', 30)
     config = {}
@@ -90,7 +92,7 @@ def main(argv=None):
             provider = MockProvider(args.responses) if args.provider == 'mock' else ResponsesProvider(args.model)
             comparison = run_accuracy(args.input, args.synthetic, args.expected, provider, args.output)
             print(json.dumps({'matches': comparison['matches'], 'denominator': comparison['denominator']}))
-            return 0 if comparison['matches'] == comparison['denominator'] and not comparison['duplicates'] and not comparison['unexpected'] else 1
+            return 0 if comparison['matches'] == comparison['denominator'] and not comparison['duplicates'] and not comparison['unexpected'] and not comparison['evidence_errors'] and not comparison['routing_errors'] else 1
         store = Store(args.db)
         if args.command == 'queue':
             print(json.dumps(store.current(args.include_pending), indent=2)); return 0
@@ -106,7 +108,13 @@ def main(argv=None):
                 raise ValueError('input contains no JSON exports')
             runner.run([load(path) for path in paths], force=args.refresh)
         elif args.command == 'resume':
-            runner.resume()
+            # Reconstruct producing settings per document rather than borrowing the
+            # first pending document's model, endpoint or mock script for all work.
+            from concurrent.futures import ThreadPoolExecutor
+            def resume_one(pending):
+                make_runner(args, store, pending['settings']).resume(attempts=[pending['id']])
+            with ThreadPoolExecutor(max_workers=args.workers) as pool:
+                list(pool.map(resume_one, store.pending()))
         else:
             runner.retry(args.document)
         if args.output:

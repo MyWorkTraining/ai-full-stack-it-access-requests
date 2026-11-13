@@ -100,7 +100,7 @@ env -u API_KEY python3 -m intake export --db /tmp/northstar-demo.sqlite --output
 env -u API_KEY python3 -m intake accuracy --input materials/requests --synthetic tests/fixtures/IT-P01.json --expected tests/expected --responses tests/mock_responses --provider mock --output deliverables/accuracy.md
 ```
 
-The mock script manifest must declare file-to-response scenarios, revision/settings variants and response_source; it is test/development configuration, never a business-fact extractor. Each run uses a fresh documented database when demonstrating initial intake; rerun/retry demonstrations intentionally reuse it. `--provider mock` never reads API_KEY. Authentication tests create and remove an inert sentinel inside the test and intercept transport; that is not a supplied credential or a live API call. Credentials are excluded from errors, provenance and artifacts.
+The mock script manifest must declare file-to-response scenarios, revision/settings variants and response_source; it is test/development configuration, never a business-fact extractor. Each run uses a fresh documented database when demonstrating initial intake; rerun/retry demonstrations intentionally reuse it. `--provider mock` never reads API_KEY. Authentication tests inject an inert credential function and intercept transport; they inspect the environment-reader source statically and never read API_KEY, as required by the later implementation instruction. Credentials are excluded from errors, provenance and artifacts.
 
 ## Test plan
 
@@ -288,3 +288,5 @@ These two requirements are external final-submission acceptance work, with prepa
 The implementer should obtain the facilitator’s capture/submission instructions before closing D-104/D-105. No guessed capture procedure, automatic approval request or submission action is part of this plan. For any newly discovered ambiguity in a business rule, record the exact conflicting source words and ask the person before implementing that rule; ordinary runtime/storage/test choices above do not change the stated business policy.
 
 Implementation clarification: the TP-34 synthetic input filename is `IT-P01.json` to match its stated request ID and preserve the intended staging/read outcome under the identifier-mismatch rule; the saved mock reply may still be named `paraphrase.json`. Tests inject credentials and statically inspect the environment boundary rather than reading API_KEY, as required by the implementation instruction.
+
+Implementation record: all 11 build steps completed with test-first and passing implementation commits; the full suite passed after each completed step and ended at 114 tests. Supplemental step-11 operational checks cover recovery configuration isolation, prompt-version refresh, progress during resume, changed-source overlap, publisher ordering and routing diagnostics; evidence and limits are recorded in `deliverables/verification.md`. R-104/R-105 remain external final-submission acceptance checks.

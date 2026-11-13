@@ -1,0 +1,15 @@
+test_accuracy_routing_diagnostics (test_spec_contract.Step11.test_accuracy_routing_diagnostics) ... ok
+test_changed_source_overlap (test_spec_contract.Step11.test_changed_source_overlap) ... ok
+test_export_publishers_do_not_revert_current (test_spec_contract.Step11.test_export_publishers_do_not_revert_current) ... ok
+test_package_manifest_contract (test_spec_contract.Step11.test_package_manifest_contract) ... ok
+test_r102_contract (test_spec_contract.Step11.test_r102_contract) ... ok
+test_r71_contract (test_spec_contract.Step11.test_r71_contract) ... ok
+test_readme_command_smoke (test_spec_contract.Step11.test_readme_command_smoke) ... ok
+test_recovery_configuration_isolation (test_spec_contract.Step11.test_recovery_configuration_isolation) ... ok
+test_resume_configuration_refresh (test_spec_contract.Step11.test_resume_configuration_refresh) ... ok
+test_resume_keeps_other_work_available (test_spec_contract.Step11.test_resume_keeps_other_work_available) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.680s
+
+OK

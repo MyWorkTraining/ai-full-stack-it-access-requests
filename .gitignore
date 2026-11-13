@@ -4,3 +4,7 @@
 node_modules/
 .venv/
 __pycache__/
+
+var/
+deliverables/.publish.lock
+deliverables/.current-*
