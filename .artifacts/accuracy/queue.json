@@ -1,0 +1,233 @@
+[
+  {
+    "document_id": "IT-001.json",
+    "source_sha256": "102a69f8fbc3779ec19fb6c761ad34b0c9a001f845b8df3c808f5a79441fbb10",
+    "attempt_id": "5a791a84-36e4-41ae-9c28-d7797ea3c47e",
+    "version_id": "5e434c9f-0ca8-4295-882b-7f8e4a00d7a9",
+    "status": "review",
+    "owner": "System Owner",
+    "next_action": "review-request",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-002.json",
+    "source_sha256": "007e47d1bd662d246e6d3656b6226b1c512ca4d38d71fc5844b9690ee29c14f6",
+    "attempt_id": "f2013096-a562-47fb-a85c-716a6d5c4c17",
+    "version_id": "2622eefc-6e87-4cf0-85bb-b67e42af0e98",
+    "status": "review",
+    "owner": "Security Review",
+    "next_action": "review-risk-then-owner",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-003.json",
+    "source_sha256": "80b64509cf82b29006492e97a2c53a165b9df7d22c78da10976a04594f829052",
+    "attempt_id": "2b7bdc7e-5748-40d6-88a7-ab6201315e4b",
+    "version_id": "664e5f91-3c0b-4ea3-9d28-b02156b25a62",
+    "status": "needs-information",
+    "owner": "IT Service Desk",
+    "next_action": "clarify",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-004.json",
+    "source_sha256": "d5de0f00c5c118e499ed27c6f779139b1b4c483158adf5fd2d86f513b1f9654e",
+    "attempt_id": "2c5640b8-c72e-440d-875e-54310e6105e2",
+    "version_id": "85a051e9-e096-4734-8684-a9d6b1c347a2",
+    "status": "needs-information",
+    "owner": "IT Service Desk",
+    "next_action": "clarify",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-005.json",
+    "source_sha256": "fb0f1d6451346e0d411204cb82375ae6f3be26e2791996d6adb5550d969c20f1",
+    "attempt_id": "79bbaa0d-7123-4754-81cd-7f99b7812c44",
+    "version_id": "42b54277-bafb-4570-9901-0acf75288b69",
+    "status": "review",
+    "owner": "IT Service Desk",
+    "next_action": "confirm-withdrawal",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-006.json",
+    "source_sha256": "d342c355bcf72b2d2c50e5fdf2696403bc245f5e7483722095e92b382a1991b2",
+    "attempt_id": "1e344a62-45d1-4e2b-9f93-2a78cd7c1381",
+    "version_id": "55d6b42a-d42c-4c28-a4ee-50fb307b230d",
+    "status": "review",
+    "owner": "IT Service Desk",
+    "next_action": "inspect-message",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-007.json",
+    "source_sha256": "dd4857323b83b418755981031c2798cd95c83703d09aa5457e3c8105afba646e",
+    "attempt_id": "8f5f8a79-9c3f-43c1-bf0f-a327787edc75",
+    "version_id": "9c669580-e4db-4e3d-aa5a-b928b0181547",
+    "status": "review",
+    "owner": "Security Review",
+    "next_action": "review-risk-then-owner",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-008.json",
+    "source_sha256": "b1e1de4bd67831115149cad2f1caba73f76d0c016bfcd75bdcdefdff8705a66f",
+    "attempt_id": "51cfb73f-81e2-4e30-804f-edcab9122d11",
+    "version_id": "2739945d-3b9e-464d-9fa2-49c9dba66b2e",
+    "status": "review",
+    "owner": "System Owner",
+    "next_action": "review-request",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-009.json",
+    "source_sha256": "8aa13b91d4d163827ed609b04c4cf40db2e66e4bbe33cd2211e22c1fa35378ad",
+    "attempt_id": "4704ca4e-a560-49cf-bfbc-fdf461911f84",
+    "version_id": "1104ba22-7e99-4611-9057-a23d6189272d",
+    "status": "needs-information",
+    "owner": "IT Service Desk",
+    "next_action": "clarify",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-010.json",
+    "source_sha256": "8d40a28442575c92e012ea57356a5d39b5a5724dd8e85de65118bffbf269ea2d",
+    "attempt_id": "3701f36e-d077-4312-817b-d652b563efd7",
+    "version_id": "6adfe33c-55c9-437f-87c1-af96d41b2d21",
+    "status": "needs-information",
+    "owner": "IT Service Desk",
+    "next_action": "clarify",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-011.json",
+    "source_sha256": "0776059292b21c7e12a3c5ecf3e81b3afa9743a4bd5e67e897da9bdd15bab345",
+    "attempt_id": "41c3111a-6eb4-4d47-b8ad-76b523743bd2",
+    "version_id": "67b67649-403f-45ea-89be-d407d144061a",
+    "status": "needs-information",
+    "owner": "IT Service Desk",
+    "next_action": "clarify",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-012.json",
+    "source_sha256": "192b72da5e74647b660d0e1226bb6a0f056fca4ec5ec53b278d7863fd397a791",
+    "attempt_id": "583b496e-b344-42ac-993a-9924a4446f01",
+    "version_id": "3b37e02c-5bd9-4401-8be7-62a682cabb83",
+    "status": "review",
+    "owner": "Security Review",
+    "next_action": "review-risk-then-owner",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-013.json",
+    "source_sha256": "e477b1b1ecabb5f445dd80703e532a7ac11247220861a09f550f374dcdea240f",
+    "attempt_id": "02171a66-cc20-42ea-92a4-00dae241d249",
+    "version_id": "76292488-eefe-4a04-bd6d-777a8a1c49de",
+    "status": "review",
+    "owner": "Security Review",
+    "next_action": "review-risk-then-owner",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-014.json",
+    "source_sha256": "8f2ce7407f230ea93d334947f9fd577ef7656f5deb25c5d28b62e5930ce592a1",
+    "attempt_id": "04d696f5-e4ae-4deb-9d46-06cf80cceead",
+    "version_id": "1aea4c20-9002-4349-8e88-c4b58d120f47",
+    "status": "needs-information",
+    "owner": "IT Service Desk",
+    "next_action": "clarify",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-015.json",
+    "source_sha256": "a8beef34c01e19d3192a97d81b7a9b1a076703733d842b2eb50b002c6723cd2d",
+    "attempt_id": "eb67be16-7ae0-4425-a603-a98fb95016cc",
+    "version_id": "87aa978c-594a-44d1-b30e-b6f9c5385968",
+    "status": "review",
+    "owner": "System Owner",
+    "next_action": "review-request",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-016.json",
+    "source_sha256": "4c470e6fc498eba6b02efd4fcb9e4550b5e6229c608b20d7ceb2e529cd6282c2",
+    "attempt_id": "f96ab36d-52c6-4402-a360-9a619805b82d",
+    "version_id": "21a9f879-4d30-4e40-bedb-f70ad4708b8e",
+    "status": "needs-information",
+    "owner": "IT Service Desk",
+    "next_action": "clarify",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-017.json",
+    "source_sha256": "48c112b2079b488d1c8c52585526957f072df1d7985cf8a2d1a71624c7f08a15",
+    "attempt_id": "a209e266-788b-4735-a422-ff7db4f865b7",
+    "version_id": "1a9c9f8b-d8c0-415a-bf89-b44c5cf95cda",
+    "status": "needs-information",
+    "owner": "IT Service Desk",
+    "next_action": "clarify",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-018.json",
+    "source_sha256": "0f4735183084c428b92ba37fc4247b8792222daff9395ab3feb94b866a8de1bd",
+    "attempt_id": "9e73cb51-b84d-45c7-a69f-1a56debef2bb",
+    "version_id": "132fb56b-7a85-46c9-8d50-b2833485bf51",
+    "status": "review",
+    "owner": "System Owner",
+    "next_action": "review-request",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-019.json",
+    "source_sha256": "a2818ebed37c50392ff66143f0f4ecea0509b40a6d42edff4168770041d8e87d",
+    "attempt_id": "99698281-28cf-4a5c-89f1-6c9eff09e428",
+    "version_id": "2cb46709-dcc3-430e-8f8e-55fefe4c22d2",
+    "status": "review",
+    "owner": "Security Review",
+    "next_action": "review-risk-then-owner",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "IT-020.json",
+    "source_sha256": "05c79e5aeea9a964492143fe9e0731e7926ae987bd935482940ffde658a273ab",
+    "attempt_id": "6c1cf5bf-c4a2-4052-addf-c9ca37b78f8f",
+    "version_id": "1fc92768-788c-4133-af71-18e780e977b6",
+    "status": "needs-information",
+    "owner": "IT Service Desk",
+    "next_action": "clarify",
+    "error": null,
+    "response_source": "mock"
+  },
+  {
+    "document_id": "SYN-001.json",
+    "source_sha256": "0bf5dd51cc9a0588b16aec495975039e996a150d519cf66ec0e5c9754a7e790a",
+    "attempt_id": "74a620d9-658f-4274-a7ec-f1dcb0e7a87e",
+    "version_id": "934f6525-cbd6-47df-afe4-56408d26e995",
+    "status": "review",
+    "owner": "System Owner",
+    "next_action": "review-request",
+    "error": null,
+    "response_source": "mock"
+  }
+]
