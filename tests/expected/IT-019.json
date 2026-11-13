@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "request_id": "IT-019",
+    "request_date": "2026-10-22",
+    "kind": "change",
+    "requester": "Sara Ahmed",
+    "team": "Customer Operations",
+    "system": "Beacon",
+    "environment": "production",
+    "permission": "read",
+    "start_date": "2026-10-28",
+    "end_date": "2026-11-04",
+    "manager": "Elena Park",
+    "business_purpose": "reviewing the daily exception report"
+  },
+  "owner": "Security Review",
+  "status": "review",
+  "next_action": "review-risk-then-owner",
+  "purpose_evidence": "reviewing the daily exception report",
+  "source": "materials/requests/IT-019.json",
+  "source_quote": "Sara Ahmed, Customer Operations. This is IT-019, submitted 2026-10-22. I need to change my current Beacon access in production from write to read from 2026-10-28 to 2026-11-04. My manager is Elena Park. I am transitioning from updating accounts to reviewing the daily exception report as my colleague will now update the accounts. However, I need to view the records that make up the exception report and to explain any unusual entries when I hand it over. I need to have read access to accomplish this for the above timeframe. I put the prior permission so that they can know exactly what has changed.",
+  "basis": "planning/plan.md source-derived Test plan case; office-policy.md ordered rules"
+}

@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "request_id": "IT-007",
+    "request_date": "2026-10-22",
+    "kind": "change",
+    "requester": "Grace Tan",
+    "team": "Developer Experience",
+    "system": "Forge",
+    "environment": "staging",
+    "permission": "write",
+    "start_date": "2026-10-24",
+    "end_date": "2026-10-28",
+    "manager": "Nia Patel",
+    "business_purpose": "We're updating starter project templates, so i want to save our changes for the templates."
+  },
+  "owner": "Security Review",
+  "status": "review",
+  "next_action": "review-risk-then-owner",
+  "purpose_evidence": "We're updating starter project templates, so i want to save our changes for the templates.",
+  "source": "materials/requests/IT-007.json",
+  "source_quote": "IT-007 2026-10-22 - Grace Tan / Developer Experience\n\nI have current (read only) access to Forge (staging) and would like to transition to (write) from 2026-10-24 to 2026-10-28. My manager is Nia Patel.\n\nWe're updating starter project templates, so i want to save our changes for the templates. Also confirming example pipelines are still working.\n\nThe changes involve fixing the sample configuration + testing on a new project. I'll provide a summary of what templates were modified for the team. (so they can reference this during next onboarding session)",
+  "basis": "planning/plan.md source-derived Test plan case; office-policy.md ordered rules"
+}

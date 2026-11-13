@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "request_id": "IT-011",
+    "request_date": "2026-10-22",
+    "kind": "new",
+    "requester": "Zoe Adams",
+    "team": "Research",
+    "system": "Atlas",
+    "environment": "staging",
+    "permission": "read",
+    "start_date": null,
+    "end_date": null,
+    "manager": "Priya Shah",
+    "business_purpose": "I'm looking at sample experiment records to get ready for our team walkthrough."
+  },
+  "owner": "IT Service Desk",
+  "status": "needs-information",
+  "next_action": "clarify",
+  "purpose_evidence": "I'm looking at sample experiment records to get ready for our team walkthrough.",
+  "source": "materials/requests/IT-011.json",
+  "source_quote": "IT-011, 2026-10-22: Research (Zoe Adams) - I need new read access to Atlas in staging for next Monday - Friday. Priya Shah is my boss. I'm looking at sample experiment records to get ready for our team walkthrough. The walkthrough covers how the experiment records relate to the charts. I'm looking to find confusing examples before the walkthrough.",
+  "basis": "planning/plan.md source-derived Test plan case; office-policy.md ordered rules"
+}

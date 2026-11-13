@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "request_id": "IT-004",
+    "request_date": "2026-10-22",
+    "kind": "new",
+    "requester": "Theo Malik",
+    "team": "Quality Engineering",
+    "system": "Atlas",
+    "environment": null,
+    "permission": "read",
+    "start_date": "2026-10-23",
+    "end_date": "2026-10-30",
+    "manager": "Nia Patel",
+    "business_purpose": "I'm trying to understand why the nightly quality report shows different counts from the release checklist."
+  },
+  "owner": "IT Service Desk",
+  "status": "needs-information",
+  "next_action": "clarify",
+  "purpose_evidence": "I'm trying to understand why the nightly quality report shows different counts from the release checklist.",
+  "source": "materials/requests/IT-004.json",
+  "source_quote": "IT-004 submitted on 2026-10-22 by Theo Malik, Quality Engineering. Please grant me new read access in staging to Atlas from 2026-10-23 to 2026-10-30. Nia Patel is my manager. I'm trying to understand why the nightly quality report shows different counts from the release checklist. This request is for the production environment. I'm trying to look into the records for the failed run. I would like to send out a brief summary to the engineers responsible for the report. Dates are during the current release cycle and follow up after cycle completion.",
+  "basis": "planning/plan.md source-derived Test plan case; office-policy.md ordered rules"
+}

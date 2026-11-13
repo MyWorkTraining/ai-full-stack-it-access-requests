@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "request_id": "IT-017",
+    "request_date": "2026-10-22",
+    "kind": "other",
+    "requester": "Chloe Martin",
+    "team": "Communications",
+    "system": null,
+    "environment": null,
+    "permission": null,
+    "start_date": null,
+    "end_date": null,
+    "manager": null,
+    "business_purpose": "I want to update the document before the next bunch start"
+  },
+  "owner": "IT Service Desk",
+  "status": "needs-information",
+  "next_action": "clarify",
+  "purpose_evidence": "I want to update the document before the next bunch start",
+  "source": "materials/requests/IT-017.json",
+  "source_quote": "IT-017 was submitted by Chloe Martin from Communications on 2026-10-22. Where can we find the access request form? I noticed the link we have in our onboarding docs goes to an old page. I've had a few new starters ask me which link they should bookmark. I'm wondering if you can let me know the form URL. And who is responsible for that bit of onboarding? I want to update the document before the next bunch start so they're all doing the same thing.",
+  "basis": "planning/plan.md source-derived Test plan case; office-policy.md ordered rules"
+}

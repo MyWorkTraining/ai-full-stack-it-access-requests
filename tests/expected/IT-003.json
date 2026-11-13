@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "request_id": "IT-003",
+    "request_date": "2026-10-22",
+    "kind": "new",
+    "requester": "Lina Gomez",
+    "team": "Customer Success",
+    "system": "Beacon",
+    "environment": null,
+    "permission": null,
+    "start_date": null,
+    "end_date": null,
+    "manager": "Priya Shah",
+    "business_purpose": "We are working on the customer renewal review next week."
+  },
+  "owner": "IT Service Desk",
+  "status": "needs-information",
+  "next_action": "clarify",
+  "purpose_evidence": "We are working on the customer renewal review next week.",
+  "source": "materials/requests/IT-003.json",
+  "source_quote": "Hi, this is Lina Gomez from Customer Success. I'm opening up IT-003 on 2026-10-22. I need new access to Beacon. The same access Sam has. We are working on the customer renewal review next week. I'm trying to get the account notes together before we meet as a team. My manager is Priya Shah. Sam did show me the screens during the hand-off but I didn't note what environment he was on or what the permission is named. Can someone help me figure out what the request should be? I'll follow up when I have the details.",
+  "basis": "planning/plan.md source-derived Test plan case; office-policy.md ordered rules"
+}

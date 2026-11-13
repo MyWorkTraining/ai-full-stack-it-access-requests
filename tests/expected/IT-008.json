@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "request_id": "IT-008",
+    "request_date": "2026-10-22",
+    "kind": "new",
+    "requester": "Noah Kim",
+    "team": "Finance",
+    "system": "Atlas",
+    "environment": "staging",
+    "permission": "read",
+    "start_date": "2026-10-25",
+    "end_date": "2026-10-31",
+    "manager": "Priya Shah",
+    "business_purpose": "I am trying to check the sample billing total vs forecasting workbook before month end rehearsal."
+  },
+  "owner": "System Owner",
+  "status": "review",
+  "next_action": "review-request",
+  "purpose_evidence": "I am trying to check the sample billing total vs forecasting workbook before month end rehearsal.",
+  "source": "materials/requests/IT-008.json",
+  "source_quote": "For IT-008, submitted date 2026-10-22, Noah Kim from Finance is asking for new read access to Atlas in production from 2026-10-25 to 2026-10-31 (Priya Shah is my manager). I am trying to check the sample billing total vs forecasting workbook before month end rehearsal. (Correction: environment is actually staging. Previous entry used production. Our rehearsal uses sample billing dataset in staging. The rest of the request remains the same) Permission request and dates are the same. When I first wrote this, I'd copied the environment from some old note. When I was reading through rehearsal instructions I noticed the mistake.",
+  "basis": "planning/plan.md source-derived Test plan case; office-policy.md ordered rules"
+}
