@@ -350,9 +350,9 @@ class Step05(Contract):
     def test_r62_contract(self):self.check_case(4);self.check_case(20)
     def test_r63_contract(self):self.check_case(6)
     def test_r67_contract(self):
-        doc=self.module('intake.source').load(ROOT/'tests/fixtures/paraphrase.json')
+        doc=self.module('intake.source').load(ROOT/'tests/fixtures/IT-P01.json')
         data=self.module('intake.validation').extract_response(doc,self.reply('paraphrase.json'))
-        expected=self.expected('paraphrase.json')
+        expected=self.expected('IT-P01.json')
         self.assertEqual(data['request_id'],'IT-P01')
         self.assertEqual(data['permission'],'read')
         self.assertEqual(self.module('intake.policy').route(doc,data),{k:expected[k] for k in ['owner','status','next_action']})
