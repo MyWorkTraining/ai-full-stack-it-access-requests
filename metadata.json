@@ -5,6 +5,8 @@
   "branch": "main",
   "checkpoints_count": 1,
   "files_touched": [
+    "deliverables/step-checks/step-11-red-test_export_publishers_do_not_revert_current.log",
+    "deliverables/step-checks/step-11-red-test_resume_keeps_other_work_available.log",
     "deliverables/step-checks/step-11-red.log",
     "tests/mock_responses/resume-error-manifest.json",
     "tests/mock_responses/resume-success-manifest.json",
@@ -20,21 +22,21 @@
     }
   ],
   "token_usage": {
-    "input_tokens": 568,
+    "input_tokens": 6904,
     "cache_creation_tokens": 0,
-    "cache_read_tokens": 184448,
-    "output_tokens": 3679,
-    "api_call_count": 1
+    "cache_read_tokens": 1149312,
+    "output_tokens": 6042,
+    "api_call_count": 6
   },
   "redaction": {
-    "replacements": 3,
+    "replacements": 4,
     "layers": {
       "betterleaks": 0,
       "connection_string": 0,
       "credential_key": 0,
       "credential_value": 0,
       "credentialed_uri": 0,
-      "entropy": 3,
+      "entropy": 5,
       "key_context": 0,
       "pii": 0,
       "provider_token": 0,
