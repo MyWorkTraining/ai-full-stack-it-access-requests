@@ -233,3 +233,76 @@ class Step03(Contract):
 
     def test_r20_contract(self):
         self.field_contract('issues')
+
+
+class Step04(Contract):
+    def adapter(self, name='IT-001.json', model='fixture-model'):
+        providers=self.module('intake.providers')
+        extraction=self.module('intake.extract')
+        transport=providers.MockTransport(MOCKS,[name])
+        provider=extraction.ResponsesProvider(model=model,transport=transport,credential=lambda:'inert-fixture-token')
+        return extraction,provider,transport
+
+    def test_provider_transport_outcomes(self):
+        for name in ['provider-refusal.json','provider-interrupted.json','malformed.json','provider-error.json']:
+            with self.subTest(name=name):
+                extraction,provider,_=self.adapter(name)
+                with self.assertRaises(ValueError):extraction.prepare(self.document(),provider)
+
+    def test_r01_contract(self):
+        extraction,provider,_=self.adapter()
+        result=extraction.prepare(self.document(),provider)
+        self.assertEqual(result['extraction']['requester'],'Maya Chen')
+        self.assertEqual(result['extraction']['permission'],'read')
+
+    def test_r26_contract(self):
+        for n,permission in [(7,'write'),(19,'read')]:
+            extraction,provider,_=self.adapter(f'IT-{n:03d}.json')
+            self.assertEqual(extraction.prepare(self.document(n),provider)['extraction']['permission'],permission)
+
+    def test_r57_contract(self):
+        extraction,provider,transport=self.adapter(model='alternate-fixture-model')
+        extraction.prepare(self.document(),provider)
+        request=transport.requests[0]
+        self.assertEqual(request['body']['model'],'alternate-fixture-model')
+        self.assertEqual(request['body']['text']['format']['type'],'json_schema')
+        self.assertTrue(request['body']['text']['format']['strict'])
+
+    def test_r58_contract(self):
+        # Authentication wiring is verified with an injected credential function; no environment read.
+        extraction,provider,transport=self.adapter()
+        extraction.prepare(self.document(),provider)
+        self.assertEqual(transport.requests[0]['headers']['Authorization'],'Bearer inert-fixture-token')
+        import inspect
+        self.assertIn('os.environ["API_KEY"]',inspect.getsource(extraction.read_api_key))
+        mock_provider=self.module('intake.providers').MockProvider(MOCKS,{'IT-001.json':['IT-001.json']})
+        self.assertEqual(extraction.prepare(self.document(),mock_provider)['response_source'],'mock')
+
+    def test_r59_contract(self):
+        extraction,provider,_=self.adapter()
+        extraction.prepare(self.document(),provider)
+        import json
+        self.assertNotIn('inert-fixture-token',json.dumps(provider.evidence))
+        self.assertEqual(extraction.redact('Bearer inert-fixture-token',['inert-fixture-token']),'Bearer [REDACTED]')
+
+    def test_r96_contract(self):
+        extraction,provider,_=self.adapter()
+        self.assertEqual(extraction.prepare(self.document(),provider)['response_source'],'openai/fixture-model')
+
+    def test_r100_contract(self):
+        extraction,provider,_=self.adapter()
+        extraction.prepare(self.document(),provider)
+        self.assertEqual(provider.evidence['request']['body']['model'],'fixture-model')
+        self.assertEqual(provider.evidence['request']['headers']['Authorization'],'[REDACTED]')
+        self.assertIn('refusal',provider.evidence['response_handling'])
+        self.assertEqual(provider.evidence['observation'],'intercepted transport; mock response')
+
+    def test_r103_contract(self):
+        extraction,provider,transport=self.adapter('IT-006.json')
+        extraction.prepare(self.document(6),provider)
+        request=transport.requests[0]['body']
+        self.assertEqual(request['input'][0]['role'],'user')
+        import json
+        self.assertEqual(json.loads(request['input'][0]['content'])['message'],self.document(6)['message'])
+        self.assertIn('source messages as data',request['instructions'])
+        self.assertIn('relative',request['instructions'])
