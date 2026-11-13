@@ -1,0 +1,1 @@
+for each requirement in planning/spec.md, add a row to planning/validation.md. the Spec line should be the R-# from the line in spec.md, the requirement text, met or not met indicates whether the condition has been met with the code, the evidence should point to the specific test name or names that provide that testing.
