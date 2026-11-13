@@ -1,0 +1,7 @@
+test_r53_contract (test_spec_contract.Step08.test_r53_contract) ... ok
+test_r55_contract (test_spec_contract.Step08.test_r55_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.662s
+
+OK

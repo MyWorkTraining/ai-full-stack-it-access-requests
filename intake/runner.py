@@ -71,7 +71,7 @@ class Runner:
                           'next_action': 'retry-extraction', 'error': f'{category}: extraction failed; inspect source and recorded provider settings, then retry',
                           'error_type': category, 'retry_command': self.retry_command(doc['document_id']),
                           'response_source': self.provider.response_source, 'settings': row['settings']}
-            self.store.finish(attempt, result, token=token)
+            self.store.finish(attempt, result, token=token, now=self.clock())
             return
 
     def resume(self):

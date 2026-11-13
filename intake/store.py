@@ -62,11 +62,17 @@ class Store:
                        (name, document['source_sha256'], revision, attempt))
             return attempt
 
-    def finish(self, attempt, result, token=None):
+    def finish(self, attempt, result, token=None, now=None):
         with self.connection() as db:
             db.execute('BEGIN IMMEDIATE')
             row = db.execute('SELECT * FROM attempts WHERE id=?', (attempt,)).fetchone()
             if row is None or row['state'] in ('done', 'error'):
+                return False
+            if row['state'] == 'running':
+                current_time = time.time() if now is None else now
+                if token != row['token'] or row['expires'] <= current_time:
+                    return False
+            elif token is not None:
                 return False
             state = 'error' if result.get('error') else 'done'
             db.execute('UPDATE attempts SET state=?,result=?,token=NULL,expires=NULL WHERE id=?', (state, json.dumps(result), attempt))
@@ -114,6 +120,9 @@ class Store:
         with self.connection() as db:
             db.execute('BEGIN IMMEDIATE')
             row = db.execute('SELECT * FROM attempts WHERE id=?', (attempt,)).fetchone()
+            latest = db.execute('SELECT current_attempt FROM documents WHERE document_id=(SELECT document_id FROM attempts WHERE id=?)', (attempt,)).fetchone()
+            if latest is None or latest['current_attempt'] != attempt:
+                return None
             if row is None or row['state'] in ('done', 'error') or row['not_before'] > now:
                 return None
             if row['state'] == 'running' and row['expires'] > now:
