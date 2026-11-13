@@ -1,0 +1,6 @@
+{
+  "event": "file-block",
+  "barrier": "release",
+  "entered": "entered",
+  "response": "IT-001.json"
+}

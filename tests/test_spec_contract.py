@@ -615,3 +615,77 @@ class Step08(Contract):
             self.assertEqual(queue[0]['source_sha256'],records[0]['source_sha256'])
             self.assertEqual(queue[0]['attempt_id'],records[0]['attempt_id'])
             self.assertEqual(records[0]['extraction']['end_date'],'2026-11-06' if records[0]['source_sha256']==original else '2026-11-09')
+
+
+class Step09(Contract):
+    def setUp(self):
+        super().setUp()
+        import tempfile
+        self.directory=tempfile.TemporaryDirectory();self.addCleanup(self.directory.cleanup)
+        self.db=Path(self.directory.name)/'intake.sqlite'
+        self.output=Path(self.directory.name)/'deliverables'
+
+    def cli(self,*args,allow_error=False):
+        self.module('intake.__main__')
+        import subprocess,sys
+        environment={k:os.environ[k] for k in os.environ if k!='API_KEY'}
+        result=subprocess.run([sys.executable,str(ROOT/'tests/mock_worker.py'),*map(str,args)],capture_output=True,text=True,env=environment,timeout=15)
+        if not allow_error:self.assertEqual(result.returncode,0,result.stderr)
+        return result
+
+    def test_r02_contract(self):
+        self.module('intake.__main__')
+        import json,subprocess,sys,time
+        input_dir=Path(self.directory.name)/'input';input_dir.mkdir()
+        for n in [1,2]:
+            name=f'IT-{n:03d}.json';(input_dir/name).write_bytes((ROOT/'materials/requests'/name).read_bytes())
+        gates=Path(self.directory.name)/'gates';gates.mkdir()
+        environment={k:os.environ[k] for k in os.environ if k!='API_KEY'}
+        command=[sys.executable,str(ROOT/'tests/mock_worker.py'),'run','--input',str(input_dir),'--db',str(self.db),'--provider','mock','--responses',str(MOCKS),'--script',str(MOCKS/'cli-block-manifest.json'),'--mock-gates',str(gates),'--timeout','5']
+        worker=subprocess.Popen(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=environment)
+        try:
+            deadline=time.monotonic()+8
+            while not (gates/'entered').exists() and worker.poll() is None and time.monotonic()<deadline:time.sleep(0.01)
+            self.assertTrue((gates/'entered').exists())
+            rows=[]
+            while time.monotonic()<deadline:
+                rows=json.loads(self.cli('queue','--db',self.db,'--include-pending').stdout)
+                if any(r.get('document_id')=='IT-002.json' and r.get('status')=='review' for r in rows):break
+            self.assertTrue(any(r.get('document_id')=='IT-001.json' and r['work_state']=='running' for r in rows))
+            self.assertTrue(any(r.get('document_id')=='IT-002.json' and r['owner']=='Security Review' for r in rows))
+            worker.terminate();worker.communicate(timeout=5)
+            # Deterministic clock-expiry injection after actual process termination.
+            store=self.module('intake.store').Store(self.db)
+            with store.connection() as db:db.execute("UPDATE attempts SET expires=0 WHERE state='running'")
+            (gates/'release').touch()
+            self.cli('resume','--db',self.db,'--provider','mock','--responses',MOCKS,'--script',MOCKS/'cli-block-manifest.json','--mock-gates',gates)
+            rows=json.loads(self.cli('queue','--db',self.db).stdout)
+            self.assertEqual([r['status'] for r in rows],['review','review'])
+            self.assertEqual(len(store.history('IT-002.json')),1)
+        finally:
+            if worker.poll() is None:worker.terminate()
+            worker.communicate(timeout=5)
+
+    def test_r95_contract(self):
+        import json,hashlib
+        self.cli('run','--input',ROOT/'materials/requests','--db',self.db,'--provider','mock','--responses',MOCKS,'--output',self.output)
+        records=[json.loads(line) for line in (self.output/'extractions.jsonl').read_text().splitlines()]
+        self.assertEqual(len(records),20);self.assertEqual(len({r['document_id'] for r in records}),20)
+        for row in records:
+            expected=self.expected(row['document_id'])
+            self.assertEqual(row['source_sha256'],hashlib.sha256((ROOT/'materials/requests'/row['document_id']).read_bytes()).hexdigest())
+            self.assertEqual(row['response_source'],'mock');self.assertIsNone(row['error'])
+            for key,value in expected['fields'].items():self.assertEqual(row['extraction'][key],value)
+
+    def test_r97_contract(self):
+        import json
+        self.cli('run','--input',ROOT/'materials/requests/IT-001.json','--db',self.db,'--provider','mock','--responses',MOCKS,'--output',self.output)
+        self.cli('retry','--document','IT-001.json','--db',self.db,'--provider','mock','--responses',MOCKS,'--script',MOCKS/'error-manifest.json',allow_error=True)
+        self.cli('export','--db',self.db,'--output',self.output)
+        record=json.loads((self.output/'extractions.jsonl').read_text().strip())
+        queue=json.loads((self.output/'queue.json').read_text())
+        self.assertEqual(queue[0]['attempt_id'],record['attempt_id'])
+        self.assertEqual(queue[0]['source_sha256'],record['source_sha256'])
+        self.assertEqual(queue[0]['status'],'error');self.assertIsNone(record['extraction'])
+        history=json.loads(self.cli('history','--db',self.db,'--document','IT-001.json').stdout)
+        self.assertEqual(history[0]['result']['extraction']['end_date'],'2026-11-06')

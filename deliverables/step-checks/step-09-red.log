@@ -1,0 +1,42 @@
+test_r02_contract (test_spec_contract.Step09.test_r02_contract) ... FAIL
+test_r95_contract (test_spec_contract.Step09.test_r95_contract) ... FAIL
+test_r97_contract (test_spec_contract.Step09.test_r97_contract) ... FAIL
+
+======================================================================
+FAIL: test_r02_contract (test_spec_contract.Step09.test_r02_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 637, in test_r02_contract
+    self.module('intake.__main__')
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.__main__ behavior has not been implemented
+
+======================================================================
+FAIL: test_r95_contract (test_spec_contract.Step09.test_r95_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 671, in test_r95_contract
+    self.cli('run','--input',ROOT/'materials/requests','--db',self.db,'--provider','mock','--responses',MOCKS,'--output',self.output)
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 629, in cli
+    self.module('intake.__main__')
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.__main__ behavior has not been implemented
+
+======================================================================
+FAIL: test_r97_contract (test_spec_contract.Step09.test_r97_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 682, in test_r97_contract
+    self.cli('run','--input',ROOT/'materials/requests/IT-001.json','--db',self.db,'--provider','mock','--responses',MOCKS,'--output',self.output)
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 629, in cli
+    self.module('intake.__main__')
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.__main__ behavior has not been implemented
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.011s
+
+FAILED (failures=3)
