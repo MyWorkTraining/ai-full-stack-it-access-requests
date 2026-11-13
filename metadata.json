@@ -25,6 +25,7 @@
     "deliverables/step-checks/step-07-red.log",
     "deliverables/step-checks/step-07-suite.log",
     "deliverables/step-checks/step-07-targeted.log",
+    "deliverables/step-checks/step-08-red.log",
     "tests/mock_worker.py",
     "tests/test_spec_contract.py"
   ],
@@ -38,10 +39,10 @@
     }
   ],
   "token_usage": {
-    "input_tokens": 425,
+    "input_tokens": 1106,
     "cache_creation_tokens": 0,
-    "cache_read_tokens": 163840,
-    "output_tokens": 2677,
+    "cache_read_tokens": 166784,
+    "output_tokens": 778,
     "api_call_count": 1
   },
   "redaction": {
