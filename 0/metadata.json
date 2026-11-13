@@ -1,0 +1,75 @@
+{
+  "cli_version": "0.13.4",
+  "checkpoint_id": "01M7B24PF7CS6TV1JEMNBG74G4",
+  "session_id": "01a1d5c7-da2d-7ae2-a99a-61b256339bdd",
+  "strategy": "manual-commit",
+  "created_at": "2026-11-13T18:18:58.49622812Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    ".gitignore",
+    "README.md",
+    "deliverables/.generations/f841887faa0a43fcb4e4ef94892fca6d/extractions.jsonl",
+    "deliverables/.generations/f841887faa0a43fcb4e4ef94892fca6d/queue.json",
+    "deliverables/accuracy.json",
+    "deliverables/accuracy.md",
+    "deliverables/current",
+    "deliverables/extractions.jsonl",
+    "deliverables/queue.json",
+    "deliverables/request-evidence.json",
+    "deliverables/step-checks/step-11-suite.log",
+    "deliverables/step-checks/step-11-targeted.log",
+    "deliverables/verification.md",
+    "intake/__main__.py",
+    "intake/accuracy.py",
+    "intake/export.py",
+    "intake/runner.py",
+    "intake/store.py",
+    "planning/plan.md",
+    "pyproject.toml",
+    "uv.lock"
+  ],
+  "agent": "Codex",
+  "model": "gpt-6.1-sol",
+  "turn_id": "93710f8c64de",
+  "checkpoint_transcript_start": 619,
+  "transcript_lines_at_start": 619,
+  "compact_transcript_start": 117,
+  "token_usage": {
+    "input_tokens": 3786,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 1452672,
+    "output_tokens": 9418,
+    "api_call_count": 7
+  },
+  "session_token_usage": {
+    "input_tokens": 117480,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 9733888,
+    "output_tokens": 97604,
+    "api_call_count": 75
+  },
+  "redaction": {
+    "replacements": 4,
+    "layers": {
+      "betterleaks": 0,
+      "connection_string": 0,
+      "credential_key": 0,
+      "credential_value": 0,
+      "credentialed_uri": 0,
+      "entropy": 5,
+      "key_context": 0,
+      "pii": 0,
+      "provider_token": 0,
+      "shell_stdin": 0
+    },
+    "pii": {
+      "EMAIL": 0,
+      "IP": 0,
+      "PHONE": 0
+    }
+  },
+  "session_metrics": {
+    "turn_count": 3
+  }
+}
