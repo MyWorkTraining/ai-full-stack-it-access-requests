@@ -1,0 +1,12 @@
+for each step in planning/plan.md, write the test the plan names, run it and sshow it failing, write the code until it passes. Every test uses mock responses saved under 'tests/mock_responses/' and no tests call the real model or reads 'API_KEY', the expected values in each test are the expected facts of the test plan, not values copied from a run. After each step, run the whole test suite and stop if anything fails.
+
+---
+
+using planning/plan.md,    - for each step, first write the test the plan names, run it and show it failing, then stop;
+     after you commit the failing test (`Test first: <step>`), write the code until it passes, then
+     stop again so you commit it (`Step <n>: <step>`);
+   - every test uses mock responses saved under `tests/mock_responses/`, and no test calls the real
+     model or reads `API_KEY`;
+   - the expected values in each test are the expected facts of the test plan, not values copied
+     from a run;
+   - after each step, run the whole test suite and stop if anything fails.
