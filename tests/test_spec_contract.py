@@ -464,3 +464,100 @@ class Step06(Contract):
 
     def test_r65_contract(self):self.test_r47_contract()
     def test_r66_contract(self):self.test_r48_contract()
+
+
+class Step07(Contract):
+    def setUp(self):
+        super().setUp()
+        import tempfile
+        self.directory=tempfile.TemporaryDirectory();self.addCleanup(self.directory.cleanup)
+        self.db=Path(self.directory.name)/'intake.sqlite'
+
+    def runner(self,scripts,**options):
+        runner=self.module('intake.runner')
+        store=self.module('intake.store').Store(self.db)
+        provider=self.module('intake.providers').MockProvider(MOCKS,scripts,options.pop('barriers',None))
+        return runner.Runner(store,provider,**options),store,provider
+
+    def failure(self,name):
+        runner,store,_=self.runner({'IT-001.json':[name]})
+        runner.run([self.document()])
+        row=store.current()[0]
+        self.assertEqual({k:row[k] for k in ['extraction','status','owner','next_action']},{'extraction':None,'status':'error','owner':'IT Service Desk','next_action':'retry-extraction'})
+        self.assertTrue(row['error']);self.assertIn('--document IT-001.json',row['retry_command'])
+        return row
+
+    def test_r39_contract(self):self.failure('provider-error.json')
+    def test_r40_contract(self):
+        self.failure('malformed.json')
+        runner,store,_=self.runner({'IT-001.json':['schema-invalid.json']})
+        runner.run([self.document()],force=True)
+        self.assertEqual(store.current()[0]['status'],'error')
+    def test_r41_contract(self):self.failure('provider-rate-limit.json')
+    def test_r42_contract(self):self.failure('provider-refusal.json')
+    def test_r43_contract(self):self.failure('provider-interrupted.json')
+
+    def test_r44_contract(self):
+        import threading
+        entered,release,finished=threading.Event(),threading.Event(),threading.Event()
+        runner,store,_=self.runner({'IT-001.json':['blocked.json'],'IT-002.json':['IT-002.json']},barriers={'release':release,'entered':entered},workers=2)
+        original=store.finish
+        def observe(attempt,result,**kwargs):
+            answer=original(attempt,result,**kwargs)
+            if store.get(attempt)['document_id']=='IT-002.json':finished.set()
+            return answer
+        store.finish=observe
+        thread=threading.Thread(target=runner.run,args=([self.document(),self.document(2)],))
+        thread.start()
+        try:
+            self.assertTrue(entered.wait(2));self.assertTrue(finished.wait(2))
+            self.assertEqual([r['document_id'] for r in store.current()],['IT-002.json'])
+            self.assertEqual(store.current()[0]['owner'],'Security Review')
+        finally:release.set();thread.join(3)
+        self.assertFalse(thread.is_alive())
+
+    def test_r45_contract(self):
+        row=self.failure('provider-error.json')
+        self.assertIn(str(self.db),row['retry_command'])
+        runner,store,_=self.runner({'IT-001.json':['IT-001.json']})
+        runner.retry('IT-001.json')
+        self.assertEqual(store.current()[0]['status'],'review')
+
+    def test_r50_contract(self):
+        runner,store,_=self.runner({'IT-001.json':['IT-001.json','provider-error.json']})
+        runner.run([self.document()]);runner.retry('IT-001.json')
+        self.assertIsNone(store.current()[0]['extraction'])
+        history=store.history('IT-001.json')
+        self.assertEqual(history[0]['result']['extraction']['end_date'],'2026-11-06')
+        self.assertEqual(history[1]['result']['status'],'error')
+        self.assertNotEqual(history[0]['id'],history[1]['id'])
+
+    def test_r54_contract(self):
+        runner,store,provider=self.runner({'IT-001.json':['IT-001.json'],'IT-002.json':['IT-002.json']})
+        runner.run([self.document()])
+        attempt=store.begin(self.document(2),self.module('intake.extract').settings(provider))
+        store.claim(attempt,now=0,lease=1)
+        runner.resume()
+        self.assertEqual(provider.calls,['IT-001.json','IT-002.json'])
+        self.assertEqual(len(store.current()),2)
+
+    def test_r56_contract(self):
+        self.failure('provider-error.json')
+        runner,store,_=self.runner({'IT-001.json':['IT-001.json']})
+        runner.retry('IT-001.json');self.assertEqual(store.current()[0]['status'],'review')
+
+    def test_r64_contract(self):
+        runner,store,_=self.runner({'IT-001.json':['IT-001.json'],'IT-002.json':['provider-error.json']})
+        runner.run([self.document(),self.document(2)])
+        self.assertEqual([r['status'] for r in store.current()],['review','error'])
+
+    def test_r68_contract(self):
+        self.failure('provider-refusal.json');self.failure('provider-interrupted.json')
+    def test_r69_contract(self):self.test_r50_contract()
+
+    def test_retry_budget(self):
+        clock=[10.0]
+        runner,store,provider=self.runner({'IT-001.json':['provider-rate-limit.json','IT-001.json']},max_retries=1,clock=lambda:clock[0],sleep=lambda seconds:clock.__setitem__(0,clock[0]+seconds))
+        runner.run([self.document()])
+        self.assertEqual(provider.calls,['IT-001.json','IT-001.json'])
+        self.assertEqual(store.current()[0]['status'],'review')
