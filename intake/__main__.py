@@ -40,6 +40,14 @@ def parser():
             sub.add_argument('--include-pending', action='store_true')
         if command == 'export':
             sub.add_argument('--output', required=True)
+    accuracy = commands.add_parser('accuracy')
+    accuracy.add_argument('--input', required=True)
+    accuracy.add_argument('--synthetic')
+    accuracy.add_argument('--expected', required=True)
+    accuracy.add_argument('--responses', default='tests/mock_responses')
+    accuracy.add_argument('--provider', choices=['mock', 'openai'], default='mock')
+    accuracy.add_argument('--model')
+    accuracy.add_argument('--output', required=True)
     return result
 
 
@@ -75,6 +83,14 @@ def make_runner(args, store):
 def main(argv=None):
     args = parser().parse_args(argv)
     try:
+        if args.command == 'accuracy':
+            from .accuracy import run_accuracy
+            if args.provider == 'openai' and not args.model:
+                raise ValueError('--model is required for provider=openai')
+            provider = MockProvider(args.responses) if args.provider == 'mock' else ResponsesProvider(args.model)
+            comparison = run_accuracy(args.input, args.synthetic, args.expected, provider, args.output)
+            print(json.dumps({'matches': comparison['matches'], 'denominator': comparison['denominator']}))
+            return 0 if comparison['matches'] == comparison['denominator'] and not comparison['duplicates'] and not comparison['unexpected'] else 1
         store = Store(args.db)
         if args.command == 'queue':
             print(json.dumps(store.current(args.include_pending), indent=2)); return 0

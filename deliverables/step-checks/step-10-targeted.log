@@ -1,0 +1,8 @@
+test_accuracy_arithmetic (test_spec_contract.Step10.test_accuracy_arithmetic) ... ok
+test_accuracy_report_contract (test_spec_contract.Step10.test_accuracy_report_contract) ... ok
+test_r70_contract (test_spec_contract.Step10.test_r70_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.411s
+
+OK
