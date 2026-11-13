@@ -1,0 +1,186 @@
+test_provider_transport_outcomes (test_spec_contract.Step04.test_provider_transport_outcomes) ... 
+  test_provider_transport_outcomes (test_spec_contract.Step04.test_provider_transport_outcomes) (name='provider-refusal.json') ... FAIL
+  test_provider_transport_outcomes (test_spec_contract.Step04.test_provider_transport_outcomes) (name='provider-interrupted.json') ... FAIL
+  test_provider_transport_outcomes (test_spec_contract.Step04.test_provider_transport_outcomes) (name='malformed.json') ... FAIL
+  test_provider_transport_outcomes (test_spec_contract.Step04.test_provider_transport_outcomes) (name='provider-error.json') ... FAIL
+test_r01_contract (test_spec_contract.Step04.test_r01_contract) ... FAIL
+test_r100_contract (test_spec_contract.Step04.test_r100_contract) ... FAIL
+test_r103_contract (test_spec_contract.Step04.test_r103_contract) ... FAIL
+test_r26_contract (test_spec_contract.Step04.test_r26_contract) ... FAIL
+test_r57_contract (test_spec_contract.Step04.test_r57_contract) ... FAIL
+test_r58_contract (test_spec_contract.Step04.test_r58_contract) ... FAIL
+test_r59_contract (test_spec_contract.Step04.test_r59_contract) ... FAIL
+test_r96_contract (test_spec_contract.Step04.test_r96_contract) ... FAIL
+
+======================================================================
+FAIL: test_provider_transport_outcomes (test_spec_contract.Step04.test_provider_transport_outcomes) (name='provider-refusal.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 249, in test_provider_transport_outcomes
+    extraction,provider,_=self.adapter(name)
+                          ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_provider_transport_outcomes (test_spec_contract.Step04.test_provider_transport_outcomes) (name='provider-interrupted.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 249, in test_provider_transport_outcomes
+    extraction,provider,_=self.adapter(name)
+                          ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_provider_transport_outcomes (test_spec_contract.Step04.test_provider_transport_outcomes) (name='malformed.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 249, in test_provider_transport_outcomes
+    extraction,provider,_=self.adapter(name)
+                          ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_provider_transport_outcomes (test_spec_contract.Step04.test_provider_transport_outcomes) (name='provider-error.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 249, in test_provider_transport_outcomes
+    extraction,provider,_=self.adapter(name)
+                          ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_r01_contract (test_spec_contract.Step04.test_r01_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 253, in test_r01_contract
+    extraction,provider,_=self.adapter()
+                          ^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_r100_contract (test_spec_contract.Step04.test_r100_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 293, in test_r100_contract
+    extraction,provider,_=self.adapter()
+                          ^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_r103_contract (test_spec_contract.Step04.test_r103_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 301, in test_r103_contract
+    extraction,provider,transport=self.adapter('IT-006.json')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_r26_contract (test_spec_contract.Step04.test_r26_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 260, in test_r26_contract
+    extraction,provider,_=self.adapter(f'IT-{n:03d}.json')
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_r57_contract (test_spec_contract.Step04.test_r57_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 264, in test_r57_contract
+    extraction,provider,transport=self.adapter(model='alternate-fixture-model')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_r58_contract (test_spec_contract.Step04.test_r58_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 273, in test_r58_contract
+    extraction,provider,transport=self.adapter()
+                                  ^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_r59_contract (test_spec_contract.Step04.test_r59_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 282, in test_r59_contract
+    extraction,provider,_=self.adapter()
+                          ^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+======================================================================
+FAIL: test_r96_contract (test_spec_contract.Step04.test_r96_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 289, in test_r96_contract
+    extraction,provider,_=self.adapter()
+                          ^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 241, in adapter
+    extraction=self.module('intake.extract')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.extract behavior has not been implemented
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.006s
+
+FAILED (failures=12)

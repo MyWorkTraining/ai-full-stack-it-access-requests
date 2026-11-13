@@ -1,0 +1,28 @@
+test_r06_contract (test_spec_contract.Step03.test_r06_contract) ... ok
+test_r07_contract (test_spec_contract.Step03.test_r07_contract) ... ok
+test_r08_contract (test_spec_contract.Step03.test_r08_contract) ... ok
+test_r09_contract (test_spec_contract.Step03.test_r09_contract) ... ok
+test_r10_contract (test_spec_contract.Step03.test_r10_contract) ... ok
+test_r11_contract (test_spec_contract.Step03.test_r11_contract) ... ok
+test_r12_contract (test_spec_contract.Step03.test_r12_contract) ... ok
+test_r13_contract (test_spec_contract.Step03.test_r13_contract) ... ok
+test_r14_contract (test_spec_contract.Step03.test_r14_contract) ... ok
+test_r15_contract (test_spec_contract.Step03.test_r15_contract) ... ok
+test_r16_contract (test_spec_contract.Step03.test_r16_contract) ... ok
+test_r17_contract (test_spec_contract.Step03.test_r17_contract) ... ok
+test_r18_contract (test_spec_contract.Step03.test_r18_contract) ... ok
+test_r19_contract (test_spec_contract.Step03.test_r19_contract) ... ok
+test_r20_contract (test_spec_contract.Step03.test_r20_contract) ... ok
+test_r21_contract (test_spec_contract.Step03.test_r21_contract) ... ok
+test_r22_contract (test_spec_contract.Step03.test_r22_contract) ... ok
+test_r23_contract (test_spec_contract.Step03.test_r23_contract) ... ok
+test_r24_contract (test_spec_contract.Step03.test_r24_contract) ... ok
+test_r25_contract (test_spec_contract.Step03.test_r25_contract) ... ok
+test_r27_contract (test_spec_contract.Step03.test_r27_contract) ... ok
+test_r29_contract (test_spec_contract.Step03.test_r29_contract) ... ok
+test_r30_contract (test_spec_contract.Step03.test_r30_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.115s
+
+OK

@@ -1,0 +1,95 @@
+test_r47_contract (test_spec_contract.Step06.test_r47_contract) ... FAIL
+test_r48_contract (test_spec_contract.Step06.test_r48_contract) ... FAIL
+test_r49_contract (test_spec_contract.Step06.test_r49_contract) ... FAIL
+test_r51_contract (test_spec_contract.Step06.test_r51_contract) ... FAIL
+test_r52_contract (test_spec_contract.Step06.test_r52_contract) ... FAIL
+test_r65_contract (test_spec_contract.Step06.test_r65_contract) ... FAIL
+test_r66_contract (test_spec_contract.Step06.test_r66_contract) ... FAIL
+
+======================================================================
+FAIL: test_r47_contract (test_spec_contract.Step06.test_r47_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 421, in test_r47_contract
+    store=self.module('intake.store').Store(self.db)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.store behavior has not been implemented
+
+======================================================================
+FAIL: test_r48_contract (test_spec_contract.Step06.test_r48_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 430, in test_r48_contract
+    store=self.module('intake.store').Store(self.db)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.store behavior has not been implemented
+
+======================================================================
+FAIL: test_r49_contract (test_spec_contract.Step06.test_r49_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 443, in test_r49_contract
+    store=self.module('intake.store').Store(self.db)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.store behavior has not been implemented
+
+======================================================================
+FAIL: test_r51_contract (test_spec_contract.Step06.test_r51_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 450, in test_r51_contract
+    store=self.module('intake.store').Store(self.db)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.store behavior has not been implemented
+
+======================================================================
+FAIL: test_r52_contract (test_spec_contract.Step06.test_r52_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 457, in test_r52_contract
+    store=self.module('intake.store').Store(self.db)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.store behavior has not been implemented
+
+======================================================================
+FAIL: test_r65_contract (test_spec_contract.Step06.test_r65_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 465, in test_r65_contract
+    def test_r65_contract(self):self.test_r47_contract()
+                                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 421, in test_r47_contract
+    store=self.module('intake.store').Store(self.db)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.store behavior has not been implemented
+
+======================================================================
+FAIL: test_r66_contract (test_spec_contract.Step06.test_r66_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 466, in test_r66_contract
+    def test_r66_contract(self):self.test_r48_contract()
+                                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 430, in test_r48_contract
+    store=self.module('intake.store').Store(self.db)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.store behavior has not been implemented
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.009s
+
+FAILED (failures=7)

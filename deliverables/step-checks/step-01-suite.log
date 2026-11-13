@@ -1,0 +1,10 @@
+test_mock_provider_contract (test_spec_contract.Step01.test_mock_provider_contract) ... ok
+test_mock_transport_contract (test_spec_contract.Step01.test_mock_transport_contract) ... ok
+test_a_mock_reply_is_read_with_no_key_and_no_network (test_starter.MockResponse.test_a_mock_reply_is_read_with_no_key_and_no_network) ... ok
+test_each_request_export_has_message_text_and_a_hash (test_starter.SuppliedFiles.test_each_request_export_has_message_text_and_a_hash) ... ok
+test_the_schema_names_the_fields_it_requires (test_starter.SuppliedFiles.test_the_schema_names_the_fields_it_requires) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.003s
+
+OK

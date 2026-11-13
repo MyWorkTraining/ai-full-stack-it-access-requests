@@ -1,0 +1,38 @@
+test_r31_contract (test_spec_contract.Step05.test_r31_contract) ... ok
+test_r32_contract (test_spec_contract.Step05.test_r32_contract) ... ok
+test_r33_contract (test_spec_contract.Step05.test_r33_contract) ... ok
+test_r34_contract (test_spec_contract.Step05.test_r34_contract) ... ok
+test_r35_contract (test_spec_contract.Step05.test_r35_contract) ... ok
+test_r36_contract (test_spec_contract.Step05.test_r36_contract) ... ok
+test_r37_contract (test_spec_contract.Step05.test_r37_contract) ... ok
+test_r38_contract (test_spec_contract.Step05.test_r38_contract) ... ok
+test_r60_contract (test_spec_contract.Step05.test_r60_contract) ... ok
+test_r61_contract (test_spec_contract.Step05.test_r61_contract) ... ok
+test_r62_contract (test_spec_contract.Step05.test_r62_contract) ... ok
+test_r63_contract (test_spec_contract.Step05.test_r63_contract) ... ok
+test_r67_contract (test_spec_contract.Step05.test_r67_contract) ... ok
+test_r73_contract (test_spec_contract.Step05.test_r73_contract) ... ok
+test_r74_contract (test_spec_contract.Step05.test_r74_contract) ... ok
+test_r75_contract (test_spec_contract.Step05.test_r75_contract) ... ok
+test_r76_contract (test_spec_contract.Step05.test_r76_contract) ... ok
+test_r77_contract (test_spec_contract.Step05.test_r77_contract) ... ok
+test_r78_contract (test_spec_contract.Step05.test_r78_contract) ... ok
+test_r79_contract (test_spec_contract.Step05.test_r79_contract) ... ok
+test_r80_contract (test_spec_contract.Step05.test_r80_contract) ... ok
+test_r81_contract (test_spec_contract.Step05.test_r81_contract) ... ok
+test_r82_contract (test_spec_contract.Step05.test_r82_contract) ... ok
+test_r83_contract (test_spec_contract.Step05.test_r83_contract) ... ok
+test_r84_contract (test_spec_contract.Step05.test_r84_contract) ... ok
+test_r85_contract (test_spec_contract.Step05.test_r85_contract) ... ok
+test_r86_contract (test_spec_contract.Step05.test_r86_contract) ... ok
+test_r87_contract (test_spec_contract.Step05.test_r87_contract) ... ok
+test_r88_contract (test_spec_contract.Step05.test_r88_contract) ... ok
+test_r89_contract (test_spec_contract.Step05.test_r89_contract) ... ok
+test_r90_contract (test_spec_contract.Step05.test_r90_contract) ... ok
+test_r91_contract (test_spec_contract.Step05.test_r91_contract) ... ok
+test_r92_contract (test_spec_contract.Step05.test_r92_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 0.125s
+
+OK

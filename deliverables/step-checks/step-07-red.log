@@ -1,0 +1,240 @@
+test_r39_contract (test_spec_contract.Step07.test_r39_contract) ... FAIL
+test_r40_contract (test_spec_contract.Step07.test_r40_contract) ... FAIL
+test_r41_contract (test_spec_contract.Step07.test_r41_contract) ... FAIL
+test_r42_contract (test_spec_contract.Step07.test_r42_contract) ... FAIL
+test_r43_contract (test_spec_contract.Step07.test_r43_contract) ... FAIL
+test_r44_contract (test_spec_contract.Step07.test_r44_contract) ... FAIL
+test_r45_contract (test_spec_contract.Step07.test_r45_contract) ... FAIL
+test_r50_contract (test_spec_contract.Step07.test_r50_contract) ... FAIL
+test_r54_contract (test_spec_contract.Step07.test_r54_contract) ... FAIL
+test_r56_contract (test_spec_contract.Step07.test_r56_contract) ... FAIL
+test_r64_contract (test_spec_contract.Step07.test_r64_contract) ... FAIL
+test_r68_contract (test_spec_contract.Step07.test_r68_contract) ... FAIL
+test_r69_contract (test_spec_contract.Step07.test_r69_contract) ... FAIL
+test_retry_budget (test_spec_contract.Step07.test_retry_budget) ... FAIL
+
+======================================================================
+FAIL: test_r39_contract (test_spec_contract.Step07.test_r39_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 490, in test_r39_contract
+    def test_r39_contract(self):self.failure('provider-error.json')
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 483, in failure
+    runner,store,_=self.runner({'IT-001.json':[name]})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r40_contract (test_spec_contract.Step07.test_r40_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 492, in test_r40_contract
+    self.failure('malformed.json')
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 483, in failure
+    runner,store,_=self.runner({'IT-001.json':[name]})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r41_contract (test_spec_contract.Step07.test_r41_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 496, in test_r41_contract
+    def test_r41_contract(self):self.failure('provider-rate-limit.json')
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 483, in failure
+    runner,store,_=self.runner({'IT-001.json':[name]})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r42_contract (test_spec_contract.Step07.test_r42_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 497, in test_r42_contract
+    def test_r42_contract(self):self.failure('provider-refusal.json')
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 483, in failure
+    runner,store,_=self.runner({'IT-001.json':[name]})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r43_contract (test_spec_contract.Step07.test_r43_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 498, in test_r43_contract
+    def test_r43_contract(self):self.failure('provider-interrupted.json')
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 483, in failure
+    runner,store,_=self.runner({'IT-001.json':[name]})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r44_contract (test_spec_contract.Step07.test_r44_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 503, in test_r44_contract
+    runner,store,_=self.runner({'IT-001.json':['blocked.json'],'IT-002.json':['IT-002.json']},barriers={'release':release,'entered':entered},workers=2)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r45_contract (test_spec_contract.Step07.test_r45_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 520, in test_r45_contract
+    row=self.failure('provider-error.json')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 483, in failure
+    runner,store,_=self.runner({'IT-001.json':[name]})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r50_contract (test_spec_contract.Step07.test_r50_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 527, in test_r50_contract
+    runner,store,_=self.runner({'IT-001.json':['IT-001.json','provider-error.json']})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r54_contract (test_spec_contract.Step07.test_r54_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 536, in test_r54_contract
+    runner,store,provider=self.runner({'IT-001.json':['IT-001.json'],'IT-002.json':['IT-002.json']})
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r56_contract (test_spec_contract.Step07.test_r56_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 545, in test_r56_contract
+    self.failure('provider-error.json')
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 483, in failure
+    runner,store,_=self.runner({'IT-001.json':[name]})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r64_contract (test_spec_contract.Step07.test_r64_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 550, in test_r64_contract
+    runner,store,_=self.runner({'IT-001.json':['IT-001.json'],'IT-002.json':['provider-error.json']})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r68_contract (test_spec_contract.Step07.test_r68_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 555, in test_r68_contract
+    self.failure('provider-refusal.json');self.failure('provider-interrupted.json')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 483, in failure
+    runner,store,_=self.runner({'IT-001.json':[name]})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_r69_contract (test_spec_contract.Step07.test_r69_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 556, in test_r69_contract
+    def test_r69_contract(self):self.test_r50_contract()
+                                ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 527, in test_r50_contract
+    runner,store,_=self.runner({'IT-001.json':['IT-001.json','provider-error.json']})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+======================================================================
+FAIL: test_retry_budget (test_spec_contract.Step07.test_retry_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 560, in test_retry_budget
+    runner,store,provider=self.runner({'IT-001.json':['provider-rate-limit.json','IT-001.json']},max_retries=1,clock=lambda:clock[0],sleep=lambda seconds:clock.__setitem__(0,clock[0]+seconds))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 477, in runner
+    runner=self.module('intake.runner')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.runner behavior has not been implemented
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.012s
+
+FAILED (failures=14)

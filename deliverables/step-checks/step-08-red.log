@@ -1,0 +1,26 @@
+test_r53_contract (test_spec_contract.Step08.test_r53_contract) ... FAIL
+test_r55_contract (test_spec_contract.Step08.test_r55_contract) ... FAIL
+
+======================================================================
+FAIL: test_r53_contract (test_spec_contract.Step08.test_r53_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 591, in test_r53_contract
+    self.assertFalse(store.finish(attempt,result,token=old))
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_r55_contract (test_spec_contract.Step08.test_r55_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 596, in test_r55_contract
+    export=self.module('intake.export')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.export behavior has not been implemented
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.522s
+
+FAILED (failures=2)

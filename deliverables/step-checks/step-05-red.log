@@ -1,0 +1,497 @@
+test_r31_contract (test_spec_contract.Step05.test_r31_contract) ... FAIL
+test_r32_contract (test_spec_contract.Step05.test_r32_contract) ... FAIL
+test_r33_contract (test_spec_contract.Step05.test_r33_contract) ... FAIL
+test_r34_contract (test_spec_contract.Step05.test_r34_contract) ... FAIL
+test_r35_contract (test_spec_contract.Step05.test_r35_contract) ... FAIL
+test_r36_contract (test_spec_contract.Step05.test_r36_contract) ... FAIL
+test_r37_contract (test_spec_contract.Step05.test_r37_contract) ... FAIL
+test_r38_contract (test_spec_contract.Step05.test_r38_contract) ... FAIL
+test_r60_contract (test_spec_contract.Step05.test_r60_contract) ... FAIL
+test_r61_contract (test_spec_contract.Step05.test_r61_contract) ... FAIL
+test_r62_contract (test_spec_contract.Step05.test_r62_contract) ... FAIL
+test_r63_contract (test_spec_contract.Step05.test_r63_contract) ... FAIL
+test_r67_contract (test_spec_contract.Step05.test_r67_contract) ... ERROR
+test_r73_contract (test_spec_contract.Step05.test_r73_contract) ... FAIL
+test_r74_contract (test_spec_contract.Step05.test_r74_contract) ... FAIL
+test_r75_contract (test_spec_contract.Step05.test_r75_contract) ... FAIL
+test_r76_contract (test_spec_contract.Step05.test_r76_contract) ... FAIL
+test_r77_contract (test_spec_contract.Step05.test_r77_contract) ... FAIL
+test_r78_contract (test_spec_contract.Step05.test_r78_contract) ... FAIL
+test_r79_contract (test_spec_contract.Step05.test_r79_contract) ... FAIL
+test_r80_contract (test_spec_contract.Step05.test_r80_contract) ... FAIL
+test_r81_contract (test_spec_contract.Step05.test_r81_contract) ... FAIL
+test_r82_contract (test_spec_contract.Step05.test_r82_contract) ... FAIL
+test_r83_contract (test_spec_contract.Step05.test_r83_contract) ... FAIL
+test_r84_contract (test_spec_contract.Step05.test_r84_contract) ... FAIL
+test_r85_contract (test_spec_contract.Step05.test_r85_contract) ... FAIL
+test_r86_contract (test_spec_contract.Step05.test_r86_contract) ... FAIL
+test_r87_contract (test_spec_contract.Step05.test_r87_contract) ... FAIL
+test_r88_contract (test_spec_contract.Step05.test_r88_contract) ... FAIL
+test_r89_contract (test_spec_contract.Step05.test_r89_contract) ... FAIL
+test_r90_contract (test_spec_contract.Step05.test_r90_contract) ... FAIL
+test_r91_contract (test_spec_contract.Step05.test_r91_contract) ... FAIL
+test_r92_contract (test_spec_contract.Step05.test_r92_contract) ... FAIL
+
+======================================================================
+ERROR: test_r67_contract (test_spec_contract.Step05.test_r67_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 354, in test_r67_contract
+    data=self.module('intake.validation').extract_response(doc,self.reply('paraphrase.json'))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/intake/validation.py", line 65, in extract_response
+    return validate(document, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/intake/validation.py", line 36, in validate
+    raise ValueError('request_id: filename mismatch requires an issue')
+ValueError: request_id: filename mismatch requires an issue
+
+======================================================================
+FAIL: test_r31_contract (test_spec_contract.Step05.test_r31_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 323, in test_r31_contract
+    self.check_case(6);self.check_case(5);self.check_case(10)
+    ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r32_contract (test_spec_contract.Step05.test_r32_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 325, in test_r32_contract
+    def test_r32_contract(self):self.check_case(6)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r33_contract (test_spec_contract.Step05.test_r33_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 326, in test_r33_contract
+    def test_r33_contract(self):self.check_case(5)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r34_contract (test_spec_contract.Step05.test_r34_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 328, in test_r34_contract
+    for n in [3,4,9,10,11,14,16,17,20]:self.check_case(n)
+                                       ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r35_contract (test_spec_contract.Step05.test_r35_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 331, in test_r35_contract
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r36_contract (test_spec_contract.Step05.test_r36_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 340, in test_r36_contract
+    for n in [2,7,12,13,19]:self.check_case(n)
+                            ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r37_contract (test_spec_contract.Step05.test_r37_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 343, in test_r37_contract
+    for n in [1,8,15,18]:self.check_case(n)
+                         ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r38_contract (test_spec_contract.Step05.test_r38_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 346, in test_r38_contract
+    for n in range(1,21):self.assertIn(self.check_case(n)['status'],['review','needs-information'])
+                                       ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r60_contract (test_spec_contract.Step05.test_r60_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 348, in test_r60_contract
+    def test_r60_contract(self):self.check_case(1)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r61_contract (test_spec_contract.Step05.test_r61_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 349, in test_r61_contract
+    def test_r61_contract(self):self.check_case(10);self.check_case(11)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r62_contract (test_spec_contract.Step05.test_r62_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 350, in test_r62_contract
+    def test_r62_contract(self):self.check_case(4);self.check_case(20)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r63_contract (test_spec_contract.Step05.test_r63_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 351, in test_r63_contract
+    def test_r63_contract(self):self.check_case(6)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r73_contract (test_spec_contract.Step05.test_r73_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 360, in test_r73_contract
+    def test_r73_contract(self):self.check_case(1)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r74_contract (test_spec_contract.Step05.test_r74_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 362, in test_r74_contract
+    def test_r74_contract(self):self.check_case(2)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r75_contract (test_spec_contract.Step05.test_r75_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 364, in test_r75_contract
+    def test_r75_contract(self):self.check_case(3)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r76_contract (test_spec_contract.Step05.test_r76_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 366, in test_r76_contract
+    def test_r76_contract(self):self.check_case(4)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r77_contract (test_spec_contract.Step05.test_r77_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 368, in test_r77_contract
+    def test_r77_contract(self):self.check_case(5)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r78_contract (test_spec_contract.Step05.test_r78_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 370, in test_r78_contract
+    def test_r78_contract(self):self.check_case(6)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r79_contract (test_spec_contract.Step05.test_r79_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 372, in test_r79_contract
+    def test_r79_contract(self):self.check_case(7)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r80_contract (test_spec_contract.Step05.test_r80_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 374, in test_r80_contract
+    def test_r80_contract(self):self.check_case(8)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r81_contract (test_spec_contract.Step05.test_r81_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 376, in test_r81_contract
+    def test_r81_contract(self):self.check_case(9)
+                                ^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r82_contract (test_spec_contract.Step05.test_r82_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 378, in test_r82_contract
+    def test_r82_contract(self):self.check_case(10)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r83_contract (test_spec_contract.Step05.test_r83_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 380, in test_r83_contract
+    def test_r83_contract(self):self.check_case(11)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r84_contract (test_spec_contract.Step05.test_r84_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 382, in test_r84_contract
+    def test_r84_contract(self):self.check_case(12)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r85_contract (test_spec_contract.Step05.test_r85_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 384, in test_r85_contract
+    def test_r85_contract(self):self.check_case(13)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r86_contract (test_spec_contract.Step05.test_r86_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 386, in test_r86_contract
+    def test_r86_contract(self):self.check_case(14)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r87_contract (test_spec_contract.Step05.test_r87_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 388, in test_r87_contract
+    def test_r87_contract(self):self.check_case(15)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r88_contract (test_spec_contract.Step05.test_r88_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 390, in test_r88_contract
+    def test_r88_contract(self):self.check_case(16)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r89_contract (test_spec_contract.Step05.test_r89_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 392, in test_r89_contract
+    def test_r89_contract(self):self.check_case(17)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r90_contract (test_spec_contract.Step05.test_r90_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 394, in test_r90_contract
+    def test_r90_contract(self):self.check_case(18)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r91_contract (test_spec_contract.Step05.test_r91_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 396, in test_r91_contract
+    def test_r91_contract(self):self.check_case(19)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+======================================================================
+FAIL: test_r92_contract (test_spec_contract.Step05.test_r92_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 398, in test_r92_contract
+    def test_r92_contract(self):self.check_case(20)
+                                ^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 313, in check_case
+    policy=self.module('intake.policy')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.policy behavior has not been implemented
+
+----------------------------------------------------------------------
+Ran 33 tests in 0.078s
+
+FAILED (failures=32, errors=1)

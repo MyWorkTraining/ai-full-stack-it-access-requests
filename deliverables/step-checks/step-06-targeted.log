@@ -1,0 +1,12 @@
+test_r47_contract (test_spec_contract.Step06.test_r47_contract) ... ok
+test_r48_contract (test_spec_contract.Step06.test_r48_contract) ... ok
+test_r49_contract (test_spec_contract.Step06.test_r49_contract) ... ok
+test_r51_contract (test_spec_contract.Step06.test_r51_contract) ... ok
+test_r52_contract (test_spec_contract.Step06.test_r52_contract) ... ok
+test_r65_contract (test_spec_contract.Step06.test_r65_contract) ... ok
+test_r66_contract (test_spec_contract.Step06.test_r66_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.449s
+
+OK

@@ -1,0 +1,17 @@
+test_mock_provider_contract (test_spec_contract.Step01.test_mock_provider_contract)
+TP-01: ordered saved success/error responses and explicit unscripted errors. ... ok
+test_mock_transport_contract (test_spec_contract.Step01.test_mock_transport_contract)
+TP-01: saved refusal/interruption responses and exact request recording. ... ok
+test_r03_contract (test_spec_contract.Step02.test_r03_contract) ... ok
+test_r04_contract (test_spec_contract.Step02.test_r04_contract) ... ok
+test_r05_contract (test_spec_contract.Step02.test_r05_contract) ... ok
+test_r28_contract (test_spec_contract.Step02.test_r28_contract) ... ok
+test_r46_contract (test_spec_contract.Step02.test_r46_contract) ... ok
+test_a_mock_reply_is_read_with_no_key_and_no_network (test_starter.MockResponse.test_a_mock_reply_is_read_with_no_key_and_no_network) ... ok
+test_each_request_export_has_message_text_and_a_hash (test_starter.SuppliedFiles.test_each_request_export_has_message_text_and_a_hash) ... ok
+test_the_schema_names_the_fields_it_requires (test_starter.SuppliedFiles.test_the_schema_names_the_fields_it_requires) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.011s
+
+OK

@@ -1,0 +1,10 @@
+test_r03_contract (test_spec_contract.Step02.test_r03_contract) ... ok
+test_r04_contract (test_spec_contract.Step02.test_r04_contract) ... ok
+test_r05_contract (test_spec_contract.Step02.test_r05_contract) ... ok
+test_r28_contract (test_spec_contract.Step02.test_r28_contract) ... ok
+test_r46_contract (test_spec_contract.Step02.test_r46_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK

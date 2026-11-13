@@ -1,0 +1,19 @@
+test_r39_contract (test_spec_contract.Step07.test_r39_contract) ... ok
+test_r40_contract (test_spec_contract.Step07.test_r40_contract) ... ok
+test_r41_contract (test_spec_contract.Step07.test_r41_contract) ... ok
+test_r42_contract (test_spec_contract.Step07.test_r42_contract) ... ok
+test_r43_contract (test_spec_contract.Step07.test_r43_contract) ... ok
+test_r44_contract (test_spec_contract.Step07.test_r44_contract) ... ok
+test_r45_contract (test_spec_contract.Step07.test_r45_contract) ... ok
+test_r50_contract (test_spec_contract.Step07.test_r50_contract) ... ok
+test_r54_contract (test_spec_contract.Step07.test_r54_contract) ... ok
+test_r56_contract (test_spec_contract.Step07.test_r56_contract) ... ok
+test_r64_contract (test_spec_contract.Step07.test_r64_contract) ... ok
+test_r68_contract (test_spec_contract.Step07.test_r68_contract) ... ok
+test_r69_contract (test_spec_contract.Step07.test_r69_contract) ... ok
+test_retry_budget (test_spec_contract.Step07.test_retry_budget) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.053s
+
+OK

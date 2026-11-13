@@ -1,0 +1,68 @@
+test_r03_contract (test_spec_contract.Step02.test_r03_contract) ... FAIL
+test_r04_contract (test_spec_contract.Step02.test_r04_contract) ... FAIL
+test_r05_contract (test_spec_contract.Step02.test_r05_contract) ... FAIL
+test_r28_contract (test_spec_contract.Step02.test_r28_contract) ... FAIL
+test_r46_contract (test_spec_contract.Step02.test_r46_contract) ... FAIL
+
+======================================================================
+FAIL: test_r03_contract (test_spec_contract.Step02.test_r03_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 82, in test_r03_contract
+    source = self.module('intake.source')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.source behavior has not been implemented
+
+======================================================================
+FAIL: test_r04_contract (test_spec_contract.Step02.test_r04_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 93, in test_r04_contract
+    source = self.module('intake.source')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.source behavior has not been implemented
+
+======================================================================
+FAIL: test_r05_contract (test_spec_contract.Step02.test_r05_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 103, in test_r05_contract
+    doc=self.document(16)
+        ^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 43, in document
+    return self.module('intake.source').load(ROOT / f'materials/requests/IT-{number:03d}.json')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.source behavior has not been implemented
+
+======================================================================
+FAIL: test_r28_contract (test_spec_contract.Step02.test_r28_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 109, in test_r28_contract
+    source=self.module('intake.source')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.source behavior has not been implemented
+
+======================================================================
+FAIL: test_r46_contract (test_spec_contract.Step02.test_r46_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 122, in test_r46_contract
+    source=self.module('intake.source')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 35, in module
+    self.assertIsNotNone(importlib.util.find_spec(name), f'{name} behavior has not been implemented')
+AssertionError: unexpectedly None : intake.source behavior has not been implemented
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.004s
+
+FAILED (failures=5)

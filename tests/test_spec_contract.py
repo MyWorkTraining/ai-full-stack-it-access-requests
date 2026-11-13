@@ -561,3 +561,57 @@ class Step07(Contract):
         runner.run([self.document()])
         self.assertEqual(provider.calls,['IT-001.json','IT-001.json'])
         self.assertEqual(store.current()[0]['status'],'review')
+
+
+class Step08(Contract):
+    def setUp(self):
+        super().setUp()
+        import tempfile
+        self.directory=tempfile.TemporaryDirectory();self.addCleanup(self.directory.cleanup)
+        self.db=Path(self.directory.name)/'intake.sqlite'
+
+    def test_r53_contract(self):
+        import subprocess
+        import sys
+        store=self.module('intake.store').Store(self.db)
+        environment={k:os.environ[k] for k in os.environ if k!='API_KEY'}
+        workers=[subprocess.Popen([sys.executable,str(ROOT/'tests/mock_worker.py'),'worker',str(self.db)],stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=environment) for _ in range(2)]
+        for process in workers:
+            out,err=process.communicate(timeout=10)
+            self.assertEqual(process.returncode,0,(out,err))
+        self.assertEqual(len(store.current()),1)
+        self.assertEqual(store.current()[0]['owner'],'System Owner')
+        provider=self.module('intake.providers').MockProvider(MOCKS)
+        attempt=store.begin(self.document(),self.module('intake.extract').settings(provider),force=True)
+        old=store.claim(attempt,now=0,lease=1)
+        new=store.claim(attempt,now=2,lease=10)
+        self.assertNotEqual(old,new)
+        prepared=self.module('intake.extract').prepare(self.document(),provider)
+        result=dict(prepared,status='review',owner='System Owner',next_action='review-request',error=None)
+        self.assertFalse(store.finish(attempt,result,token=old))
+        self.assertTrue(store.finish(attempt,result,token=new,now=3))
+        self.assertEqual(len(store.history('IT-001.json')),2)
+
+    def test_r55_contract(self):
+        export=self.module('intake.export')
+        import json
+        store=self.module('intake.store').Store(self.db)
+        provider=self.module('intake.providers').MockProvider(MOCKS,{'IT-001.json':['IT-001.json','IT-001-revised.json']})
+        runner=self.module('intake.runner').Runner(store,provider)
+        runner.run([self.document()])
+        output=Path(self.directory.name)/'deliverables'
+        export.publish(store,output)
+        original=self.document()['source_sha256']
+        revised=Path(self.directory.name)/'IT-001.json'
+        revised.write_text(json.dumps({'message':self.document()['message']+' Correction: replace the access end date above with 2026-11-09.'}))
+        runner.run([self.module('intake.source').load(revised)])
+        for stage in ['after-extractions','after-queue','before-publish','after-publish']:
+            def interrupt(actual):
+                if actual==stage:raise RuntimeError('simulated interruption')
+            with self.assertRaisesRegex(RuntimeError,'interruption'):export.publish(store,output,hook=interrupt)
+            generation=(output/'current').resolve()
+            records=[json.loads(line) for line in (generation/'extractions.jsonl').read_text().splitlines()]
+            queue=json.loads((generation/'queue.json').read_text())
+            self.assertEqual(queue[0]['source_sha256'],records[0]['source_sha256'])
+            self.assertEqual(queue[0]['attempt_id'],records[0]['attempt_id'])
+            self.assertEqual(records[0]['extraction']['end_date'],'2026-11-06' if records[0]['source_sha256']==original else '2026-11-09')
