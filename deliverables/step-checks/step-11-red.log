@@ -1,0 +1,72 @@
+test_accuracy_routing_diagnostics (test_spec_contract.Step11.test_accuracy_routing_diagnostics) ... FAIL
+test_changed_source_overlap (test_spec_contract.Step11.test_changed_source_overlap) ... ok
+test_package_manifest_contract (test_spec_contract.Step11.test_package_manifest_contract) ... FAIL
+test_r102_contract (test_spec_contract.Step11.test_r102_contract) ... FAIL
+test_r71_contract (test_spec_contract.Step11.test_r71_contract) ... FAIL
+test_readme_command_smoke (test_spec_contract.Step11.test_readme_command_smoke) ... FAIL
+test_recovery_configuration_isolation (test_spec_contract.Step11.test_recovery_configuration_isolation) ... FAIL
+test_resume_configuration_refresh (test_spec_contract.Step11.test_resume_configuration_refresh) ... FAIL
+
+======================================================================
+FAIL: test_accuracy_routing_diagnostics (test_spec_contract.Step11.test_accuracy_routing_diagnostics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 862, in test_accuracy_routing_diagnostics
+    self.assertIn('routing_errors',result)
+AssertionError: 'routing_errors' not found in {'matches': 231, 'denominator': 231, 'factual_errors': [], 'missing': [], 'duplicates': [], 'unexpected': [], 'evidence_errors': [], 'purpose_reviews': [], 'by_field': {'request_id': {'matches': 21, 'denominator': 21}, 'request_date': {'matches': 21, 'denominator': 21}, 'kind': {'matches': 21, 'denominator': 21}, 'requester': {'matches': 21, 'denominator': 21}, 'team': {'matches': 21, 'denominator': 21}, 'system': {'matches': 21, 'denominator': 21}, 'environment': {'matches': 21, 'denominator': 21}, 'permission': {'matches': 21, 'denominator': 21}, 'start_date': {'matches': 21, 'denominator': 21}, 'end_date': {'matches': 21, 'denominator': 21}, 'manager': {'matches': 21, 'denominator': 21}}, 'by_case': [{'document_id': 'IT-001.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-002.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-003.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-004.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-005.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-006.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-007.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-008.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-009.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-010.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-011.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-012.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-013.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-014.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-015.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-016.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-017.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-018.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-019.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-020.json', 'matches': 11, 'denominator': 11}, {'document_id': 'IT-P01.json', 'matches': 11, 'denominator': 11}]}
+
+======================================================================
+FAIL: test_package_manifest_contract (test_spec_contract.Step11.test_package_manifest_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 801, in test_package_manifest_contract
+    self.assertTrue((ROOT/'pyproject.toml').exists(),'runtime/dependency declaration missing')
+AssertionError: False is not true : runtime/dependency declaration missing
+
+======================================================================
+FAIL: test_r102_contract (test_spec_contract.Step11.test_r102_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 769, in test_r102_contract
+    self.assertTrue(path.exists(),'reproducible mock deliverables are missing')
+AssertionError: False is not true : reproducible mock deliverables are missing
+
+======================================================================
+FAIL: test_r71_contract (test_spec_contract.Step11.test_r71_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 759, in test_r71_contract
+    self.assertTrue(path.exists(),'operational verification handover is missing')
+AssertionError: False is not true : operational verification handover is missing
+
+======================================================================
+FAIL: test_readme_command_smoke (test_spec_contract.Step11.test_readme_command_smoke)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 785, in test_readme_command_smoke
+    self.assertIsNotNone(match,'README needs executable, isolated smoke examples')
+AssertionError: unexpectedly None : README needs executable, isolated smoke examples
+
+======================================================================
+FAIL: test_recovery_configuration_isolation (test_spec_contract.Step11.test_recovery_configuration_isolation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 833, in test_recovery_configuration_isolation
+    self.assertEqual(result.returncode,1,result.stderr)
+AssertionError: 0 != 1 : 
+
+======================================================================
+FAIL: test_resume_configuration_refresh (test_spec_contract.Step11.test_resume_configuration_refresh)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 818, in test_resume_configuration_refresh
+    self.assertEqual(row['settings']['prompt_sha256'],hashlib.sha256((ROOT/'intake/prompt.txt').read_bytes()).hexdigest())
+AssertionError: 'stale-prompt-version' != 'cdd11b92921b6fc8aecb55f0f72afb0126e16deb5ef3212f01d9e65ad7cc7d99'
+- stale-prompt-version
++ cdd11b92921b6fc8aecb55f0f72afb0126e16deb5ef3212f01d9e65ad7cc7d99
+
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.534s
+
+FAILED (failures=7)

@@ -1,0 +1,15 @@
+test_export_publishers_do_not_revert_current (test_spec_contract.Step11.test_export_publishers_do_not_revert_current) ... FAIL
+
+======================================================================
+FAIL: test_export_publishers_do_not_revert_current (test_spec_contract.Step11.test_export_publishers_do_not_revert_current)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/ai-full-stack-it-access-requests/tests/test_spec_contract.py", line 904, in test_export_publishers_do_not_revert_current
+    try:self.assertFalse(second_finished.wait(.15),'a newer publisher must wait until the earlier publication releases its lock')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : a newer publisher must wait until the earlier publication releases its lock
+
+----------------------------------------------------------------------
+Ran 1 test in 0.163s
+
+FAILED (failures=1)

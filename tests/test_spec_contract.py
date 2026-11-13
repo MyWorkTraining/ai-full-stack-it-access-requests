@@ -751,3 +751,158 @@ class Step10(Contract):
             r=subprocess.run(command,capture_output=True,text=True,env=environment,timeout=15)
             self.assertEqual(r.returncode,0,r.stderr)
             self.assertIn('231/231',output.read_text())
+
+
+class Step11(Contract):
+    def test_r71_contract(self):
+        path=ROOT/'deliverables/verification.md'
+        self.assertTrue(path.exists(),'operational verification handover is missing')
+        text=path.read_text()
+        for name in ['test_r44_contract','test_r53_contract','test_r54_contract','test_r55_contract','test_r51_contract','test_r69_contract']:
+            self.assertIn(name,text)
+        for limit in ['one host','multi-host','not live model accuracy','200','2,000']:
+            self.assertIn(limit,text)
+
+    def test_r102_contract(self):
+        import json
+        path=ROOT/'deliverables/extractions.jsonl'
+        self.assertTrue(path.exists(),'reproducible mock deliverables are missing')
+        rows=[json.loads(line) for line in path.read_text().splitlines()]
+        self.assertEqual(len(rows),20)
+        for row in rows:
+            self.assertEqual(row['response_source'],'mock')
+            expected=self.expected(row['document_id'])
+            for key,value in expected['fields'].items():self.assertEqual(row['extraction'][key],value)
+        evidence=json.loads((ROOT/'deliverables/request-evidence.json').read_text())
+        self.assertEqual(evidence['observation'],'intercepted transport; mock response')
+        self.assertEqual(evidence['request']['headers']['Authorization'],'[REDACTED]')
+        self.assertIn('231/231',(ROOT/'deliverables/accuracy.md').read_text())
+
+    def test_readme_command_smoke(self):
+        import re,shlex,tempfile,subprocess,sys
+        text=(ROOT/'README.md').read_text()
+        match=re.search(r'<!-- smoke -->\s*```bash\n(.*?)```',text,re.S)
+        self.assertIsNotNone(match,'README needs executable, isolated smoke examples')
+        with tempfile.TemporaryDirectory() as directory:
+            environment={k:os.environ[k] for k in os.environ if k!='API_KEY'}
+            for line in match.group(1).splitlines():
+                if not line or line.startswith('#'):continue
+                command=shlex.split(line)
+                self.assertEqual(command[:3],['python3','-m','intake'])
+                args=command[3:]
+                for flag in ['--db','--output']:
+                    if flag in args:
+                        i=args.index(flag)+1;args[i]=str(Path(directory)/('state.sqlite' if flag=='--db' else 'outputs'))
+                r=subprocess.run([sys.executable,str(ROOT/'tests/mock_worker.py'),*args],capture_output=True,text=True,env=environment,timeout=15)
+                self.assertEqual(r.returncode,0,(line,r.stderr))
+
+    def test_package_manifest_contract(self):
+        import tomllib
+        self.assertTrue((ROOT/'pyproject.toml').exists(),'runtime/dependency declaration missing')
+        self.assertTrue((ROOT/'uv.lock').exists(),'dependency lockfile missing')
+        project=tomllib.loads((ROOT/'pyproject.toml').read_text())['project']
+        self.assertIn('3.11',project['requires-python'])
+        self.assertTrue(any('jsonschema' in value for value in project['dependencies']))
+        lock=tomllib.loads((ROOT/'uv.lock').read_text())
+        self.assertTrue(any(item['name']=='jsonschema' for item in lock['package']))
+
+    def test_resume_configuration_refresh(self):
+        import tempfile,hashlib
+        with tempfile.TemporaryDirectory() as directory:
+            store=self.module('intake.store').Store(Path(directory)/'state.sqlite')
+            provider=self.module('intake.providers').MockProvider(MOCKS,{'IT-001.json':['IT-001.json']})
+            stale=self.module('intake.extract').settings(provider,{'prompt_sha256':'stale-prompt-version'})
+            store.begin(self.document(),stale)
+            self.module('intake.runner').Runner(store,provider).resume()
+            row=store.current()[0]
+            self.assertEqual(row['settings']['prompt_sha256'],hashlib.sha256((ROOT/'intake/prompt.txt').read_bytes()).hexdigest())
+            self.assertEqual(row['extraction']['end_date'],'2026-11-06')
+            self.assertEqual(len(store.history('IT-001.json')),2)
+
+    def test_recovery_configuration_isolation(self):
+        import tempfile,json,hashlib,sys,subprocess
+        with tempfile.TemporaryDirectory() as directory:
+            db=Path(directory)/'state.sqlite';store=self.module('intake.store').Store(db)
+            for number,script in [(1,'resume-success-manifest.json'),(2,'resume-error-manifest.json')]:
+                path=MOCKS/script
+                provider=self.module('intake.providers').MockProvider(MOCKS,json.loads(path.read_text()))
+                runner=self.module('intake.runner').Runner(store,provider,config={'mock_script':str(path.resolve()),'mock_script_sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+                store.begin(self.document(number),runner.config)
+            environment={k:os.environ[k] for k in os.environ if k!='API_KEY'}
+            result=subprocess.run([sys.executable,str(ROOT/'tests/mock_worker.py'),'resume','--db',str(db)],capture_output=True,text=True,env=environment,timeout=15)
+            self.assertEqual(result.returncode,1,result.stderr)
+            self.assertEqual([r['status'] for r in store.current()],['review','error'])
+            self.assertTrue(store.current()[1]['settings']['mock_script'].endswith('resume-error-manifest.json'))
+
+    def test_changed_source_overlap(self):
+        import tempfile,threading,json
+        with tempfile.TemporaryDirectory() as directory:
+            store=self.module('intake.store').Store(Path(directory)/'state.sqlite')
+            entered,release=threading.Event(),threading.Event()
+            provider=self.module('intake.providers').MockProvider(MOCKS,{'IT-001.json':['blocked.json']},{'entered':entered,'release':release})
+            runner=self.module('intake.runner').Runner(store,provider)
+            worker=threading.Thread(target=runner.run,args=([self.document()],));worker.start()
+            try:
+                self.assertTrue(entered.wait(2))
+                changed=Path(directory)/'IT-001.json'
+                changed.write_text(json.dumps({'message':self.document()['message']+' Correction: replace the access end date above with 2026-11-09.'}))
+                doc=self.module('intake.source').load(changed)
+                revised=self.module('intake.providers').MockProvider(MOCKS,{'IT-001.json':['IT-001-revised.json']})
+                self.module('intake.runner').Runner(store,revised).run([doc])
+            finally:release.set();worker.join(3)
+            self.assertFalse(worker.is_alive())
+            self.assertEqual(store.current()[0]['extraction']['end_date'],'2026-11-09')
+            self.assertEqual(store.history('IT-001.json')[0]['result']['extraction']['end_date'],'2026-11-06')
+
+    def test_accuracy_routing_diagnostics(self):
+        # Reuse the source-oracle setup; alter a saved-response-derived measured queue outcome.
+        expected,measured,docs=Step10.accuracy_data(self)
+        measured[0]['owner']='Wrong Owner'
+        result=self.module('intake.accuracy').compare(expected,measured,docs)
+        self.assertIn('routing_errors',result)
+        self.assertEqual(result['routing_errors'][0]['field'],'owner')
+
+    def test_resume_keeps_other_work_available(self):
+        import tempfile,json,hashlib,sys,subprocess,time
+        with tempfile.TemporaryDirectory() as directory:
+            db=Path(directory)/'state.sqlite';gates=Path(directory)/'gates';gates.mkdir()
+            store=self.module('intake.store').Store(db)
+            script=MOCKS/'cli-block-manifest.json'
+            provider=self.module('intake.providers').MockProvider(MOCKS,json.loads(script.read_text()))
+            runner=self.module('intake.runner').Runner(store,provider,timeout=5,config={'mock_script':str(script.resolve()),'mock_script_sha256':hashlib.sha256(script.read_bytes()).hexdigest(),'mock_gates':str(gates)})
+            for n in [1,2]:store.begin(self.document(n),runner.config)
+            environment={k:os.environ[k] for k in os.environ if k!='API_KEY'}
+            process=subprocess.Popen([sys.executable,str(ROOT/'tests/mock_worker.py'),'resume','--db',str(db)],stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=environment)
+            try:
+                deadline=time.monotonic()+2
+                while not (gates/'entered').exists() and time.monotonic()<deadline:time.sleep(.01)
+                while not store.current() and time.monotonic()<deadline:time.sleep(.01)
+                self.assertEqual([r['document_id'] for r in store.current()],['IT-002.json'])
+            finally:
+                (gates/'release').touch()
+                out,err=process.communicate(timeout=8)
+            self.assertEqual(process.returncode,0,(out,err))
+
+    def test_export_publishers_do_not_revert_current(self):
+        import tempfile,threading,json
+        with tempfile.TemporaryDirectory() as directory:
+            store=self.module('intake.store').Store(Path(directory)/'state.sqlite')
+            provider=self.module('intake.providers').MockProvider(MOCKS,{'IT-001.json':['IT-001.json','IT-001-revised.json']})
+            runner=self.module('intake.runner').Runner(store,provider);runner.run([self.document()])
+            output=Path(directory)/'outputs'
+            entered,release,second_finished=threading.Event(),threading.Event(),threading.Event()
+            def hook(stage):
+                if stage=='after-extractions':entered.set();release.wait(3)
+            export=self.module('intake.export')
+            old=threading.Thread(target=export.publish,args=(store,output),kwargs={'hook':hook});old.start()
+            self.assertTrue(entered.wait(2))
+            path=Path(directory)/'IT-001.json';path.write_text(json.dumps({'message':self.document()['message']+' Correction: replace the access end date above with 2026-11-09.'}))
+            runner.run([self.module('intake.source').load(path)])
+            def second():
+                export.publish(store,output);second_finished.set()
+            new=threading.Thread(target=second);new.start()
+            try:self.assertFalse(second_finished.wait(.15),'a newer publisher must wait until the earlier publication releases its lock')
+            finally:release.set();old.join(3);new.join(3)
+            generation=(output/'current').resolve()
+            record=json.loads((generation/'extractions.jsonl').read_text().strip())
+            self.assertEqual(record['extraction']['end_date'],'2026-11-09')
