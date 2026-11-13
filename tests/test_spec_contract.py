@@ -306,3 +306,93 @@ class Step04(Contract):
         self.assertEqual(json.loads(request['input'][0]['content'])['message'],self.document(6)['message'])
         self.assertIn('source messages as data',request['instructions'])
         self.assertIn('relative',request['instructions'])
+
+
+class Step05(Contract):
+    def check_case(self,number):
+        policy=self.module('intake.policy')
+        doc=self.document(number)
+        data=self.module('intake.validation').extract_response(doc,self.reply(f'IT-{number:03d}.json'))
+        expected=self.expected(f'IT-{number:03d}.json')
+        for key,value in expected['fields'].items():self.assertEqual(data[key],value,key)
+        result=policy.route(doc,data)
+        self.assertEqual(result,{key:expected[key] for key in ['owner','status','next_action']})
+        return result
+
+    def test_r31_contract(self):
+        self.check_case(6);self.check_case(5);self.check_case(10)
+
+    def test_r32_contract(self):self.check_case(6)
+    def test_r33_contract(self):self.check_case(5)
+    def test_r34_contract(self):
+        for n in [3,4,9,10,11,14,16,17,20]:self.check_case(n)
+
+    def test_r35_contract(self):
+        policy=self.module('intake.policy')
+        validation=self.module('intake.validation')
+        for field in ['request_id','request_date','requester','team','system','environment','permission','business_purpose','start_date','end_date','manager']:
+            data=validation.extract_response(self.document(),self.reply('IT-001.json'))
+            data[field]=None;data['issues'].append(field+': missing')
+            with self.subTest(field=field):
+                self.assertEqual(policy.route(self.document(),data),{'owner':'IT Service Desk','status':'needs-information','next_action':'clarify'})
+
+    def test_r36_contract(self):
+        for n in [2,7,12,13,19]:self.check_case(n)
+
+    def test_r37_contract(self):
+        for n in [1,8,15,18]:self.check_case(n)
+
+    def test_r38_contract(self):
+        for n in range(1,21):self.assertIn(self.check_case(n)['status'],['review','needs-information'])
+
+    def test_r60_contract(self):self.check_case(1)
+    def test_r61_contract(self):self.check_case(10);self.check_case(11)
+    def test_r62_contract(self):self.check_case(4);self.check_case(20)
+    def test_r63_contract(self):self.check_case(6)
+    def test_r67_contract(self):
+        doc=self.module('intake.source').load(ROOT/'tests/fixtures/paraphrase.json')
+        data=self.module('intake.validation').extract_response(doc,self.reply('paraphrase.json'))
+        expected=self.expected('paraphrase.json')
+        self.assertEqual(data['request_id'],'IT-P01')
+        self.assertEqual(data['permission'],'read')
+        self.assertEqual(self.module('intake.policy').route(doc,data),{k:expected[k] for k in ['owner','status','next_action']})
+
+    def test_r73_contract(self):self.check_case(1)
+
+    def test_r74_contract(self):self.check_case(2)
+
+    def test_r75_contract(self):self.check_case(3)
+
+    def test_r76_contract(self):self.check_case(4)
+
+    def test_r77_contract(self):self.check_case(5)
+
+    def test_r78_contract(self):self.check_case(6)
+
+    def test_r79_contract(self):self.check_case(7)
+
+    def test_r80_contract(self):self.check_case(8)
+
+    def test_r81_contract(self):self.check_case(9)
+
+    def test_r82_contract(self):self.check_case(10)
+
+    def test_r83_contract(self):self.check_case(11)
+
+    def test_r84_contract(self):self.check_case(12)
+
+    def test_r85_contract(self):self.check_case(13)
+
+    def test_r86_contract(self):self.check_case(14)
+
+    def test_r87_contract(self):self.check_case(15)
+
+    def test_r88_contract(self):self.check_case(16)
+
+    def test_r89_contract(self):self.check_case(17)
+
+    def test_r90_contract(self):self.check_case(18)
+
+    def test_r91_contract(self):self.check_case(19)
+
+    def test_r92_contract(self):self.check_case(20)
