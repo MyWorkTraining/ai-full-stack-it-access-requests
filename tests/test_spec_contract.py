@@ -396,3 +396,71 @@ class Step05(Contract):
     def test_r91_contract(self):self.check_case(19)
 
     def test_r92_contract(self):self.check_case(20)
+
+
+class Step06(Contract):
+    def setUp(self):
+        super().setUp()
+        import tempfile
+        self.directory=tempfile.TemporaryDirectory();self.addCleanup(self.directory.cleanup)
+        self.db=Path(self.directory.name)/'intake.sqlite'
+
+    def save(self,store,doc=None,config=None,provider=None):
+        doc=doc or self.document()
+        provider=provider or self.module('intake.providers').MockProvider(MOCKS,{'IT-001.json':['IT-001.json']*3})
+        extraction=self.module('intake.extract')
+        settings=extraction.settings(provider,config)
+        attempt=store.begin(doc,settings)
+        if attempt is not None:
+            prepared=extraction.prepare(doc,provider,config)
+            result=dict(prepared,**self.module('intake.policy').route(doc,prepared['extraction']),error=None)
+            store.finish(attempt,result)
+        return attempt
+
+    def test_r47_contract(self):
+        store=self.module('intake.store').Store(self.db)
+        provider=self.module('intake.providers').MockProvider(MOCKS,{'IT-001.json':['IT-001.json']})
+        self.assertIsNotNone(self.save(store,provider=provider))
+        self.assertIsNone(self.save(store,provider=provider))
+        self.assertEqual(provider.calls,['IT-001.json'])
+        self.assertEqual(len(store.current()),1)
+
+    def test_r48_contract(self):
+        import json
+        store=self.module('intake.store').Store(self.db)
+        self.save(store)
+        doc=self.document()
+        revised=Path(self.directory.name)/'IT-001.json'
+        revised.write_text(json.dumps({'message':doc['message']+' Correction: replace the access end date above with 2026-11-09.'}))
+        provider=self.module('intake.providers').MockProvider(MOCKS,{'IT-001.json':['IT-001-revised.json']})
+        self.save(store,self.module('intake.source').load(revised),provider=provider)
+        self.assertEqual(store.current()[0]['extraction']['end_date'],'2026-11-09')
+        history=store.history('IT-001.json')
+        self.assertEqual(history[0]['result']['extraction']['end_date'],'2026-11-06')
+        self.assertNotEqual(history[0]['document']['source_sha256'],history[1]['document']['source_sha256'])
+
+    def test_r49_contract(self):
+        store=self.module('intake.store').Store(self.db)
+        self.save(store)
+        self.save(store,self.document(2),provider=self.module('intake.providers').MockProvider(MOCKS,{'IT-002.json':['IT-002.json']}))
+        self.save(store,self.document(2),provider=self.module('intake.providers').MockProvider(MOCKS,{'IT-002.json':['IT-002.json']}))
+        self.assertEqual([r['document_id'] for r in store.current()],['IT-001.json','IT-002.json'])
+
+    def test_r51_contract(self):
+        store=self.module('intake.store').Store(self.db)
+        self.save(store,config={'model':'fixture-A'})
+        self.assertIsNotNone(self.save(store,config={'model':'fixture-B'}))
+        self.assertIsNotNone(self.save(store,config={'model':'fixture-B','policy_sha256':'test-policy-version-B'}))
+        self.assertEqual(len(store.history('IT-001.json')),3)
+
+    def test_r52_contract(self):
+        store=self.module('intake.store').Store(self.db)
+        self.save(store,config={'model':'fixture-A','policy_sha256':'A'})
+        self.save(store,config={'model':'fixture-B','policy_sha256':'B'})
+        history=store.history('IT-001.json')
+        self.assertEqual([h['settings']['model'] for h in history],['fixture-A','fixture-B'])
+        self.assertEqual([h['settings']['policy_sha256'] for h in history],['A','B'])
+        self.assertEqual(store.current()[0]['settings']['model'],'fixture-B')
+
+    def test_r65_contract(self):self.test_r47_contract()
+    def test_r66_contract(self):self.test_r48_contract()
