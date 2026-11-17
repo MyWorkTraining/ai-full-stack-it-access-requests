@@ -1,0 +1,16 @@
+{
+  "session_id": "01a1bb38-0e8f-78c2-9caa-c087ead2a107",
+  "timestamp": "2026-11-08T12:53:16Z",
+  "untracked_files": [
+    "instruction_prompt.md"
+  ],
+  "untracked_file_stats": {
+    "instruction_prompt.md": {
+      "size": 7689,
+      "mod_time_ns": 1794142336173021045,
+      "ino": 8143647,
+      "ctime_ns": 1794142336173021045
+    }
+  },
+  "transcript_offset": 11
+}
