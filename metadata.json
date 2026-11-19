@@ -3,9 +3,10 @@
   "checkpoint_id": "01M7SRBVZ20YM2QP80SKENDP4Z",
   "strategy": "manual-commit",
   "branch": "main",
-  "checkpoints_count": 3,
+  "checkpoints_count": 5,
   "files_touched": [
     "README.md",
+    "deliverables/accuracy.md",
     "deliverables/verification.md",
     "intake/__main__.py",
     "intake/accuracy.py",
@@ -21,14 +22,21 @@
       "compact_transcript": "/0/transcript.jsonl",
       "content_hash": "/0/content_hash.txt",
       "prompt": "/0/prompt.txt"
+    },
+    {
+      "metadata": "/1/metadata.json",
+      "transcript": "/1/full.jsonl",
+      "compact_transcript": "/1/transcript.jsonl",
+      "content_hash": "/1/content_hash.txt",
+      "prompt": "/1/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 412390,
+    "input_tokens": 499297,
     "cache_creation_tokens": 0,
-    "cache_read_tokens": 16541696,
-    "output_tokens": 50872,
-    "api_call_count": 112
+    "cache_read_tokens": 20098048,
+    "output_tokens": 63139,
+    "api_call_count": 164
   },
   "redaction": {
     "replacements": 5,

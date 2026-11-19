@@ -1,0 +1,5 @@
+examine the project and deterrmine where we left off from the last session.
+
+---
+
+lets resume with the final Orca pass for queue navigation.
