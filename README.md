@@ -49,11 +49,10 @@ Use the same `--format text` option with `run`, `resume`, `retry`, `export` and 
 
 Use a keyboard-operable terminal exposing its text through the platform's accessibility services, such as Xfce Terminal with Orca on Linux. See the [Section 508 verification results](deliverables/verification.md#section-508-accessibility) for tested versions, workflows and scope.
 
-To review a long queue with Orca, save the labelled output, then open it in a pager.
+To review a long queue with Orca, stream the labelled output into a pager.
 
 ```bash
-python3 -m intake queue --db var/demo.sqlite --include-pending --format text > queue.txt
-less -j1 queue.txt
+python3 -m intake queue --db var/demo.sqlite --include-pending --format text | less -j1
 ```
 
 In `less`, press `g` to go to the beginning or type `/Document: IT-010` and press Enter to find a specific request. With the tested Orca 46.1 desktop layout, press `Insert` + numpad `7` to read from the top of the terminal and numpad `9` to read each next line. Press numpad minus to leave flat review, then press `q` to return to the shell.

@@ -141,6 +141,9 @@ def main(argv=None):
                     print('Next action: Use --input with a readable JSON file or a directory containing .json exports.', file=sys.stderr)
                     return 2
                 raise ValueError('input contains no JSON exports')
+            if text_output:
+                exports = 'export' if len(paths) == 1 else 'exports'
+                print(f'Progress: Reading {len(paths)} JSON {exports}.', flush=True)
             documents = []
             for path in paths:
                 try:
@@ -155,8 +158,6 @@ def main(argv=None):
                         print(f'Error: Invalid JSON message export: {printable(path.name)}.', file=sys.stderr)
                         print('Next action: Provide UTF-8 JSON with a message string, then rerun intake.', file=sys.stderr)
                     return 2
-            if text_output:
-                print(f'Progress: Starting intake for {len(paths)} input files.', flush=True)
             runner.run(documents, force=args.refresh)
         elif args.command == 'resume':
             if text_output:

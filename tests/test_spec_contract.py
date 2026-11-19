@@ -941,6 +941,7 @@ class Step12(Contract):
                 invalid = self.cli('run', '--input', bad_export, *database,
                                    '--provider', 'mock', *text_mode, allow_error=True)
                 self.assertEqual(invalid.returncode, 2)
+                self.assertIn('Progress: Reading 1 JSON export.', invalid.stdout)
                 self.assertIn('Invalid JSON message export: invalid-export.json', invalid.stderr)
                 self.assertIn('UTF-8 JSON with a message string', invalid.stderr)
                 self.assertNotIn('No message field', invalid.stderr)
@@ -953,7 +954,7 @@ class Step12(Contract):
                 while time.monotonic() < deadline and worker.poll() is None:
                     if (gates / 'entered').exists():
                         rows = json.loads(self.cli('queue', *database, '--include-pending').stdout)
-                        if [row.get('status') for row in rows] == [None, 'review', 'error']:
+                        if [row['work_state'] for row in rows] == ['running', 'done', 'error']:
                             break
                     time.sleep(.02)
                 else:
@@ -983,6 +984,10 @@ class Step12(Contract):
                     self.assertIn('Progress: Resuming unfinished requests.', resume.stdout)
                     self.assertIn('Failed requests: 1', resume.stdout)
                     self.assertIn('Unfinished requests: 0', resume.stdout)
+                    resumed_rows = json.loads(self.cli('queue', *database).stdout)
+                    original_review = next(row for row in rows if row['document_id'] == 'IT-002.json')
+                    resumed_review = next(row for row in resumed_rows if row['document_id'] == 'IT-002.json')
+                    self.assertEqual(resumed_review, original_review)
                 history = self.cli('history', *database, '--document', 'IT-010.json', *text_mode, allow_error=True)
                 with self.subTest(output='history'):
                     self.assertEqual(history.returncode, 0, history.stderr)

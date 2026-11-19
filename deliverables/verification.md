@@ -100,11 +100,10 @@ The first targeted run discovered one test and failed five subchecks. Help omitt
 
 On November 19, 2026, a keyboard-only replay used Ubuntu 24.04, Xfce Terminal 1.1.3, Orca 46.1 and `less` 590 in a virtual desktop. Speech Dispatcher used eSpeak NG and a virtual PulseAudio sink. The replay captured Orca's spoken text from the Speech Dispatcher log and confirmed that the sink received audio.
 
-At the mixed queue stage, set `replay_db` to the path of the replay database. Save the plain-text queue and open it in the pager.
+At the mixed queue stage, set `replay_db` to the path of the replay database. Stream the plain-text queue into the pager.
 
 ```bash
-python3 -m intake queue --db "$replay_db" --include-pending --format text > queue.txt
-less -j1 queue.txt
+python3 -m intake queue --db "$replay_db" --include-pending --format text | less -j1
 ```
 
 Press `g` for the first request. For the later requests, press `g` and search with `/Document: IT-002` or `/Document: IT-010`. In Orca's desktop layout, use `Insert` + numpad `7` to read the first visible line and numpad `9` to read each next line. Use numpad minus to leave flat review before returning to pager navigation. The spoken lines followed this order within each request.
@@ -119,6 +118,8 @@ Press `g` for the first request. For the later requests, press `g` and search wi
 
 In a fresh Ubuntu 24.04 virtual desktop with Xfce Terminal 1.1.3, Orca 46.1 and `less` 590, scripted keyboard input exercised the intake, interruption and recovery commands with the TP-52 mock manifest. A nine-second provider timeout and the usual five-second claim grace period made expiry reproducible. The replay stopped the mock worker, waited for expiry and resumed the same database. Speech Dispatcher sent Orca's output to eSpeak NG and a virtual PulseAudio sink. The sink recording contained audio and the log captured the utterances below. For long outputs, the replay saved command output and used the pager controls above.
 
+The follow-up regression verifies that text mode announces reading before export validation and that resuming after the mixed-state snapshot preserves IT-002's committed result and attempt ID.
+
 | Action | What Orca read and what the replay verified |
 |---|---|
 | Open help and start intake | The queue usage with the JSON/text choices and the progress message for three input files. |
@@ -132,6 +133,15 @@ In a fresh Ubuntu 24.04 virtual desktop with Xfce Terminal 1.1.3, Orca 46.1 and 
 The virtual terminal honored the configured Liberation Mono font, yellow-on-black text, and a magenta underline cursor. Four zoom increments doubled the measured AT-SPI character height from 23 to 46 pixels. At that size, Orca located IT-010 in the queue and read its state, owner, action, diagnostic and both lines of the wrapped retry command. Resetting zoom restored the 23-pixel character height. Leaving the pager returned focus to the shell with the configured cursor.
 
 The document check used Mozilla Firefox 153.7.0esr, Orca 46.1 and Python-Markdown 3.5.2 with tables, fenced code and heading anchors. Each local test page had an English language declaration, a descriptive title, a main landmark and a visible link focus style. The checks inspected headings and content at 100% and 200% browser zoom. The rendered Markdown documents contain text and tables, with no app-supplied images, audio or video.
+
+From the repository root, generate the local test pages and open the printed README path in Firefox. The renderer uses the committed mock accuracy report by default. To render the report from a fresh replay, append `--accuracy "$work/accuracy.md"`.
+
+```bash
+rendered=$(mktemp -d)
+uv run --no-project --with 'Markdown==3.5.2' python tools/render_accessibility_docs.py "$rendered"
+```
+
+The output contains `README.html`, `deliverables/accuracy.html`, and `deliverables/verification.html`. The renderer preserves link fragments and maps links among the local pages to their HTML counterparts. It also renders the linked plan and spec so the replay and requirement links work.
 
 In Firefox's document view, the replay used `h` for headings, `k` for links, `t` for tables and `Alt` + `Shift` + arrow keys for table cells. It used Firefox's zoom shortcuts and checked the reported 200% level before resetting it. [Orca structural navigation commands](https://help.gnome.org/orca/commands_structural_navigation.html)
 

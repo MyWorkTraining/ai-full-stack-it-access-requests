@@ -203,13 +203,17 @@ printf 'Workspace %s\nWorker PID %s\n' "$work" "$worker"
 wait "$worker"
 ```
 
-In the second terminal, set `work` and `worker` to the printed values and `format` to the same value. Once `$work/gates/entered` exists, inspect the mixed queue with the command below. Confirm IT-001 is unfinished, IT-002 shows `Security Review / review / review-risk-then-owner`, and IT-010 shows `IT Service Desk / error / retry-extraction` with a retry command.
+In the second terminal, set `work` and `worker` to the printed values and `format` to the same value. Once `$work/gates/entered` exists, repeat the queue command below until a single snapshot shows all three states.
+
+- IT-001 is Running.
+- IT-002 is Completed with `Security Review / review / review-risk-then-owner`.
+- IT-010 is Failed with `IT Service Desk / error / retry-extraction` and a retry command.
 
 ```bash
 env -u API_KEY python3 -m intake queue --db "$work/intake.sqlite" --include-pending --format "$format"
 ```
 
-Terminate the recorded worker with `kill -TERM "$worker"` in the second terminal while IT-001 is blocked. Wait for its claim to expire before resuming (185 seconds from the claim with this timeout). Release the gate, then resume against the recorded mock configuration. Resume returns exit status 1 while IT-010 is still failed. IT-001 should now show `System Owner / review / review-request` and IT-002 should retain its committed result.
+Record IT-002's attempt ID from that snapshot. Send `kill -TERM "$worker"` only after confirming all three states while IT-001 is still blocked. If the worker exits or IT-001 times out before then, restart the replay with a fresh workspace. Wait for the blocked claim to expire (185 seconds from the claim with this timeout). Release the gate, then resume against the recorded mock configuration. Resume returns exit status 1 while IT-010 is still failed. IT-001 should now show `System Owner / review / review-request` and IT-002 should retain the same committed result and attempt ID.
 
 ```bash
 touch "$work/gates/release"
