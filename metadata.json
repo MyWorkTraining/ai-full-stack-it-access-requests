@@ -3,7 +3,7 @@
   "checkpoint_id": "01M7SRBVZ20YM2QP80SKENDP4Z",
   "strategy": "manual-commit",
   "branch": "main",
-  "checkpoints_count": 5,
+  "checkpoints_count": 6,
   "files_touched": [
     "README.md",
     "deliverables/accuracy.md",
@@ -29,24 +29,31 @@
       "compact_transcript": "/1/transcript.jsonl",
       "content_hash": "/1/content_hash.txt",
       "prompt": "/1/prompt.txt"
+    },
+    {
+      "metadata": "/2/metadata.json",
+      "transcript": "/2/full.jsonl",
+      "compact_transcript": "/2/transcript.jsonl",
+      "content_hash": "/2/content_hash.txt",
+      "prompt": "/2/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 499297,
+    "input_tokens": 527178,
     "cache_creation_tokens": 0,
-    "cache_read_tokens": 20098048,
-    "output_tokens": 63139,
-    "api_call_count": 164
+    "cache_read_tokens": 20235392,
+    "output_tokens": 63657,
+    "api_call_count": 171
   },
   "redaction": {
-    "replacements": 5,
+    "replacements": 8,
     "layers": {
       "betterleaks": 0,
       "connection_string": 0,
       "credential_key": 0,
       "credential_value": 0,
       "credentialed_uri": 0,
-      "entropy": 0,
+      "entropy": 3,
       "key_context": 0,
       "pii": 5,
       "provider_token": 0,
