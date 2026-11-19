@@ -1,0 +1,13 @@
+review the spec in planning/spec.md, and the plan in planning/plan.md. Adjust the spec to ensure accessibility requirements stated in section 508 of the US Code are addressed in any requirements statements.
+
+---
+
+add the accessibility acceptance checks to the build plan.
+
+---
+
+review the build plan vs the current state of the project, assess whether the changes to the spec require re-execution of any pre-existing steps or if we can continue to step 12
+
+---
+
+Execute Step 12 of the plan.
