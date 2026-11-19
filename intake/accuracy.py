@@ -66,24 +66,26 @@ def render(result, expected, measured):
              'Unexpected cases are reported separately and do not enlarge the denominator. Purpose, issues and exact evidence are separate checks, not hidden scalar successes. '
              'A faithful paraphrase of purpose does not fail solely because it differs from a canned sentence. Nonliteral purpose text requires manual source review; '
              'this checker cannot prove semantic support or attack resistance. No score threshold is specified.\n\n')
-    text += 'Producing configuration and origin:\n\n```json\n' + json.dumps(configurations, indent=2) + '\n```\n\n'
+    text += '## Producing configuration and origin\n\n```json\n' + json.dumps(configurations, indent=2) + '\n```\n\n'
+    text += '## Exact matches by document\n\n'
     text += '| Document | Exact scalar matches |\n|---|---|\n'
     for case in result['by_case']:
         text += f"| {case['document_id']} | {case['matches']}/{case['denominator']} |\n"
-    text += '\n| Field | Matches |\n|---|---|\n'
+    text += '\n## Exact matches by field\n\n| Field | Matches |\n|---|---|\n'
     for field, values in result['by_field'].items():
         text += f"| {field} | {values['matches']}/{values['denominator']} |\n"
-    text += '\nExpected facts and exact source evidence (supplied messages plus the authored synthetic input):\n\n'
+    text += '\n## Expected facts and exact source evidence\n\n'
+    text += 'Includes the supplied messages and the authored synthetic input.\n\n'
     for name, oracle in sorted(expected.items()):
         text += f"- **{name}**, `{oracle['source']}` /message: “" + oracle['source_quote'].replace('\n', '<br>') + '”\n'
         text += '  Expected fields: `' + json.dumps(oracle['fields'], ensure_ascii=False) + '`; '
         text += f"owner={oracle['owner']}, status={oracle['status']}, next_action={oracle['next_action']}.\n"
     policy = Path(__file__).resolve().parents[1] / 'materials/office-policy.md'
-    text += '\nRouting expectations derive from `materials/office-policy.md` § Review queue:\n\n'
+    text += '\n## Routing expectations\n\nSource is the Review queue section of `materials/office-policy.md`.\n\n'
     for line in policy.read_text().splitlines():
         if line[:2] in ('1.', '2.', '3.', '4.', '5.'):
             text += '> ' + line + '\n\n'
-    text += 'Comparison findings and factual-error reporting:\n\n```json\n' + json.dumps(result, indent=2) + '\n```\n'
+    text += '## Comparison findings and factual-error reporting\n\n```json\n' + json.dumps(result, indent=2) + '\n```\n'
     return text
 
 

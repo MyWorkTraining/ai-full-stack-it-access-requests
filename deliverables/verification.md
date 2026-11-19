@@ -19,7 +19,7 @@ The full suite compares fixed source-derived facts and ordered routing, not valu
 
 ## Red/green observations
 
-Each step has a test-first commit before its implementation commit; the first-step failing run is also recorded in the coding session. Steps 2 onward retain exact failing and passing run logs under step-checks/. Step 5's first red run also exposed the paraphrase filename mismatch; the input was renamed IT-P01.json to preserve the stated expected facts under the supplied policy. Step 8's harness initially patched sockets before SSL class initialization; it was corrected before the test-first commit was finalized, and the retained red run shows missing stale-claim fencing and generation publication. No full-suite failure was observed after any completed step.
+In Steps 1–11, each step has a test-first commit before its implementation commit. The first-step failing run is also recorded in the coding session. Steps 2–11 retain failing and passing run logs under `step-checks/`. Step 5's first red run also exposed the paraphrase filename mismatch. The input was renamed IT-P01.json to preserve the stated expected facts under the supplied policy. Step 8's harness initially patched sockets before SSL class initialization. It was corrected before the test-first commit was finalized, and the retained red run shows missing stale-claim fencing and generation publication. No full-suite failure was observed after any of those steps.
 
 | Step | Targeted tests | Full suite after implementation | Evidence |
 |---|---:|---:|---|
@@ -64,6 +64,75 @@ Repair observations: final-step tests detected stale prompt attribution, cross-d
 Supported arrangement: concurrent CLI processes on one host using local SQLite and POSIX advisory file locks, symlinks, rename and fsync; multi-host/shared network filesystems are not supported or verified. Current reads are transactional database views; static files are point-in-time snapshots and readers must pin one generation across multi-file inspection. Default concurrency is four requests, request timeout is 30 seconds and claim lifetime is timeout plus 5 seconds. Retryable failures have configurable bounded exponential retries, default zero; there is no shared organization-wide request-rate coordinator.
 
 The brief's 200–400 ordinary daily messages and roughly 2,000-message burst are context. No 2,000-message load test, throughput/latency SLA, distributed recovery or actual power-loss test was performed. Process termination, fake clock expiry, thread/process barriers and publication fault hooks exercise specific recovery paths; they do not simulate every filesystem/hardware outage. Mock fixture sequences reset per mock process, and fixtures intentionally contain known facts. There are no live provider/credential observations, and mock accuracy cannot establish general extraction quality, universal attack resistance or arbitrary prose support. Business purpose/issue prose beyond deterministic checks needs human source review; nonliteral purpose text is flagged, not automatically rejected as false.
+
+## Section 508 accessibility
+
+Step 12 covers the internal CLI, its operator-facing outputs, and the rendered README, accuracy report and verification report. Operators need to identify requests and their state without color or vision, operate without a mouse or timed input, keep their terminal preferences, and recover interrupted or failed work using the same information and permissions. The application ships a local CLI. There is no public workflow, application web UI, or application support service in this build. R-110 and R-113 are inapplicable for that reason. [Revised 508 Standards](https://www.access-board.gov/ict/) · [WCAG 2.0](https://www.w3.org/TR/WCAG20/)
+
+### Replay the acceptance checks
+
+Run from the repository root in the documented virtual environment. Use mock fixtures and leave `API_KEY` unset. `test_r109_contract` creates the mixed-state fixture, gates IT-001, checks live queue output, terminates the worker and injects claim expiry for reproducibility. It then releases the gate, resumes, retries IT-010 with the recovery manifest, inspects history, exports records and generates a report. The test uses the guarded mock subprocess runner. For the interactive check, use the [Step 12 replay](../planning/plan.md#test-plan) with ordinary claim expiry and repeat the workflow in fresh state with the same permissions. Add `--format text` after each subcommand. Append `--script tests/mock_responses/manifest.json` to the displayed retry command to replace the mock failure response with the completed response.
+
+```bash
+env -u API_KEY python3 -m unittest discover -s tests -k test_r109_contract -v
+env -u API_KEY python3 -m unittest discover -s tests -v
+```
+
+In the mixed queue, expect IT-001 to be unfinished, IT-002 to show `Security Review / review / review-risk-then-owner`, and IT-010 to show `IT Service Desk / error / retry-extraction` with a retry command. Resume should produce `System Owner / review / review-request` for IT-001 and preserve IT-002's committed result. Retry should produce `IT Service Desk / needs-information / clarify` for IT-010 and retain the failure in history. Read the export path and compare the linked extraction and queue records. Read the report path and verify 231 of 231 exact scalar matches in the independent 21-case mock accuracy run. These results describe the mock pipeline.
+
+### Observed results
+
+The first targeted run discovered one test and failed five subchecks. Help omitted the text format and the mixed queue, progress, history and accuracy commands rejected it. The repair adds opt-in labelled text with stable field order, one-time progress messages, readable errors and shell-ready retry guidance. The existing JSON output and export formats are still exercised by the full suite. The accuracy report now has navigable headings. The targeted regression passed after the repair.
+
+| Requirement | Check | Evidence |
+|---|---|---|
+| R-106 | A-106, comparable workflow access | The guarded mock replay and the keyboard-driven terminal run obtained the expected mixed states, recovery outcomes, history, export and report. Speech presentation is assessed separately below. |
+| R-108 | A-108, keyboard-only operation | In Xfce Terminal, keyboard input exercised help, intake, queue, interruption, resume, retry, history, export and accuracy. Commands use ordinary shell input with explicit submission. The application presents no interactive prompts or custom focus targets. Recovery used deterministic claim expiry in the virtual replay. |
+| R-109 | A-109 and `test_r109_contract`, CLI text | The regression verifies labels, reading order, state, owner, action and retry, progress, history and report output with no terminal escape or cursor-rewrite sequences. The Orca queue navigation check passed as recorded below. |
+| R-110 | A-110, web application | Inapplicable. The delivered interface is the local CLI. The Firefox checks below concern rendered documents. |
+| R-111 | A-111, rendered documents | Python-Markdown 3.5.2 with tables, fenced code and heading anchors rendered all three documents to HTML. The structure check found a single top-level heading in each, sequential levels, named links and table headers. The documents contain text and tables with no images, audio or video. |
+| R-112 | A-112, accessibility handover | The README explains the text option, supported commands, reading order, retry and progress, and terminal-owned preferences. Its documented commands were exercised in the keyboard workflow. |
+| R-113 | A-113, application support service | Inapplicable. The application supplies documentation and CLI help, with no help desk, support channel or referral service. |
+| R-114 | A-114, evidence and replay | This record identifies the tests, versions, scope, results and what remains to be verified. Claim conformance only after all applicable checks pass. |
+
+### Orca queue navigation
+
+On November 19, 2026, a keyboard-only replay used Ubuntu 24.04, Xfce Terminal 1.1.3, Orca 46.1 and `less` 590 in a virtual desktop. Speech Dispatcher used eSpeak NG and a virtual PulseAudio sink. The replay captured Orca's spoken text from the Speech Dispatcher log and confirmed that the sink received audio.
+
+At the mixed queue stage, set `replay_db` to the path of the replay database. Save the plain-text queue and open it in the pager.
+
+```bash
+python3 -m intake queue --db "$replay_db" --include-pending --format text > queue.txt
+less -j1 queue.txt
+```
+
+Press `g` for the first request. For the later requests, press `g` and search with `/Document: IT-002` or `/Document: IT-010`. In Orca's desktop layout, use `Insert` + numpad `7` to read the first visible line and numpad `9` to read each next line. Use numpad minus to leave flat review before returning to pager navigation. The spoken lines followed this order within each request.
+
+| Request | What Orca read during navigation |
+|---|---|
+| IT-001.json | Document identifier, then work state Running. |
+| IT-002.json | Document identifier, work state Completed, owner Security Review, status `review`, and next action `review-risk-then-owner`. |
+| IT-010.json | Document identifier, work state Failed, owner IT Service Desk, status `error`, next action `retry-extraction`, the provider error, and the retry command. Orca read both terminal lines of the wrapped command in sequence. |
+
+This pass covers queue navigation in the labelled text mode. Rendered-document screen-reader navigation remains open.
+
+### Applicable software and document criteria
+
+For the CLI, apply the four non-Web success-criterion exceptions in E207.2 (2.4.1, 2.4.5, 3.2.3 and 3.2.4) and the terminology substitutions in E207.2.1. E207.3 governs the complete multistep CLI workflow. For covered non-Web documents under E205, apply E205.4 and E205.4.1. Apply 602.3 to electronic support documentation. Evaluate the three documents here in a rendered HTML reading environment, including its headings, links and table semantics.
+
+| Provision | Scope and evidence |
+|---|---|
+| E203.1–E203.2, E207.3 | The same internal operator commands support the complete intake and recovery task. A-106 and A-108 trace the access needs above to the keyboard and assistive-technology test. Public access is inapplicable for this delivery. |
+| WCAG 1.1.1, 1.2.1–1.2.5, 1.4.2, 1.4.5 | The CLI and reviewed documents expose text and text structure. There is no app-supplied non-text content, audio, video or image of text. |
+| WCAG 1.3.1–1.3.3, 1.4.1 | CLI labels and state names survive without color or layout, as exercised by TP-54. Rendered heading levels, link names, table headers and content order were inspected in HTML. The instructions use command and field names, with no sensory-only references. |
+| WCAG 1.4.3–1.4.4, 2.4.7, 503.2 | The CLI emits unstyled text and leaves font, color, contrast and cursor to the terminal. The rendered-document test uses black text and dark blue links on white, with a visible focus outline. Text resizing and platform settings are tested in the presentation layer. |
+| WCAG 2.1.1–2.1.2, 2.2.1–2.2.2, 2.3.1 | A-108 exercised ordinary shell input and return to the prompt. There is no application time limit for keystrokes, rotating display, animation or flashing. Provider timeouts apply to background processing, with persisted status and recovery. |
+| WCAG 2.4.2–2.4.4, 2.4.6 | Commands and reports have descriptive names. The HTML test sets a page title, preserves heading levels, and verifies that links have names. CLI commands announce their purpose in help, and result fields have labels. |
+| WCAG 3.1.1–3.1.2, 3.2.1–3.2.2 | Application labels and repository-authored reading content are English. The HTML test rendering declares English. Commands take effect on explicit invocation, with no custom fields that change context on focus or input. |
+| WCAG 3.3.1–3.3.4 | Help describes inputs, and invalid CLI arguments are identified in text. A failed extraction associates the error and retry command with the affected document. There is no legal or financial submission, approval or deletion control. Recovery retains prior attempts and source revisions. |
+| WCAG 4.1.1–4.1.2, 502 | The platform presents the CLI through an ordinary terminal text control. The renderer provides native HTML headings, links and table headers. The application supplies no platform accessibility service or custom controls. AT-SPI and screen-reader observations assess interoperability and non-disruption separately from the structured text checks. |
+| E204.1 / Chapter 3, 503.3–503.4, 504 | For functions requiring functional performance coverage, A-106–A-109 examine operation without vision, without color, with reduced vision and with keyboard-only input. Hearing and speech are not required to operate the CLI. The application has no embedded assistive-technology UI, synchronized media player or interactive document authoring tools. |
+| E208 / 602, 603 | A-111 and A-112 address electronic support documents and compatibility instructions. Support-service provisions are inapplicable for this release. |
 
 ## External final checks
 

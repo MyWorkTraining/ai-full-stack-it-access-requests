@@ -906,3 +906,98 @@ class Step11(Contract):
             generation=(output/'current').resolve()
             record=json.loads((generation/'extractions.jsonl').read_text().strip())
             self.assertEqual(record['extraction']['end_date'],'2026-11-09')
+
+
+class Step12(Contract):
+    cli = Step09.cli
+
+    def test_r109_contract(self):
+        import json
+        import subprocess
+        import sys
+        import tempfile
+        import time
+
+        with tempfile.TemporaryDirectory() as directory:
+            work = Path(directory)
+            sources, gates = work / 'input', work / 'gates'
+            sources.mkdir()
+            gates.mkdir()
+            for name in ('IT-001.json', 'IT-002.json', 'IT-010.json'):
+                (sources / name).write_bytes((ROOT / 'materials/requests' / name).read_bytes())
+            manifest = work / 'initial.json'
+            manifest.write_text(json.dumps({'IT-001.json': ['blocked-file.json'],
+                                            'IT-002.json': ['IT-002.json'],
+                                            'IT-010.json': ['provider-error.json']}))
+            database = ['--db', str(work / 'intake.sqlite')]
+            provider = ['--provider', 'mock', '--responses', str(MOCKS), '--script', str(manifest),
+                        '--mock-gates', str(gates), '--timeout', '15']
+            text_mode = ['--format', 'text']
+            help_output = self.cli('queue', '--help').stdout
+
+            worker = subprocess.Popen([sys.executable, str(ROOT / 'tests/mock_worker.py'), 'run',
+                                       '--input', str(sources), *database, *provider],
+                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            try:
+                deadline = time.monotonic() + 8
+                while time.monotonic() < deadline and worker.poll() is None:
+                    if (gates / 'entered').exists():
+                        rows = json.loads(self.cli('queue', *database, '--include-pending').stdout)
+                        if [row.get('status') for row in rows] == [None, 'review', 'error']:
+                            break
+                    time.sleep(.02)
+                else:
+                    self.fail('the mock workflow did not reach its three expected states')
+                queue = self.cli('queue', *database, '--include-pending', *text_mode, allow_error=True)
+                with self.subTest(output='help'):
+                    self.assertIn('--format {json,text}', help_output)
+                with self.subTest(output='mixed queue'):
+                    self.assertEqual(queue.returncode, 0, queue.stderr)
+                    self.assertRegex(queue.stdout, r'Document: IT-001\.json\n  Work state: Running\b')
+                    self.assertRegex(queue.stdout, r'Document: IT-002\.json\n  Work state: Completed\b')
+                    error = queue.stdout.split('Document: IT-010.json\n')[1]
+                    self.assertIn('Owner: IT Service Desk', error)
+                    self.assertIn('Next action: retry-extraction', error)
+                    self.assertIn('Error: provider-error: extraction failed', error)
+                    self.assertIn('Retry command: python3 -m intake retry', error)
+                    self.assertNotRegex(queue.stdout, r'[\x1b\r]')
+                worker.terminate()
+                worker.communicate(timeout=5)
+                store = self.module('intake.store').Store(database[1])
+                with store.connection() as connection:
+                    connection.execute("UPDATE attempts SET expires=0 WHERE state='running'")
+                (gates / 'release').touch()
+                resume = self.cli('resume', *database, *provider, *text_mode, allow_error=True)
+                with self.subTest(output='progress and result'):
+                    self.assertEqual(resume.returncode, 1, resume.stderr)
+                    self.assertIn('Progress: Resuming unfinished requests.', resume.stdout)
+                    self.assertIn('Failed requests: 1', resume.stdout)
+                    self.assertIn('Unfinished requests: 0', resume.stdout)
+                history = self.cli('history', *database, '--document', 'IT-010.json', *text_mode, allow_error=True)
+                with self.subTest(output='history'):
+                    self.assertEqual(history.returncode, 0, history.stderr)
+                    self.assertIn('Attempt: 3', history.stdout)
+                    self.assertIn('Settings:', history.stdout)
+                    self.assertIn('Retry command:', history.stdout)
+                retry = self.cli('retry', *database, '--document', 'IT-010.json',
+                                 '--script', MOCKS / 'manifest.json', *text_mode, allow_error=True)
+                with self.subTest(output='retry and export'):
+                    self.assertEqual(retry.returncode, 0, retry.stderr)
+                    self.assertIn('Progress: Retrying IT-010.json.', retry.stdout)
+                    exported = self.cli('export', *database, '--output', work / 'output', *text_mode)
+                    self.assertIn('Published generation:', exported.stdout)
+                    self.assertTrue((work / 'output/queue.json').is_file())
+                report = work / 'accuracy.md'
+                accuracy = self.cli('accuracy', '--input', ROOT / 'materials/requests',
+                                    '--synthetic', ROOT / 'tests/fixtures/IT-P01.json',
+                                    '--expected', ROOT / 'tests/expected', '--responses', MOCKS,
+                                    '--output', report, *text_mode, allow_error=True)
+                with self.subTest(output='accuracy'):
+                    self.assertEqual(accuracy.returncode, 0, accuracy.stderr)
+                    self.assertIn('Exact scalar matches: 231 of 231', accuracy.stdout)
+                    self.assertIn(f'Accuracy report: {report}', accuracy.stdout)
+                    self.assertIn('## Exact matches by document', report.read_text())
+            finally:
+                if worker.poll() is None:
+                    worker.terminate()
+                worker.communicate(timeout=5)

@@ -34,6 +34,21 @@ Run recovery with `resume` after a crash or deployment interruption. It continue
 
 Each error includes an actionable diagnostic and a reproducible `retry_command`; use that command against the same recorded database/configuration. CLI exit status is 0 on successful execution, 1 when current error records or failed accuracy comparisons remain, and 2 for command/input/configuration errors. A `needs-information` request is successful intake awaiting clarification, not an extraction error.
 
+## Keyboard and screen-reader operation
+
+Add `--format text` after any subcommand for labelled output in reading order. This mode uses ordinary terminal text with no color, animation, cursor control or timed input. Each queue entry starts with its document name and work state, followed by its routing, errors and retry guidance when available. In history, each attempt has its own state, source and producing settings. Use the terminal's screen-reader navigation commands to review earlier lines. Font size, contrast and cursor preferences are set in the terminal.
+
+```bash
+python3 -m intake --help
+python3 -m intake queue --help
+python3 -m intake queue --db var/demo.sqlite --include-pending --format text
+python3 -m intake history --db var/demo.sqlite --document IT-010.json --format text
+```
+
+Use the same `--format text` option with `run`, `resume`, `retry`, `export` and `accuracy`. While intake or resume is active, inspect progress from a second terminal with `queue --include-pending`. Read the `Retry command` line under the failed document and run it to retry that document. `export --format text` identifies the published generation, and `accuracy --format text` gives the match count and report path. JSON remains the default for command output and the format of the machine-readable exports.
+
+Use a keyboard-operable terminal exposing its text through the platform's accessibility services, such as Xfce Terminal with Orca on Linux. See the [Section 508 verification results](deliverables/verification.md#section-508-accessibility) for tested versions, workflows and pending checks.
+
 ## Provider configuration
 
 Mock mode reads only saved JSON replies and the development manifest under `tests/mock_responses/`; it never reads API_KEY. `--script` selects another saved manifest. Reply sequences reset when a new mock process is created; the durable record of attempts remains in SQLite. The production extractor does not look up known filenames or import tests/expected. `--mock-gates` is a development-only directory of file barriers for repeatable process/interruption tests.
