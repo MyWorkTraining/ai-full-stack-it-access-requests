@@ -1,0 +1,5 @@
+review the spec and plan documents, ensure they are now fully complete
+
+---
+
+Ok, lets work on the remaining screen-reader and platform checks.
