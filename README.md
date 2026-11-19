@@ -47,7 +47,16 @@ python3 -m intake history --db var/demo.sqlite --document IT-010.json --format t
 
 Use the same `--format text` option with `run`, `resume`, `retry`, `export` and `accuracy`. While intake or resume is active, inspect progress from a second terminal with `queue --include-pending`. Read the `Retry command` line under the failed document and run it to retry that document. `export --format text` identifies the published generation, and `accuracy --format text` gives the match count and report path. JSON remains the default for command output and the format of the machine-readable exports.
 
-Use a keyboard-operable terminal exposing its text through the platform's accessibility services, such as Xfce Terminal with Orca on Linux. See the [Section 508 verification results](deliverables/verification.md#section-508-accessibility) for tested versions, workflows and pending checks.
+Use a keyboard-operable terminal exposing its text through the platform's accessibility services, such as Xfce Terminal with Orca on Linux. See the [Section 508 verification results](deliverables/verification.md#section-508-accessibility) for tested versions, workflows and scope.
+
+To review a long queue with Orca, save the labelled output, then open it in a pager.
+
+```bash
+python3 -m intake queue --db var/demo.sqlite --include-pending --format text > queue.txt
+less -j1 queue.txt
+```
+
+In `less`, press `g` to go to the beginning or type `/Document: IT-010` and press Enter to find a specific request. With the tested Orca 46.1 desktop layout, press `Insert` + numpad `7` to read from the top of the terminal and numpad `9` to read each next line. Press numpad minus to leave flat review, then press `q` to return to the shell.
 
 ## Provider configuration
 

@@ -71,7 +71,7 @@ Step 12 covers the internal CLI, its operator-facing outputs, and the rendered R
 
 ### Replay the acceptance checks
 
-Run from the repository root in the documented virtual environment. Use mock fixtures and leave `API_KEY` unset. `test_r109_contract` creates the mixed-state fixture, gates IT-001, checks live queue output, terminates the worker and injects claim expiry for reproducibility. It then releases the gate, resumes, retries IT-010 with the recovery manifest, inspects history, exports records and generates a report. The test uses the guarded mock subprocess runner. For the interactive check, use the [Step 12 replay](../planning/plan.md#test-plan) with ordinary claim expiry and repeat the workflow in fresh state with the same permissions. Add `--format text` after each subcommand. Append `--script tests/mock_responses/manifest.json` to the displayed retry command to replace the mock failure response with the completed response.
+Run from the repository root in the documented virtual environment. Use mock fixtures and leave `API_KEY` unset. `test_r109_contract` creates the mixed-state fixture, gates IT-001, checks live queue output, terminates the worker and injects claim expiry for reproducibility. It then releases the gate, resumes, retries IT-010 with the recovery manifest, inspects history, exports records and generates a report. The test uses the guarded mock subprocess runner. For the interactive check, use the [Step 12 replay](../planning/plan.md#accessibility-replay) with ordinary claim expiry and repeat the workflow in fresh state with the same permissions. Append `--script tests/mock_responses/manifest.json` to the displayed retry command to select the completed mock response.
 
 ```bash
 env -u API_KEY python3 -m unittest discover -s tests -k test_r109_contract -v
@@ -82,18 +82,19 @@ In the mixed queue, expect IT-001 to be unfinished, IT-002 to show `Security Rev
 
 ### Observed results
 
-The first targeted run discovered one test and failed five subchecks. Help omitted the text format and the mixed queue, progress, history and accuracy commands rejected it. The repair adds opt-in labelled text with stable field order, one-time progress messages, readable errors and shell-ready retry guidance. The existing JSON output and export formats are still exercised by the full suite. The accuracy report now has navigable headings. The targeted regression passed after the repair.
+The first targeted run discovered one test and failed five subchecks. Help omitted the text format and the mixed queue, progress, history and accuracy commands rejected it. The repair added opt-in labelled text with stable field order, one-time progress messages, readable errors and shell-ready retry guidance. The accuracy report received navigable headings. A follow-up check found that a malformed input export produced a generic `ValueError` in text mode. The new regression first failed on the missing filename and guidance. Text mode now identifies the export and asks for UTF-8 JSON with a message string. The output omits the input contents. The full suite passed all 115 tests after the repair, including the text-mode regression and existing JSON and export checks.
 
 | Requirement | Check | Evidence |
 |---|---|---|
-| R-106 | A-106, comparable workflow access | The guarded mock replay and the keyboard-driven terminal run obtained the expected mixed states, recovery outcomes, history, export and report. Speech presentation is assessed separately below. |
-| R-108 | A-108, keyboard-only operation | In Xfce Terminal, keyboard input exercised help, intake, queue, interruption, resume, retry, history, export and accuracy. Commands use ordinary shell input with explicit submission. The application presents no interactive prompts or custom focus targets. Recovery used deterministic claim expiry in the virtual replay. |
-| R-109 | A-109 and `test_r109_contract`, CLI text | The regression verifies labels, reading order, state, owner, action and retry, progress, history and report output with no terminal escape or cursor-rewrite sequences. The Orca queue navigation check passed as recorded below. |
+| R-106 | A-106, comparable workflow access | The standard JSON replay and the keyboard-driven text replay produced the same three routing outcomes, retained the failed attempt in history, published matching queue/extraction snapshots and reported 231 of 231 mock scalar matches. Orca read the operator information listed below. |
+| R-107 | A-107, software and platform | The criterion review below records the CLI's non-Web scope. The virtual desktop checks exercised AT-SPI terminal text and speech, terminal preferences, and the whole intake and recovery workflow. |
+| R-108 | A-108, keyboard-only operation | Keyboard input exercised help, intake, queue, interruption, resume, retry, history, export and accuracy. Commands use ordinary shell input with explicit submission. The application presents no interactive prompts or custom focus targets. The follow-up replay used normal claim expiry. |
+| R-109 | A-109 and `test_r109_contract`, CLI text | The regression verifies labels, reading order, state, owner, action and retry, progress, history, report output and input-error guidance. The mixed queue has no terminal escape or cursor-rewrite sequences. Orca read the labelled output in the terminal workflows below. |
 | R-110 | A-110, web application | Inapplicable. The delivered interface is the local CLI. The Firefox checks below concern rendered documents. |
-| R-111 | A-111, rendered documents | Python-Markdown 3.5.2 with tables, fenced code and heading anchors rendered all three documents to HTML. The structure check found a single top-level heading in each, sequential levels, named links and table headers. The documents contain text and tables with no images, audio or video. |
-| R-112 | A-112, accessibility handover | The README explains the text option, supported commands, reading order, retry and progress, and terminal-owned preferences. Its documented commands were exercised in the keyboard workflow. |
+| R-111 | A-111, rendered documents | Orca navigated the three local HTML renderings in Firefox ESR by headings and links where present, and by table cells in the reports. Firefox reached 200% zoom on all three documents. The renderer and scope are recorded below. |
+| R-112 | A-112, accessibility handover | Orca found the README's keyboard and screen-reader section and read the text-mode flag and terminal preference guidance. The keyboard replay exercised those commands. Activating its named verification link opened this report. |
 | R-113 | A-113, application support service | Inapplicable. The application supplies documentation and CLI help, with no help desk, support channel or referral service. |
-| R-114 | A-114, evidence and replay | This record identifies the tests, versions, scope, results and what remains to be verified. Claim conformance only after all applicable checks pass. |
+| R-114 | A-114, evidence and replay | This record identifies the versions, test inputs, expected results, observed results, repair, applicable provisions and scope limits. |
 
 ### Orca queue navigation
 
@@ -114,24 +115,50 @@ Press `g` for the first request. For the later requests, press `g` and search wi
 | IT-002.json | Document identifier, work state Completed, owner Security Review, status `review`, and next action `review-risk-then-owner`. |
 | IT-010.json | Document identifier, work state Failed, owner IT Service Desk, status `error`, next action `retry-extraction`, the provider error, and the retry command. Orca read both terminal lines of the wrapped command in sequence. |
 
-This pass covers queue navigation in the labelled text mode. Rendered-document screen-reader navigation remains open.
+### Orca workflow replay
+
+In a fresh Ubuntu 24.04 virtual desktop with Xfce Terminal 1.1.3, Orca 46.1 and `less` 590, scripted keyboard input exercised the intake, interruption and recovery commands with the TP-52 mock manifest. A nine-second provider timeout and the usual five-second claim grace period made expiry reproducible. The replay stopped the mock worker, waited for expiry and resumed the same database. Speech Dispatcher sent Orca's output to eSpeak NG and a virtual PulseAudio sink. The sink recording contained audio and the log captured the utterances below. For long outputs, the replay saved command output and used the pager controls above.
+
+| Action | What Orca read and what the replay verified |
+|---|---|
+| Open help and start intake | The queue usage with the JSON/text choices and the progress message for three input files. |
+| Resume and retry | The resume progress, three current requests, one failed request and zero unfinished requests. After invoking the failed record's retry command with the recovery manifest, Orca read IT-010's retry progress and zero failed requests. The latest routing was IT Service Desk / needs-information / clarify. |
+| Inspect history | The IT-010 document, failed attempt, source revision, settings fingerprint and mock provider. The JSON comparison confirmed that the failed attempt and its provenance remained available alongside the later result. |
+| Export and check accuracy | The published generation path, the accuracy progress, 231 of 231 exact scalar matches and the report path. A separate check joined the exported queue and extraction records by filename and verified matching source hashes and routing. |
+| Correct malformed input | When the input export lacked a message string, Orca announced the filename `invalid-export.json` and the instruction to provide UTF-8 JSON with a message string and rerun intake. |
+
+### Terminal preferences and rendered documents
+
+The virtual terminal honored the configured Liberation Mono font, yellow-on-black text, and a magenta underline cursor. Four zoom increments doubled the measured AT-SPI character height from 23 to 46 pixels. At that size, Orca located IT-010 in the queue and read its state, owner, action, diagnostic and both lines of the wrapped retry command. Resetting zoom restored the 23-pixel character height. Leaving the pager returned focus to the shell with the configured cursor.
+
+The document check used Mozilla Firefox 153.7.0esr, Orca 46.1 and Python-Markdown 3.5.2 with tables, fenced code and heading anchors. Each local test page had an English language declaration, a descriptive title, a main landmark and a visible link focus style. The checks inspected headings and content at 100% and 200% browser zoom. The rendered Markdown documents contain text and tables, with no app-supplied images, audio or video.
+
+In Firefox's document view, the replay used `h` for headings, `k` for links, `t` for tables and `Alt` + `Shift` + arrow keys for table cells. It used Firefox's zoom shortcuts and checked the reported 200% level before resetting it. [Orca structural navigation commands](https://help.gnome.org/orca/commands_structural_navigation.html)
+
+| Document | Observed navigation |
+|---|---|
+| README | Orca announced heading levels and read the text-mode and terminal-preference instructions. Its next-link command found the named verification link. Enter activated it and Orca announced the verification page. |
+| Accuracy report | Orca reached the exact-match and source-evidence headings. Cell navigation identified the Document and Exact scalar matches column headers and associated IT-001 with its 11/11 result. |
+| Verification report | Orca reached the Section 508 heading and identified links by name. Cell navigation announced the Step, Targeted tests, Full suite after implementation and Evidence headers with sample data. |
+
+The tested presentation is the local renderer and browser configuration above. Repository-hosted presentation and other operating systems, renderers or assistive-technology combinations have separate platform behavior. The results apply to the tested CLI and document workflows.
 
 ### Applicable software and document criteria
 
-For the CLI, apply the four non-Web success-criterion exceptions in E207.2 (2.4.1, 2.4.5, 3.2.3 and 3.2.4) and the terminology substitutions in E207.2.1. E207.3 governs the complete multistep CLI workflow. For covered non-Web documents under E205, apply E205.4 and E205.4.1. Apply 602.3 to electronic support documentation. Evaluate the three documents here in a rendered HTML reading environment, including its headings, links and table semantics.
+For the CLI, E207.2 excepts criteria 2.4.1, 2.4.5, 3.2.3, 3.2.4 and WCAG Conformance Requirement 3. E207.2.1 supplies the terminology substitutions and E207.3 governs the complete multistep CLI workflow. E205.4 and E205.4.1 govern covered non-Web documents. The rendered-document checks also address electronic support documentation under 602.3. [Revised 508 Standards](https://www.access-board.gov/ict/)
 
 | Provision | Scope and evidence |
 |---|---|
 | E203.1–E203.2, E207.3 | The same internal operator commands support the complete intake and recovery task. A-106 and A-108 trace the access needs above to the keyboard and assistive-technology test. Public access is inapplicable for this delivery. |
 | WCAG 1.1.1, 1.2.1–1.2.5, 1.4.2, 1.4.5 | The CLI and reviewed documents expose text and text structure. There is no app-supplied non-text content, audio, video or image of text. |
 | WCAG 1.3.1–1.3.3, 1.4.1 | CLI labels and state names survive without color or layout, as exercised by TP-54. Rendered heading levels, link names, table headers and content order were inspected in HTML. The instructions use command and field names, with no sensory-only references. |
-| WCAG 1.4.3–1.4.4, 2.4.7, 503.2 | The CLI emits unstyled text and leaves font, color, contrast and cursor to the terminal. The rendered-document test uses black text and dark blue links on white, with a visible focus outline. Text resizing and platform settings are tested in the presentation layer. |
+| WCAG 1.4.3–1.4.4, 2.4.7, 503.2 | The CLI retains terminal-controlled color, contrast, font and cursor. The test rendering uses near-black text and dark blue links on white, with a visible focus outline. Firefox reported a 200% zoom level for each rendered document. |
 | WCAG 2.1.1–2.1.2, 2.2.1–2.2.2, 2.3.1 | A-108 exercised ordinary shell input and return to the prompt. There is no application time limit for keystrokes, rotating display, animation or flashing. Provider timeouts apply to background processing, with persisted status and recovery. |
-| WCAG 2.4.2–2.4.4, 2.4.6 | Commands and reports have descriptive names. The HTML test sets a page title, preserves heading levels, and verifies that links have names. CLI commands announce their purpose in help, and result fields have labels. |
+| WCAG 2.4.1–2.4.6, 3.2.3–3.2.4 | CLI applicability follows the non-Web exceptions above. Commands and reports have descriptive names, and CLI help and result fields use consistent labels. The local documents have titles, a main landmark and navigable headings, with no repeated authored navigation. The README points to the verification report by name. The source files are individually discoverable in the repository. |
 | WCAG 3.1.1–3.1.2, 3.2.1–3.2.2 | Application labels and repository-authored reading content are English. The HTML test rendering declares English. Commands take effect on explicit invocation, with no custom fields that change context on focus or input. |
-| WCAG 3.3.1–3.3.4 | Help describes inputs, and invalid CLI arguments are identified in text. A failed extraction associates the error and retry command with the affected document. There is no legal or financial submission, approval or deletion control. Recovery retains prior attempts and source revisions. |
-| WCAG 4.1.1–4.1.2, 502 | The platform presents the CLI through an ordinary terminal text control. The renderer provides native HTML headings, links and table headers. The application supplies no platform accessibility service or custom controls. AT-SPI and screen-reader observations assess interoperability and non-disruption separately from the structured text checks. |
-| E204.1 / Chapter 3, 503.3–503.4, 504 | For functions requiring functional performance coverage, A-106–A-109 examine operation without vision, without color, with reduced vision and with keyboard-only input. Hearing and speech are not required to operate the CLI. The application has no embedded assistive-technology UI, synchronized media player or interactive document authoring tools. |
+| WCAG 3.3.1–3.3.4 | Help describes inputs, and invalid CLI arguments are identified in text. The labelled input-error message identifies the affected export and gives a correction. An extraction failure associates its diagnostic and retry command with the affected document. Recovery retains prior attempts and source revisions. The UI has no legal or financial submission, approval or deletion control. |
+| WCAG 4.1.1–4.1.2, 502 | Xfce Terminal exposes the CLI text through AT-SPI, and Orca read it without application controls or accessibility services. Firefox exposed the rendered headings, links, table headers and data cells through native HTML semantics. Sections 502.2.1, 502.3 and 502.4 govern platform providers and platform applications. This CLI uses the platform's services. |
+| E204.1 / Chapter 3, 503.3–503.4, 504 | A-106–A-109 cover terminal speech, labelled states independent of color, magnification and keyboard-only input. Ordinary shell input and documented recovery afford sequential operations without application-imposed key timing. Labelled states, consistent help and recovery commands support task comprehension. The application has no speech input requirement, media controls, alternate assistive-technology UI or interactive authoring tools. |
 | E208 / 602, 603 | A-111 and A-112 address electronic support documents and compatibility instructions. Support-service provisions are inapplicable for this release. |
 
 ## External final checks

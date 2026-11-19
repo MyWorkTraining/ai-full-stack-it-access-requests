@@ -935,6 +935,16 @@ class Step12(Contract):
             text_mode = ['--format', 'text']
             help_output = self.cli('queue', '--help').stdout
 
+            bad_export = work / 'invalid-export.json'
+            bad_export.write_text(json.dumps({'subject': 'No message field'}))
+            with self.subTest(output='invalid input'):
+                invalid = self.cli('run', '--input', bad_export, *database,
+                                   '--provider', 'mock', *text_mode, allow_error=True)
+                self.assertEqual(invalid.returncode, 2)
+                self.assertIn('Invalid JSON message export: invalid-export.json', invalid.stderr)
+                self.assertIn('UTF-8 JSON with a message string', invalid.stderr)
+                self.assertNotIn('No message field', invalid.stderr)
+
             worker = subprocess.Popen([sys.executable, str(ROOT / 'tests/mock_worker.py'), 'run',
                                        '--input', str(sources), *database, *provider],
                                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)

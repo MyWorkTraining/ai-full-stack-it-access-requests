@@ -136,10 +136,28 @@ def main(argv=None):
             source = Path(args.input)
             paths = [source] if source.is_file() else sorted(source.glob('*.json'))
             if not paths:
+                if text_output:
+                    print(f'Error: No JSON exports found at {printable(source)}.', file=sys.stderr)
+                    print('Next action: Use --input with a readable JSON file or a directory containing .json exports.', file=sys.stderr)
+                    return 2
                 raise ValueError('input contains no JSON exports')
+            documents = []
+            for path in paths:
+                try:
+                    documents.append(load(path))
+                except (OSError, ValueError) as exc:
+                    if not text_output:
+                        raise
+                    if isinstance(exc, OSError):
+                        print(f'Error: Could not read JSON export: {printable(path.name)}.', file=sys.stderr)
+                        print('Next action: Check that the export is readable, then rerun intake.', file=sys.stderr)
+                    else:
+                        print(f'Error: Invalid JSON message export: {printable(path.name)}.', file=sys.stderr)
+                        print('Next action: Provide UTF-8 JSON with a message string, then rerun intake.', file=sys.stderr)
+                    return 2
             if text_output:
                 print(f'Progress: Starting intake for {len(paths)} input files.', flush=True)
-            runner.run([load(path) for path in paths], force=args.refresh)
+            runner.run(documents, force=args.refresh)
         elif args.command == 'resume':
             if text_output:
                 print('Progress: Resuming unfinished requests.', flush=True)
