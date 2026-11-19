@@ -171,6 +171,24 @@ For the CLI, E207.2 excepts criteria 2.4.1, 2.4.5, 3.2.3, 3.2.4 and WCAG Conform
 | E204.1 / Chapter 3, 503.3–503.4, 504 | A-106–A-109 cover terminal speech, labelled states independent of color, magnification and keyboard-only input. Ordinary shell input and documented recovery afford sequential operations without application-imposed key timing. Labelled states, consistent help and recovery commands support task comprehension. The application has no speech input requirement, media controls, alternate assistive-technology UI or interactive authoring tools. |
 | E208 / 602, 603 | A-111 and A-112 address electronic support documents and compatibility instructions. Support-service provisions are inapplicable for this release. |
 
+## Submission evidence refresh
+
+On November 19, 2026, the locked setup and all 115 automated tests passed on Python 3.12.3 with the review fixes at commit `0ef578c`. The run used saved mock replies with `API_KEY` unset. The saved log is `planning/test-run.txt` and the requirement matrix is `planning/validation.md`.
+
+```bash
+uv sync --frozen
+env -u API_KEY .venv/bin/python -m unittest discover -s tests -v
+work=$(mktemp -d)
+env -u API_KEY .venv/bin/python -m intake run --input materials/requests --db "$work/intake.sqlite" --provider mock --responses tests/mock_responses --output "$work/deliverables" --format text
+env -u API_KEY .venv/bin/python -m intake accuracy --input materials/requests --synthetic tests/fixtures/IT-P01.json --expected tests/expected --responses tests/mock_responses --provider mock --output "$work/accuracy.md" --format text
+```
+
+The fresh run produced 20 current records with zero failures and zero unfinished requests. Every record was schema-valid, reported `response_source=mock` and matched its original file's SHA-256. The fresh and committed generations matched on document IDs, source hashes, extracted facts and review routing. The fresh Markdown and JSON accuracy reports matched the committed reports at 231 of 231 scalar comparisons across 21 messages. This check used a temporary workspace so it could compare against the committed outputs.
+
+The virtual desktop retest used the same Xfce Terminal, Orca and pager versions described above. Orca announced “Progress: Reading 3 JSON exports.” Searching the piped queue brought up IT-010's failed state, owner, next action and retry guidance. The workspace contained no plain-text queue copy. The replay confirmed all three states before terminating the worker, then waited for ordinary claim expiry with a 30-second request timeout. Resume retained IT-002's committed result and attempt ID. IT-010's retry completed successfully and the accuracy run again reported 231 of 231 comparisons.
+
+The browser retest generated the pages with the committed renderer and the fresh accuracy report. Firefox activated the README's verification link from the keyboard and reached 200% zoom on all three test pages. Orca announced headings and the accuracy and verification tables' column headers. A separate HTML check verified local links and heading fragments across the five rendered pages.
+
 ## External final checks
 
 R-104: after a submitted commit exists, inspect `git log -1 --format=fuller` and the facilitator's paired session-capture record using its supplied instructions. Entire automatically captures coding sessions at commits; no manual checkpoint/setup command is needed here. Pairing to a final submitted commit remains an external acceptance check.
